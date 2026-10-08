@@ -4,7 +4,7 @@
 
 Kind: `function`
 Module: `src/features/axes/getAxisTicks.ts`
-Source: `src/features/axes/getAxisTicks.ts:8:1`
+Source: `src/features/axes/getAxisTicks.ts:11:1`
 
 Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.
 
@@ -56,11 +56,11 @@ Source: `src/types/axes.ts:8:1`
 
 ### Members
 
-| Name  | Kind     | Type     | Required | Description |
-| ----- | -------- | -------- | -------- | ----------- |
-| id    | property | `string` | yes      |             |
-| size  | property | `number` | yes      |             |
-| start | property | `number` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `string` | yes |  |
+| size | property | `number` | yes |  |
+| start | property | `number` | yes |  |
 
 ## GridAxisDefinition
 
@@ -70,11 +70,11 @@ Source: `src/types/axes.ts:15:1`
 
 ### Members
 
-| Name       | Kind     | Type                          | Required | Description |
-| ---------- | -------- | ----------------------------- | -------- | ----------- |
-| categories | property | `readonly GridAxisCategory[]` | no       |             |
-| kind       | property | `GridAxisKind`                | yes      |             |
-| origin     | property | `number`                      | no       |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| categories | property | `readonly GridAxisCategory[]` | no |  |
+| kind | property | `GridAxisKind` | yes |  |
+| origin | property | `number` | no |  |
 
 ## GridAxisKind
 
@@ -96,11 +96,11 @@ Source: `src/types/axes.ts:22:1`
 
 ### Members
 
-| Name     | Kind     | Type                 | Required | Description |
-| -------- | -------- | -------------------- | -------- | ----------- |
-| label    | property | `string`             | no       |             |
-| level    | property | `"major" \| "minor"` | yes      |             |
-| position | property | `number`             | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| label | property | `string` | no |  |
+| level | property | `"major" \| "minor"` | yes |  |
+| position | property | `number` | yes |  |
 
 ## GridPoint
 
@@ -110,10 +110,10 @@ Source: `src/types/grid.ts:2:1`
 
 ### Members
 
-| Name | Kind     | Type     | Required | Description |
-| ---- | -------- | -------- | -------- | ----------- |
-| x    | property | `number` | yes      |             |
-| y    | property | `number` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
 
 ## GridRect
 
@@ -123,12 +123,12 @@ Source: `src/types/grid.ts:8:1`
 
 ### Members
 
-| Name   | Kind     | Type     | Required | Description |
-| ------ | -------- | -------- | -------- | ----------- |
-| height | property | `number` | yes      |             |
-| width  | property | `number` | yes      |             |
-| x      | property | `number` | yes      |             |
-| y      | property | `number` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| height | property | `number` | yes |  |
+| width | property | `number` | yes |  |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
 
 ## GridRectItem
 
@@ -138,13 +138,13 @@ Source: `src/types/items.ts:4:1`
 
 ### Members
 
-| Name   | Kind     | Type     | Required | Description |
-| ------ | -------- | -------- | -------- | ----------- |
-| height | property | `number` | yes      |             |
-| id     | property | `string` | yes      |             |
-| width  | property | `number` | yes      |             |
-| x      | property | `number` | yes      |             |
-| y      | property | `number` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| height | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+| width | property | `number` | yes |  |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
 
 ## GridSnapResolver
 
@@ -166,13 +166,13 @@ Source: `src/types/axes.ts:47:1`
 
 ### Members
 
-| Name          | Kind     | Type           | Required | Description |
-| ------------- | -------- | -------------- | -------- | ----------- |
-| axis          | property | `GridAxisName` | yes      |             |
-| end           | property | `number`       | yes      |             |
-| pixelsPerUnit | property | `number`       | yes      |             |
-| start         | property | `number`       | yes      |             |
-| viewport      | property | `GridViewport` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| axis | property | `GridAxisName` | yes |  |
+| end | property | `number` | yes |  |
+| pixelsPerUnit | property | `number` | yes |  |
+| start | property | `number` | yes |  |
+| viewport | property | `GridViewport` | yes |  |
 
 ## GridTickProvider
 
@@ -194,14 +194,14 @@ Source: `src/types/grid.ts:14:1`
 
 ### Members
 
-| Name           | Kind     | Type     | Required | Description |
-| -------------- | -------- | -------- | -------- | ----------- |
-| height         | property | `number` | yes      |             |
-| offsetX        | property | `number` | yes      |             |
-| offsetY        | property | `number` | yes      |             |
-| pixelsPerUnitX | property | `number` | yes      |             |
-| pixelsPerUnitY | property | `number` | yes      |             |
-| width          | property | `number` | yes      |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| height | property | `number` | yes |  |
+| offsetX | property | `number` | yes |  |
+| offsetY | property | `number` | yes |  |
+| pixelsPerUnitX | property | `number` | yes |  |
+| pixelsPerUnitY | property | `number` | yes |  |
+| width | property | `number` | yes |  |
 
 ## GridZoomLimits
 
@@ -211,12 +211,12 @@ Source: `src/types/grid.ts:24:1`
 
 ### Members
 
-| Name | Kind     | Type     | Required | Description |
-| ---- | -------- | -------- | -------- | ----------- |
-| maxX | property | `number` | no       |             |
-| maxY | property | `number` | no       |             |
-| minX | property | `number` | no       |             |
-| minY | property | `number` | no       |             |
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| maxX | property | `number` | no |  |
+| maxY | property | `number` | no |  |
+| minX | property | `number` | no |  |
+| minY | property | `number` | no |  |
 
 ## panViewport
 

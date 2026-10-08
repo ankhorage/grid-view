@@ -3,7 +3,7 @@
 
 # @ankhorage/grid-view
 
-![license: MIT](././docs/badges/license.svg) ![npm: v0.1.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
+![license: MIT](././docs/badges/license.svg) ![npm: v0.1.1](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
 
 Platform-neutral grid viewport, axes, snapping and virtualization geometry for Ankhorage.
 
