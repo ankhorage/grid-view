@@ -1,6 +1,7 @@
 import type {
   GridAxisName,
   GridAxisTick,
+  GridTickContext,
   GridTickProvider,
   GridTickSpecification,
 } from '../../types/axes.js';
@@ -14,17 +15,54 @@ export function getAxisTicks(
   specification: GridTickSpecification,
   provider?: GridTickProvider,
 ): readonly GridAxisTick[] {
-  const bounds = getVisibleWorldBounds(viewport, specification.overscanPixels ?? 0);
-  const start = axis === 'x' ? bounds.x : bounds.y;
-  const end = axis === 'x' ? bounds.x + bounds.width : bounds.y + bounds.height;
-  const pixelsPerUnit = axis === 'x' ? viewport.pixelsPerUnitX : viewport.pixelsPerUnitY;
+  const context = getTickContext(viewport, axis, specification);
   if (provider) {
-    return provider({ viewport, axis, start, end, pixelsPerUnit })
-      .filter(
-        (tick) => Number.isFinite(tick.position) && tick.position >= start && tick.position <= end,
-      )
-      .sort((a, b) => a.position - b.position);
+    return getProvidedTicks(provider, context);
   }
+  return getGeneratedTicks(context, specification);
+}
+
+/*** Derive one axis-specific visible interval for a ruler operation. */
+function getTickContext(
+  viewport: GridViewport,
+  axis: GridAxisName,
+  specification: GridTickSpecification,
+): GridTickContext {
+  const bounds = getVisibleWorldBounds(viewport, specification.overscanPixels ?? 0);
+  return axis === 'x'
+    ? {
+        viewport,
+        axis,
+        start: bounds.x,
+        end: bounds.x + bounds.width,
+        pixelsPerUnit: viewport.pixelsPerUnitX,
+      }
+    : {
+        viewport,
+        axis,
+        start: bounds.y,
+        end: bounds.y + bounds.height,
+        pixelsPerUnit: viewport.pixelsPerUnitY,
+      };
+}
+
+/*** Filter externally supplied domain ticks to the visible axis interval. */
+function getProvidedTicks(
+  provider: GridTickProvider,
+  { start, end, ...context }: GridTickContext,
+): readonly GridAxisTick[] {
+  return provider({ ...context, start, end })
+    .filter(
+      (tick) => Number.isFinite(tick.position) && tick.position >= start && tick.position <= end,
+    )
+    .sort((a, b) => a.position - b.position);
+}
+
+/*** Generate bounded fixed or adaptive ruler ticks for one visible axis interval. */
+function getGeneratedTicks(
+  { start, end, pixelsPerUnit }: GridTickContext,
+  specification: GridTickSpecification,
+): readonly GridAxisTick[] {
   const step =
     specification.mode === 'fixed'
       ? specification.step
@@ -52,6 +90,7 @@ export function getAxisTicks(
   });
 }
 
+/*** Select a readable decade-based ruler increment for a minimum world distance. */
 function adaptiveStep(minimum: number): number {
   if (!Number.isFinite(minimum) || minimum <= 0) {
     throw new RangeError('Minimum grid spacing must be positive and finite.');

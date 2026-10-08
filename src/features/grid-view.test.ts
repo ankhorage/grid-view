@@ -5,6 +5,7 @@ import {
   getVisibleGridItems,
   getVisibleWorldBounds,
   panViewport,
+  revealWorldRect,
   snapWorldCoordinate,
   viewportToWorld,
   worldToViewport,
@@ -70,6 +71,37 @@ describe('coordinate engine', () => {
   });
 });
 
+describe('viewport visibility', () => {
+  test('reveals a world rectangle with the smallest necessary independent-axis pan', () => {
+    expect(revealWorldRect(viewport, { x: 50, y: 35, width: 20, height: 2 })).toEqual({
+      ...viewport,
+      offsetX: 50,
+      offsetY: 17,
+    });
+    expect(revealWorldRect(viewport, { x: 105, y: 12, width: 10, height: 2 })).toEqual(viewport);
+    expect(revealWorldRect(viewport, { x: 295, y: 12, width: 10, height: 2 })).toEqual({
+      ...viewport,
+      offsetX: 105,
+    });
+  });
+
+  test('uses viewport-pixel padding and leading alignment for oversized rectangles', () => {
+    expect(revealWorldRect(viewport, { x: 96, y: 9, width: 400, height: 100 }, 20)).toEqual({
+      ...viewport,
+      offsetX: 91,
+      offsetY: 8,
+    });
+    expect(() => revealWorldRect(viewport, { x: 0, y: 0, width: -1, height: 1 })).toThrow();
+    expect(() => revealWorldRect(viewport, { x: 0, y: 0, width: 1, height: 1 }, 400)).toThrow();
+    expect(() =>
+      revealWorldRect({ ...viewport, offsetX: Number.NaN }, { x: 0, y: 0, width: 1, height: 1 }),
+    ).toThrow();
+    expect(() =>
+      revealWorldRect({ ...viewport, height: Infinity }, { x: 0, y: 0, width: 1, height: 1 }),
+    ).toThrow();
+  });
+});
+
 describe('visual ruler versus interaction snap', () => {
   test('snapping does not change across visual grid zoom levels', () => {
     const sixteenth = { mode: 'fixed' as const, step: 240 };
@@ -85,7 +117,24 @@ describe('visual ruler versus interaction snap', () => {
     expect(snapWorldCoordinate(491, { mode: 'off' })).toBe(491);
   });
 
-  test('DAW musical fixture: 4/4 to 7/8 bar lengths, triplets and irregular ruler', () => {
+  test('fixed display tick budgets avoid huge cell materialization', () => {
+    expect(() =>
+      getAxisTicks(viewport, 'x', {
+        mode: 'fixed',
+        step: 0.001,
+        maxTicks: 10,
+      }),
+    ).toThrow();
+    expect(
+      getAxisTicks(viewport, 'x', { mode: 'fixed', step: 25, majorEvery: 4 }).some(
+        ({ level }) => level === 'minor',
+      ),
+    ).toBe(true);
+  });
+});
+
+describe('DAW ruler fixture', () => {
+  test('preserves 4/4 to 7/8 bar lengths, triplets and irregular ruler ticks', () => {
     const ppq = 960;
     const fourFour = 4 * ppq;
     const sevenEight = (7 * ppq) / 2;
@@ -107,21 +156,6 @@ describe('visual ruler versus interaction snap', () => {
     expect(snapWorldCoordinate(310, { mode: 'fixed', step: ppq / 3 })).toBe(320);
     expect(snapWorldCoordinate(251, { mode: 'fixed', step: ppq / 4 })).toBe(240);
     expect(fourFour + sevenEight).toBe(7200);
-  });
-
-  test('fixed display tick budgets avoid huge cell materialization', () => {
-    expect(() =>
-      getAxisTicks(viewport, 'x', {
-        mode: 'fixed',
-        step: 0.001,
-        maxTicks: 10,
-      }),
-    ).toThrow();
-    expect(
-      getAxisTicks(viewport, 'x', { mode: 'fixed', step: 25, majorEvery: 4 }).some(
-        ({ level }) => level === 'minor',
-      ),
-    ).toBe(true);
   });
 });
 
