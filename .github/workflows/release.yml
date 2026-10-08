@@ -33,6 +33,7 @@ jobs:
           owner: ankhorage
           repositories: ${{ github.event.repository.name }}
           permission-contents: write
+          permission-workflows: write
 
       - name: Diagnose unavailable scoped release token
         if: steps.release-token.outcome == 'failure'
@@ -81,7 +82,7 @@ jobs:
           if node -e "const p=require('./package.json'); process.exit(p.name === '@ankhorage/doctor' ? 0 : 1)"; then
             bun ./dist/cli/standalone.js validate .
           else
-            BUN_INSTALL_CACHE_DIR="${RUNNER_TEMP}/doctor-cache" bunx @ankhorage/doctor@0.12.16 validate .
+            BUN_INSTALL_CACHE_DIR="${RUNNER_TEMP}/doctor-cache" bunx @ankhorage/doctor@0.13.1 validate .
           fi
 
       - name: Version packages directly on main
