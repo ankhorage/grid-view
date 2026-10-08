@@ -13,9 +13,7 @@
       "line": 8,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [
       "GridAxisName",
       "GridAxisTick",
@@ -73,12 +71,8 @@
       "line": 6,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridViewport"],
     "signatures": [
       {
         "label": "(items: readonly T[], viewport: GridViewport, overscanPixels?: number) => readonly T[]",
@@ -123,13 +117,8 @@
       "line": 5,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridRect",
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridRect", "GridViewport"],
     "signatures": [
       {
         "label": "(viewport: GridViewport, overscanPixels?: number) => GridRect",
@@ -168,9 +157,7 @@
       "line": 8,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -212,13 +199,8 @@
       "line": 15,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridAxisCategory",
-      "GridAxisKind"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridAxisCategory", "GridAxisKind"],
     "signatures": [],
     "members": [
       {
@@ -259,9 +241,7 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -281,9 +261,7 @@
       "line": 5,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -303,9 +281,7 @@
       "line": 22,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -347,9 +323,7 @@
       "line": 2,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -384,9 +358,7 @@
       "line": 8,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -435,9 +407,7 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -493,9 +463,7 @@
       "line": 7,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -515,9 +483,7 @@
       "line": 2,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -537,13 +503,8 @@
       "line": 47,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridAxisName",
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridAxisName", "GridViewport"],
     "signatures": [],
     "members": [
       {
@@ -598,9 +559,7 @@
       "line": 55,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -620,9 +579,7 @@
       "line": 28,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
@@ -642,9 +599,7 @@
       "line": 14,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -707,9 +662,7 @@
       "line": 24,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
+    "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
@@ -758,13 +711,8 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridPoint",
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridPoint", "GridViewport"],
     "signatures": [
       {
         "label": "(viewport: GridViewport, displacement: GridPoint) => GridViewport",
@@ -803,13 +751,8 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridSnapResolver",
-      "GridSnapSpecification"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridSnapResolver", "GridSnapSpecification"],
     "signatures": [
       {
         "label": "(value: number, specification: GridSnapSpecification, resolver?: GridSnapResolver | undefined) => number",
@@ -854,13 +797,8 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridPoint",
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridPoint", "GridViewport"],
     "signatures": [
       {
         "label": "(point: GridPoint, viewport: GridViewport) => GridPoint",
@@ -899,13 +837,8 @@
       "line": 4,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridPoint",
-      "GridViewport"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridPoint", "GridViewport"],
     "signatures": [
       {
         "label": "(point: GridPoint, viewport: GridViewport) => GridPoint",
@@ -944,14 +877,8 @@
       "line": 5,
       "column": 1
     },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "GridPoint",
-      "GridViewport",
-      "GridZoomLimits"
-    ],
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["GridPoint", "GridViewport", "GridZoomLimits"],
     "signatures": [
       {
         "label": "(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, \"pixelsPerUnitX\" | \"pixelsPerUnitY\">, limits?: GridZoomLimits) => GridViewport",

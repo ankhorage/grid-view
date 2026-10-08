@@ -1,5 +1,8 @@
 import type {
-  GridAxisName, GridAxisTick, GridTickProvider, GridTickSpecification,
+  GridAxisName,
+  GridAxisTick,
+  GridTickProvider,
+  GridTickSpecification,
 } from '../../types/axes.js';
 import type { GridViewport } from '../../types/grid.js';
 import { getVisibleWorldBounds } from '../viewport/getVisibleWorldBounds.js';
@@ -17,12 +20,15 @@ export function getAxisTicks(
   const pixelsPerUnit = axis === 'x' ? viewport.pixelsPerUnitX : viewport.pixelsPerUnitY;
   if (provider) {
     return provider({ viewport, axis, start, end, pixelsPerUnit })
-      .filter((tick) => Number.isFinite(tick.position) && tick.position >= start && tick.position <= end)
+      .filter(
+        (tick) => Number.isFinite(tick.position) && tick.position >= start && tick.position <= end,
+      )
       .sort((a, b) => a.position - b.position);
   }
-  const step = specification.mode === 'fixed'
-    ? specification.step
-    : adaptiveStep((specification.minPixelSpacing ?? 32) / pixelsPerUnit);
+  const step =
+    specification.mode === 'fixed'
+      ? specification.step
+      : adaptiveStep((specification.minPixelSpacing ?? 32) / pixelsPerUnit);
   if (!Number.isFinite(step) || step <= 0) {
     throw new RangeError('Grid tick step must be positive and finite.');
   }
@@ -41,7 +47,7 @@ export function getAxisTicks(
     const tickIndex = first + index;
     return {
       position: origin + tickIndex * step,
-      level: tickIndex % majorEvery === 0 ? 'major' as const : 'minor' as const,
+      level: tickIndex % majorEvery === 0 ? ('major' as const) : ('minor' as const),
     };
   });
 }

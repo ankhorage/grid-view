@@ -9,10 +9,11 @@ export function getVisibleGridItems<T extends GridRectItem>(
   overscanPixels = 0,
 ): readonly T[] {
   const bounds = getVisibleWorldBounds(viewport, overscanPixels);
-  return items.filter((item) =>
-    item.x <= bounds.x + bounds.width
-    && item.x + item.width >= bounds.x
-    && item.y <= bounds.y + bounds.height
-    && item.y + item.height >= bounds.y,
+  return items.filter(
+    (item) =>
+      item.x <= bounds.x + bounds.width &&
+      item.x + item.width >= bounds.x &&
+      item.y <= bounds.y + bounds.height &&
+      item.y + item.height >= bounds.y,
   );
 }

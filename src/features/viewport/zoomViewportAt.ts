@@ -12,8 +12,14 @@ export function zoomViewportAt(
     throw new RangeError('Viewport scales must be positive.');
   }
   const focalWorld = viewportToWorld(focalPoint, viewport);
-  const x = Math.max(limits.minX ?? Number.EPSILON, Math.min(limits.maxX ?? Infinity, nextScale.pixelsPerUnitX));
-  const y = Math.max(limits.minY ?? Number.EPSILON, Math.min(limits.maxY ?? Infinity, nextScale.pixelsPerUnitY));
+  const x = Math.max(
+    limits.minX ?? Number.EPSILON,
+    Math.min(limits.maxX ?? Infinity, nextScale.pixelsPerUnitX),
+  );
+  const y = Math.max(
+    limits.minY ?? Number.EPSILON,
+    Math.min(limits.maxY ?? Infinity, nextScale.pixelsPerUnitY),
+  );
   return {
     ...viewport,
     pixelsPerUnitX: x,

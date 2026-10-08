@@ -8,8 +8,14 @@ export { worldToViewport } from './features/viewport/worldToViewport.js';
 export { zoomViewportAt } from './features/viewport/zoomViewportAt.js';
 
 export type {
-  GridAxisCategory, GridAxisDefinition, GridAxisKind, GridAxisName,
-  GridAxisTick, GridTickContext, GridTickProvider, GridTickSpecification,
+  GridAxisCategory,
+  GridAxisDefinition,
+  GridAxisKind,
+  GridAxisName,
+  GridAxisTick,
+  GridTickContext,
+  GridTickProvider,
+  GridTickSpecification,
 } from './types/axes.js';
 export type { GridPoint, GridRect, GridViewport, GridZoomLimits } from './types/grid.js';
 export type { GridRectItem } from './types/items.js';

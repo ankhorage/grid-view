@@ -11,5 +11,10 @@ export function getVisibleWorldBounds(viewport: GridViewport, overscanPixels = 0
     { x: viewport.width + overscanPixels, y: viewport.height + overscanPixels },
     viewport,
   );
-  return { x: topLeft.x, y: topLeft.y, width: bottomRight.x - topLeft.x, height: bottomRight.y - topLeft.y };
+  return {
+    x: topLeft.x,
+    y: topLeft.y,
+    width: bottomRight.x - topLeft.x,
+    height: bottomRight.y - topLeft.y,
+  };
 }
