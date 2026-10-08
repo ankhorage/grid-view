@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant participant_adaptiveStep as adaptiveStep
+  participant participant_getAxisTicks as getAxisTicks
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_provider as provider
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getAxisTicks->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld-->>participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds-->>participant_getAxisTicks: return
+  participant_getAxisTicks->>participant_provider: provider()
+  participant_provider-->>participant_getAxisTicks: return
+  participant_getAxisTicks->>participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep-->>participant_getAxisTicks: return

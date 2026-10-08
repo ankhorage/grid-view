@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld-->>participant_getVisibleWorldBounds: return

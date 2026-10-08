@@ -1,0 +1,8 @@
+sequenceDiagram
+  participant participant_getVisibleGridItems as getVisibleGridItems
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleGridItems->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld-->>participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds-->>participant_getVisibleGridItems: return

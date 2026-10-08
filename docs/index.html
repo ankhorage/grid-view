@@ -1,0 +1,1603 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ankhorage/grid-view • Paradox</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fb;
+        color: #11203b;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      a { color: #2459d3; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      button { font: inherit; }
+      code, pre { font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .sidebar {
+        padding: 1.5rem;
+        border-right: 1px solid #d8dfec;
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        max-height: 100vh;
+        overflow: auto;
+      }
+      .content { padding: 2rem; }
+      .panel, .item {
+        background: #ffffff;
+        border: 1px solid #d8dfec;
+        border-radius: 0.9rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 8px 24px rgba(17, 32, 59, 0.06);
+      }
+      .summary {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      }
+      .summary strong {
+        display: block;
+        font-size: 1.5rem;
+      }
+      .search {
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border-radius: 0.75rem;
+        border: 1px solid #c7d2e5;
+        margin: 1rem 0 1.5rem;
+      }
+      .nav-list, .meta-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .nav-list li + li { margin-top: 0.5rem; }
+      .nav-button {
+        width: 100%;
+        display: block;
+        border: 0;
+        border-radius: 0.7rem;
+        background: transparent;
+        color: #24427a;
+        cursor: pointer;
+        padding: 0.55rem 0.7rem;
+        text-align: left;
+      }
+      .nav-button:hover, .nav-button[aria-current="page"] {
+        background: #e8eefb;
+        text-decoration: none;
+      }
+      .nav-button small {
+        display: block;
+        color: #5e6d8c;
+        margin-top: 0.15rem;
+      }
+      .view[hidden] { display: none; }
+      .muted { color: #5e6d8c; }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; list-style: none; }
+      .chip {
+        border-radius: 999px;
+        background: #e8eefb;
+        color: #24427a;
+        padding: 0.25rem 0.65rem;
+        font-size: 0.85rem;
+      }
+      table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+      th, td { padding: 0.6rem; border-bottom: 1px solid #e2e7f2; text-align: left; vertical-align: top; }
+      pre {
+        overflow: auto;
+        border-radius: 0.75rem;
+        background: #0f1729;
+        color: #e7edf7;
+        padding: 1rem;
+      }
+      .empty { font-style: italic; color: #6f7f9c; }
+      .mermaid { margin: 1rem 0; overflow: auto; }
+      details > summary { cursor: pointer; color: #5e6d8c; font-size: 0.9rem; margin-top: 0.5rem; user-select: none; }
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; max-height: none; border-right: 0; border-bottom: 1px solid #d8dfec; }
+        .content { padding: 1rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <p class="muted">Generated with Paradox</p>
+        <h1>@ankhorage/grid-view</h1>
+        <p>Platform-neutral grid viewport, axes, snapping and virtualization geometry for Ankhorage.</p>
+        <input id="search" class="search" type="search" placeholder="Search current view" />
+        <nav aria-label="Documentation sections">
+          <ul class="nav-list">
+            <li>
+              <button class="nav-button" type="button" data-target="home" aria-current="page">
+                Home
+                <small>Overview, CLI, public API, diagrams</small>
+              </button>
+            </li>
+            <li>
+    <button class="nav-button" type="button" data-target="src/features/axes/getAxisTicks.ts">
+      src/features/axes/getAxisTicks.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/items/getVisibleGridItems.ts">
+      src/features/items/getVisibleGridItems.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/snap/snapWorldCoordinate.ts">
+      src/features/snap/snapWorldCoordinate.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/getVisibleWorldBounds.ts">
+      src/features/viewport/getVisibleWorldBounds.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/panViewport.ts">
+      src/features/viewport/panViewport.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/viewportToWorld.ts">
+      src/features/viewport/viewportToWorld.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/worldToViewport.ts">
+      src/features/viewport/worldToViewport.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/zoomViewportAt.ts">
+      src/features/viewport/zoomViewportAt.ts
+      <small>1 function</small>
+    </button>
+  </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="content">
+        <section id="view-home" class="view" data-view="home">
+          
+    <section class="panel">
+      <h2>Package overview</h2>
+      <div class="summary">
+        <div><strong>23</strong><span class="muted">public exports</span></div>
+        <div><strong>0</strong><span class="muted">components</span></div>
+        <div><strong>14</strong><span class="muted">modules</span></div>
+        <div><strong>1</strong><span class="muted">entrypoints</span></div>
+      </div>
+      <h3>Entrypoints</h3>
+      <ul class="meta-list">
+        <li><code>src/index.ts</code></li>
+      </ul>
+    </section>
+    
+    <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
+    <section class="panel">
+      <h2>Modules</h2>
+      <article class="item" data-search="src/features/axes/getAxisTicks.ts src/features/viewport/getVisibleWorldBounds.ts src/types/axes.ts src/types/grid.ts getAxisTicks">
+    <h3>src/features/axes/getAxisTicks.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/viewport/getVisibleWorldBounds.ts</code>, <code>src/types/axes.ts</code>, <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>getAxisTicks</code></p>
+  </article><article class="item" data-search="src/features/grid-view.test.ts src/index.ts src/types/grid.ts">
+    <h3>src/features/grid-view.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/index.ts</code>, <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/features/items/getVisibleGridItems.ts src/features/viewport/getVisibleWorldBounds.ts src/types/grid.ts src/types/items.ts getVisibleGridItems">
+    <h3>src/features/items/getVisibleGridItems.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/viewport/getVisibleWorldBounds.ts</code>, <code>src/types/grid.ts</code>, <code>src/types/items.ts</code></p>
+    <p><strong>Exports:</strong> <code>getVisibleGridItems</code></p>
+  </article><article class="item" data-search="src/features/snap/snapWorldCoordinate.ts src/types/snap.ts snapWorldCoordinate">
+    <h3>src/features/snap/snapWorldCoordinate.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/snap.ts</code></p>
+    <p><strong>Exports:</strong> <code>snapWorldCoordinate</code></p>
+  </article><article class="item" data-search="src/features/viewport/getVisibleWorldBounds.ts src/features/viewport/viewportToWorld.ts src/types/grid.ts getVisibleWorldBounds">
+    <h3>src/features/viewport/getVisibleWorldBounds.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/viewport/viewportToWorld.ts</code>, <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>getVisibleWorldBounds</code></p>
+  </article><article class="item" data-search="src/features/viewport/panViewport.ts src/types/grid.ts panViewport">
+    <h3>src/features/viewport/panViewport.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>panViewport</code></p>
+  </article><article class="item" data-search="src/features/viewport/viewportToWorld.ts src/types/grid.ts viewportToWorld">
+    <h3>src/features/viewport/viewportToWorld.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>viewportToWorld</code></p>
+  </article><article class="item" data-search="src/features/viewport/worldToViewport.ts src/types/grid.ts worldToViewport">
+    <h3>src/features/viewport/worldToViewport.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>worldToViewport</code></p>
+  </article><article class="item" data-search="src/features/viewport/zoomViewportAt.ts src/features/viewport/viewportToWorld.ts src/types/grid.ts zoomViewportAt">
+    <h3>src/features/viewport/zoomViewportAt.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/viewport/viewportToWorld.ts</code>, <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>zoomViewportAt</code></p>
+  </article><article class="item" data-search="src/index.ts getAxisTicks getVisibleGridItems getVisibleWorldBounds GridAxisCategory GridAxisDefinition GridAxisKind GridAxisName GridAxisTick GridPoint GridRect GridRectItem GridSnapResolver GridSnapSpecification GridTickContext GridTickProvider GridTickSpecification GridViewport GridZoomLimits panViewport snapWorldCoordinate viewportToWorld worldToViewport zoomViewportAt">
+    <h3>src/index.ts</h3>
+    <p class="muted">Configured entrypoint</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>getAxisTicks</code>, <code>getVisibleGridItems</code>, <code>getVisibleWorldBounds</code>, <code>GridAxisCategory</code>, <code>GridAxisDefinition</code>, <code>GridAxisKind</code>, <code>GridAxisName</code>, <code>GridAxisTick</code>, <code>GridPoint</code>, <code>GridRect</code>, <code>GridRectItem</code>, <code>GridSnapResolver</code>, <code>GridSnapSpecification</code>, <code>GridTickContext</code>, <code>GridTickProvider</code>, <code>GridTickSpecification</code>, <code>GridViewport</code>, <code>GridZoomLimits</code>, <code>panViewport</code>, <code>snapWorldCoordinate</code>, <code>viewportToWorld</code>, <code>worldToViewport</code>, <code>zoomViewportAt</code></p>
+  </article><article class="item" data-search="src/types/axes.ts src/types/grid.ts GridAxisCategory GridAxisDefinition GridAxisKind GridAxisName GridAxisTick GridTickContext GridTickProvider GridTickSpecification">
+    <h3>src/types/axes.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>GridAxisCategory</code>, <code>GridAxisDefinition</code>, <code>GridAxisKind</code>, <code>GridAxisName</code>, <code>GridAxisTick</code>, <code>GridTickContext</code>, <code>GridTickProvider</code>, <code>GridTickSpecification</code></p>
+  </article><article class="item" data-search="src/types/grid.ts GridPoint GridRect GridViewport GridZoomLimits">
+    <h3>src/types/grid.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>GridPoint</code>, <code>GridRect</code>, <code>GridViewport</code>, <code>GridZoomLimits</code></p>
+  </article><article class="item" data-search="src/types/items.ts src/types/grid.ts GridRectItem">
+    <h3>src/types/items.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>GridRectItem</code></p>
+  </article><article class="item" data-search="src/types/snap.ts GridSnapResolver GridSnapSpecification">
+    <h3>src/types/snap.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>GridSnapResolver</code>, <code>GridSnapSpecification</code></p>
+  </article>
+    </section>
+    <section class="panel">
+      <h2>Public API</h2>
+      
+            <section>
+              <h3>src/features/axes/getAxisTicks.ts</h3>
+              <article class="item" id="symbol-getaxisticks" data-search="getAxisTicks  function src/features/axes/getAxisTicks.ts Generate only visible ruler ticks; a domain adapter may supply irregular boundaries. GridAxisName GridAxisTick GridTickProvider GridTickSpecification GridViewport (viewport: GridViewport, axis: GridAxisName, specification: GridTickSpecification, provider?: GridTickProvider | undefined) =&gt; readonly GridAxisTick[]">
+    <h4>getAxisTicks</h4>
+    
+    <p class="muted">function • <code>src/features/axes/getAxisTicks.ts:8:1</code></p>
+    <p>Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridAxisName</li><li class="chip">GridAxisTick</li><li class="chip">GridTickProvider</li><li class="chip">GridTickSpecification</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(viewport: GridViewport, axis: GridAxisName, specification: GridTickSpecification, provider?: GridTickProvider | undefined) =&gt; readonly GridAxisTick[]</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>axis</code></td>
+                        <td><code>GridAxisName</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>provider</code></td>
+                        <td><code>GridTickProvider | undefined</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>specification</code></td>
+                        <td><code>GridTickSpecification</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>readonly GridAxisTick[]</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/items/getVisibleGridItems.ts</h3>
+              <article class="item" id="symbol-getvisiblegriditems" data-search="getVisibleGridItems  function src/features/items/getVisibleGridItems.ts Cull offscreen rectangular items without materializing logical grid cells. GridViewport (items: readonly T[], viewport: GridViewport, overscanPixels?: number) =&gt; readonly T[]">
+    <h4>getVisibleGridItems</h4>
+    
+    <p class="muted">function • <code>src/features/items/getVisibleGridItems.ts:6:1</code></p>
+    <p>Cull offscreen rectangular items without materializing logical grid cells.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(items: readonly T[], viewport: GridViewport, overscanPixels?: number) =&gt; readonly T[]</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>items</code></td>
+                        <td><code>readonly T[]</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>overscanPixels</code></td>
+                        <td><code>number</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>readonly T[]</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/snap/snapWorldCoordinate.ts</h3>
+              <article class="item" id="symbol-snapworldcoordinate" data-search="snapWorldCoordinate  function src/features/snap/snapWorldCoordinate.ts Snap a world coordinate without consulting zoom or grid-line density. GridSnapResolver GridSnapSpecification (value: number, specification: GridSnapSpecification, resolver?: GridSnapResolver | undefined) =&gt; number">
+    <h4>snapWorldCoordinate</h4>
+    
+    <p class="muted">function • <code>src/features/snap/snapWorldCoordinate.ts:4:1</code></p>
+    <p>Snap a world coordinate without consulting zoom or grid-line density.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridSnapResolver</li><li class="chip">GridSnapSpecification</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(value: number, specification: GridSnapSpecification, resolver?: GridSnapResolver | undefined) =&gt; number</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>resolver</code></td>
+                        <td><code>GridSnapResolver | undefined</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>specification</code></td>
+                        <td><code>GridSnapSpecification</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>value</code></td>
+                        <td><code>number</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>number</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/getVisibleWorldBounds.ts</h3>
+              <article class="item" id="symbol-getvisibleworldbounds" data-search="getVisibleWorldBounds  function src/features/viewport/getVisibleWorldBounds.ts Calculate the visible world rectangle, optionally expanded by pixel overscan. GridRect GridViewport (viewport: GridViewport, overscanPixels?: number) =&gt; GridRect">
+    <h4>getVisibleWorldBounds</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/getVisibleWorldBounds.ts:5:1</code></p>
+    <p>Calculate the visible world rectangle, optionally expanded by pixel overscan.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridRect</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(viewport: GridViewport, overscanPixels?: number) =&gt; GridRect</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>overscanPixels</code></td>
+                        <td><code>number</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridRect</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/panViewport.ts</h3>
+              <article class="item" id="symbol-panviewport" data-search="panViewport  function src/features/viewport/panViewport.ts Pan by pixel displacement; dragging to the right reveals world coordinates to the left. GridPoint GridViewport (viewport: GridViewport, displacement: GridPoint) =&gt; GridViewport">
+    <h4>panViewport</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/panViewport.ts:4:1</code></p>
+    <p>Pan by pixel displacement; dragging to the right reveals world coordinates to the left.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridPoint</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(viewport: GridViewport, displacement: GridPoint) =&gt; GridViewport</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>displacement</code></td>
+                        <td><code>GridPoint</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridViewport</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/viewportToWorld.ts</h3>
+              <article class="item" id="symbol-viewporttoworld" data-search="viewportToWorld  function src/features/viewport/viewportToWorld.ts Transform a viewport pixel coordinate back into world space. GridPoint GridViewport (point: GridPoint, viewport: GridViewport) =&gt; GridPoint">
+    <h4>viewportToWorld</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/viewportToWorld.ts:4:1</code></p>
+    <p>Transform a viewport pixel coordinate back into world space.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridPoint</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(point: GridPoint, viewport: GridViewport) =&gt; GridPoint</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>point</code></td>
+                        <td><code>GridPoint</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridPoint</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/worldToViewport.ts</h3>
+              <article class="item" id="symbol-worldtoviewport" data-search="worldToViewport  function src/features/viewport/worldToViewport.ts Transform stable world coordinates to screen pixels. GridPoint GridViewport (point: GridPoint, viewport: GridViewport) =&gt; GridPoint">
+    <h4>worldToViewport</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/worldToViewport.ts:4:1</code></p>
+    <p>Transform stable world coordinates to screen pixels.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridPoint</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(point: GridPoint, viewport: GridViewport) =&gt; GridPoint</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>point</code></td>
+                        <td><code>GridPoint</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridPoint</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/zoomViewportAt.ts</h3>
+              <article class="item" id="symbol-zoomviewportat" data-search="zoomViewportAt  function src/features/viewport/zoomViewportAt.ts Zoom around a fixed pixel focal point without moving its underlying world coordinate. GridPoint GridViewport GridZoomLimits (viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick&lt;GridViewport, &quot;pixelsPerUnitX&quot; | &quot;pixelsPerUnitY&quot;&gt;, limits?: GridZoomLimits) =&gt; GridViewport">
+    <h4>zoomViewportAt</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/zoomViewportAt.ts:5:1</code></p>
+    <p>Zoom around a fixed pixel focal point without moving its underlying world coordinate.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridPoint</li><li class="chip">GridViewport</li><li class="chip">GridZoomLimits</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick&lt;GridViewport, &quot;pixelsPerUnitX&quot; | &quot;pixelsPerUnitY&quot;&gt;, limits?: GridZoomLimits) =&gt; GridViewport</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>focalPoint</code></td>
+                        <td><code>GridPoint</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>limits</code></td>
+                        <td><code>GridZoomLimits</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>nextScale</code></td>
+                        <td><code>Pick&lt;GridViewport, &quot;pixelsPerUnitX&quot; | &quot;pixelsPerUnitY&quot;&gt;</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridViewport</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/types/axes.ts</h3>
+              <article class="item" id="symbol-gridaxiscategory" data-search="GridAxisCategory  type src/types/axes.ts ">
+    <h4>GridAxisCategory</h4>
+    
+    <p class="muted">type • <code>src/types/axes.ts:8:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>id</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>size</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>start</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridaxisdefinition" data-search="GridAxisDefinition  type src/types/axes.ts  GridAxisCategory GridAxisKind">
+    <h4>GridAxisDefinition</h4>
+    
+    <p class="muted">type • <code>src/types/axes.ts:15:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridAxisCategory</li><li class="chip">GridAxisKind</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>categories</code></td>
+            <td>property</td>
+            <td><code>readonly GridAxisCategory[]</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>kind</code></td>
+            <td>property</td>
+            <td><code>GridAxisKind</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>origin</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>no</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridaxiskind" data-search="GridAxisKind  unknown src/types/axes.ts ">
+    <h4>GridAxisKind</h4>
+    
+    <p class="muted">unknown • <code>src/types/axes.ts:4:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article><article class="item" id="symbol-gridaxisname" data-search="GridAxisName  unknown src/types/axes.ts ">
+    <h4>GridAxisName</h4>
+    
+    <p class="muted">unknown • <code>src/types/axes.ts:5:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article><article class="item" id="symbol-gridaxistick" data-search="GridAxisTick  type src/types/axes.ts ">
+    <h4>GridAxisTick</h4>
+    
+    <p class="muted">type • <code>src/types/axes.ts:22:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>label</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>level</code></td>
+            <td>property</td>
+            <td><code>&quot;major&quot; | &quot;minor&quot;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>position</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridtickcontext" data-search="GridTickContext  type src/types/axes.ts  GridAxisName GridViewport">
+    <h4>GridTickContext</h4>
+    
+    <p class="muted">type • <code>src/types/axes.ts:47:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridAxisName</li><li class="chip">GridViewport</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>axis</code></td>
+            <td>property</td>
+            <td><code>GridAxisName</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>end</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>pixelsPerUnit</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>start</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>viewport</code></td>
+            <td>property</td>
+            <td><code>GridViewport</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridtickprovider" data-search="GridTickProvider  unknown src/types/axes.ts ">
+    <h4>GridTickProvider</h4>
+    
+    <p class="muted">unknown • <code>src/types/axes.ts:55:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article><article class="item" id="symbol-gridtickspecification" data-search="GridTickSpecification  unknown src/types/axes.ts ">
+    <h4>GridTickSpecification</h4>
+    
+    <p class="muted">unknown • <code>src/types/axes.ts:28:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/types/grid.ts</h3>
+              <article class="item" id="symbol-gridpoint" data-search="GridPoint  type src/types/grid.ts ">
+    <h4>GridPoint</h4>
+    
+    <p class="muted">type • <code>src/types/grid.ts:2:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>x</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>y</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridrect" data-search="GridRect  type src/types/grid.ts ">
+    <h4>GridRect</h4>
+    
+    <p class="muted">type • <code>src/types/grid.ts:8:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>height</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>width</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>x</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>y</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridviewport" data-search="GridViewport  type src/types/grid.ts ">
+    <h4>GridViewport</h4>
+    
+    <p class="muted">type • <code>src/types/grid.ts:14:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>height</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>offsetX</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>offsetY</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>pixelsPerUnitX</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>pixelsPerUnitY</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>width</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-gridzoomlimits" data-search="GridZoomLimits  type src/types/grid.ts ">
+    <h4>GridZoomLimits</h4>
+    
+    <p class="muted">type • <code>src/types/grid.ts:24:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>maxX</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>maxY</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>minX</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>minY</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>no</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article>
+            </section>
+            <section>
+              <h3>src/types/items.ts</h3>
+              <article class="item" id="symbol-gridrectitem" data-search="GridRectItem  type src/types/items.ts ">
+    <h4>GridRectItem</h4>
+    
+    <p class="muted">type • <code>src/types/items.ts:4:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>height</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>id</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>width</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>x</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>y</code></td>
+            <td>property</td>
+            <td><code>number</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article>
+            </section>
+            <section>
+              <h3>src/types/snap.ts</h3>
+              <article class="item" id="symbol-gridsnapresolver" data-search="GridSnapResolver  unknown src/types/snap.ts ">
+    <h4>GridSnapResolver</h4>
+    
+    <p class="muted">unknown • <code>src/types/snap.ts:7:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article><article class="item" id="symbol-gridsnapspecification" data-search="GridSnapSpecification  unknown src/types/snap.ts ">
+    <h4>GridSnapSpecification</h4>
+    
+    <p class="muted">unknown • <code>src/types/snap.ts:2:1</code></p>
+    
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    
+  </article>
+            </section>
+    </section>
+    <section class="panel">
+      <h2>Component registry</h2>
+      <p class="empty">No components were detected.</p>
+    </section>
+    <section class="panel">
+      <h2>Diagrams</h2>
+      <article class="item" data-search="Architecture overview diagrams/architecture-overview.mmd">
+    <h3>Architecture overview</h3>
+    <p class="muted"><code>diagrams/architecture-overview.mmd</code></p>
+    <div class="mermaid">graph TD
+  package__ankhorage_grid_view[&quot;@ankhorage/grid-view&quot;]
+  entrypoint_src_index_ts[&quot;src/index.ts&quot;]
+  package__ankhorage_grid_view --&gt; entrypoint_src_index_ts
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_axes_getAxisTicks_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_axes_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_grid_ts
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_grid_view_test_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_index_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_items_getVisibleGridItems_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_items_ts
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_snap_snapWorldCoordinate_ts
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; module_src_types_snap_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_panViewport_ts
+  module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_worldToViewport_ts
+  module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_zoomViewportAt_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_types_grid_ts
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_axes_ts
+  module_src_types_axes_ts --&gt; module_src_types_grid_ts
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_grid_ts
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_items_ts
+  module_src_types_items_ts --&gt; module_src_types_grid_ts
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_snap_ts
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph TD
+  package__ankhorage_grid_view[&quot;@ankhorage/grid-view&quot;]
+  entrypoint_src_index_ts[&quot;src/index.ts&quot;]
+  package__ankhorage_grid_view --&gt; entrypoint_src_index_ts
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_axes_getAxisTicks_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_axes_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_grid_ts
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_grid_view_test_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_index_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_items_getVisibleGridItems_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_items_ts
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_snap_snapWorldCoordinate_ts
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; module_src_types_snap_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_panViewport_ts
+  module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_worldToViewport_ts
+  module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_zoomViewportAt_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_types_grid_ts
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_axes_ts
+  module_src_types_axes_ts --&gt; module_src_types_grid_ts
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_grid_ts
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_items_ts
+  module_src_types_items_ts --&gt; module_src_types_grid_ts
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_types_snap_ts
+</pre>
+    </details>
+  </article><article class="item" data-search="Module relationships diagrams/module-relationships.mmd">
+    <h3>Module relationships</h3>
+    <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
+    <div class="mermaid">graph LR
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_axes_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_grid_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_index_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_items_ts
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; module_src_types_snap_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_types_grid_ts
+  module_src_types_axes_ts --&gt; module_src_types_grid_ts
+  module_src_types_items_ts --&gt; module_src_types_grid_ts
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph LR
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_axes_ts
+  module_src_features_axes_getAxisTicks_ts --&gt; module_src_types_grid_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_index_ts
+  module_src_features_grid_view_test_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --&gt; module_src_types_items_ts
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; module_src_types_snap_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_types_grid_ts
+  module_src_types_axes_ts --&gt; module_src_types_grid_ts
+  module_src_types_items_ts --&gt; module_src_types_grid_ts
+</pre>
+    </details>
+  </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
+    <h3>Export graph</h3>
+    <p class="muted"><code>diagrams/export-graph.mmd</code></p>
+    <div class="mermaid">graph LR
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  export_getAxisTicks[&quot;getAxisTicks&quot;]
+  module_src_features_axes_getAxisTicks_ts --&gt; export_getAxisTicks
+  export_getAxisTicks -.-&gt; export_GridAxisName
+  export_getAxisTicks -.-&gt; export_GridAxisTick
+  export_getAxisTicks -.-&gt; export_GridTickProvider
+  export_getAxisTicks -.-&gt; export_GridTickSpecification
+  export_getAxisTicks -.-&gt; export_GridViewport
+  export_getVisibleGridItems[&quot;getVisibleGridItems&quot;]
+  module_src_features_items_getVisibleGridItems_ts --&gt; export_getVisibleGridItems
+  export_getVisibleGridItems -.-&gt; export_GridViewport
+  export_getVisibleWorldBounds[&quot;getVisibleWorldBounds&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; export_getVisibleWorldBounds
+  export_getVisibleWorldBounds -.-&gt; export_GridRect
+  export_getVisibleWorldBounds -.-&gt; export_GridViewport
+  export_GridAxisCategory[&quot;GridAxisCategory&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisCategory
+  export_GridAxisDefinition[&quot;GridAxisDefinition&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisDefinition
+  export_GridAxisDefinition -.-&gt; export_GridAxisCategory
+  export_GridAxisDefinition -.-&gt; export_GridAxisKind
+  export_GridAxisKind[&quot;GridAxisKind&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisKind
+  export_GridAxisName[&quot;GridAxisName&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisName
+  export_GridAxisTick[&quot;GridAxisTick&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisTick
+  export_GridPoint[&quot;GridPoint&quot;]
+  module_src_types_grid_ts --&gt; export_GridPoint
+  export_GridRect[&quot;GridRect&quot;]
+  module_src_types_grid_ts --&gt; export_GridRect
+  export_GridRectItem[&quot;GridRectItem&quot;]
+  module_src_types_items_ts --&gt; export_GridRectItem
+  export_GridSnapResolver[&quot;GridSnapResolver&quot;]
+  module_src_types_snap_ts --&gt; export_GridSnapResolver
+  export_GridSnapSpecification[&quot;GridSnapSpecification&quot;]
+  module_src_types_snap_ts --&gt; export_GridSnapSpecification
+  export_GridTickContext[&quot;GridTickContext&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickContext
+  export_GridTickContext -.-&gt; export_GridAxisName
+  export_GridTickContext -.-&gt; export_GridViewport
+  export_GridTickProvider[&quot;GridTickProvider&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickProvider
+  export_GridTickSpecification[&quot;GridTickSpecification&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickSpecification
+  export_GridViewport[&quot;GridViewport&quot;]
+  module_src_types_grid_ts --&gt; export_GridViewport
+  export_GridZoomLimits[&quot;GridZoomLimits&quot;]
+  module_src_types_grid_ts --&gt; export_GridZoomLimits
+  export_panViewport[&quot;panViewport&quot;]
+  module_src_features_viewport_panViewport_ts --&gt; export_panViewport
+  export_panViewport -.-&gt; export_GridPoint
+  export_panViewport -.-&gt; export_GridViewport
+  export_snapWorldCoordinate[&quot;snapWorldCoordinate&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; export_snapWorldCoordinate
+  export_snapWorldCoordinate -.-&gt; export_GridSnapResolver
+  export_snapWorldCoordinate -.-&gt; export_GridSnapSpecification
+  export_viewportToWorld[&quot;viewportToWorld&quot;]
+  module_src_features_viewport_viewportToWorld_ts --&gt; export_viewportToWorld
+  export_viewportToWorld -.-&gt; export_GridPoint
+  export_viewportToWorld -.-&gt; export_GridViewport
+  export_worldToViewport[&quot;worldToViewport&quot;]
+  module_src_features_viewport_worldToViewport_ts --&gt; export_worldToViewport
+  export_worldToViewport -.-&gt; export_GridPoint
+  export_worldToViewport -.-&gt; export_GridViewport
+  export_zoomViewportAt[&quot;zoomViewportAt&quot;]
+  module_src_features_viewport_zoomViewportAt_ts --&gt; export_zoomViewportAt
+  export_zoomViewportAt -.-&gt; export_GridPoint
+  export_zoomViewportAt -.-&gt; export_GridViewport
+  export_zoomViewportAt -.-&gt; export_GridZoomLimits
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph LR
+  module_src_features_axes_getAxisTicks_ts[&quot;src/features/axes/getAxisTicks.ts&quot;]
+  module_src_features_grid_view_test_ts[&quot;src/features/grid-view.test.ts&quot;]
+  module_src_features_items_getVisibleGridItems_ts[&quot;src/features/items/getVisibleGridItems.ts&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
+  module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
+  module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
+  module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_types_axes_ts[&quot;src/types/axes.ts&quot;]
+  module_src_types_grid_ts[&quot;src/types/grid.ts&quot;]
+  module_src_types_items_ts[&quot;src/types/items.ts&quot;]
+  module_src_types_snap_ts[&quot;src/types/snap.ts&quot;]
+  export_getAxisTicks[&quot;getAxisTicks&quot;]
+  module_src_features_axes_getAxisTicks_ts --&gt; export_getAxisTicks
+  export_getAxisTicks -.-&gt; export_GridAxisName
+  export_getAxisTicks -.-&gt; export_GridAxisTick
+  export_getAxisTicks -.-&gt; export_GridTickProvider
+  export_getAxisTicks -.-&gt; export_GridTickSpecification
+  export_getAxisTicks -.-&gt; export_GridViewport
+  export_getVisibleGridItems[&quot;getVisibleGridItems&quot;]
+  module_src_features_items_getVisibleGridItems_ts --&gt; export_getVisibleGridItems
+  export_getVisibleGridItems -.-&gt; export_GridViewport
+  export_getVisibleWorldBounds[&quot;getVisibleWorldBounds&quot;]
+  module_src_features_viewport_getVisibleWorldBounds_ts --&gt; export_getVisibleWorldBounds
+  export_getVisibleWorldBounds -.-&gt; export_GridRect
+  export_getVisibleWorldBounds -.-&gt; export_GridViewport
+  export_GridAxisCategory[&quot;GridAxisCategory&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisCategory
+  export_GridAxisDefinition[&quot;GridAxisDefinition&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisDefinition
+  export_GridAxisDefinition -.-&gt; export_GridAxisCategory
+  export_GridAxisDefinition -.-&gt; export_GridAxisKind
+  export_GridAxisKind[&quot;GridAxisKind&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisKind
+  export_GridAxisName[&quot;GridAxisName&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisName
+  export_GridAxisTick[&quot;GridAxisTick&quot;]
+  module_src_types_axes_ts --&gt; export_GridAxisTick
+  export_GridPoint[&quot;GridPoint&quot;]
+  module_src_types_grid_ts --&gt; export_GridPoint
+  export_GridRect[&quot;GridRect&quot;]
+  module_src_types_grid_ts --&gt; export_GridRect
+  export_GridRectItem[&quot;GridRectItem&quot;]
+  module_src_types_items_ts --&gt; export_GridRectItem
+  export_GridSnapResolver[&quot;GridSnapResolver&quot;]
+  module_src_types_snap_ts --&gt; export_GridSnapResolver
+  export_GridSnapSpecification[&quot;GridSnapSpecification&quot;]
+  module_src_types_snap_ts --&gt; export_GridSnapSpecification
+  export_GridTickContext[&quot;GridTickContext&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickContext
+  export_GridTickContext -.-&gt; export_GridAxisName
+  export_GridTickContext -.-&gt; export_GridViewport
+  export_GridTickProvider[&quot;GridTickProvider&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickProvider
+  export_GridTickSpecification[&quot;GridTickSpecification&quot;]
+  module_src_types_axes_ts --&gt; export_GridTickSpecification
+  export_GridViewport[&quot;GridViewport&quot;]
+  module_src_types_grid_ts --&gt; export_GridViewport
+  export_GridZoomLimits[&quot;GridZoomLimits&quot;]
+  module_src_types_grid_ts --&gt; export_GridZoomLimits
+  export_panViewport[&quot;panViewport&quot;]
+  module_src_features_viewport_panViewport_ts --&gt; export_panViewport
+  export_panViewport -.-&gt; export_GridPoint
+  export_panViewport -.-&gt; export_GridViewport
+  export_snapWorldCoordinate[&quot;snapWorldCoordinate&quot;]
+  module_src_features_snap_snapWorldCoordinate_ts --&gt; export_snapWorldCoordinate
+  export_snapWorldCoordinate -.-&gt; export_GridSnapResolver
+  export_snapWorldCoordinate -.-&gt; export_GridSnapSpecification
+  export_viewportToWorld[&quot;viewportToWorld&quot;]
+  module_src_features_viewport_viewportToWorld_ts --&gt; export_viewportToWorld
+  export_viewportToWorld -.-&gt; export_GridPoint
+  export_viewportToWorld -.-&gt; export_GridViewport
+  export_worldToViewport[&quot;worldToViewport&quot;]
+  module_src_features_viewport_worldToViewport_ts --&gt; export_worldToViewport
+  export_worldToViewport -.-&gt; export_GridPoint
+  export_worldToViewport -.-&gt; export_GridViewport
+  export_zoomViewportAt[&quot;zoomViewportAt&quot;]
+  module_src_features_viewport_zoomViewportAt_ts --&gt; export_zoomViewportAt
+  export_zoomViewportAt -.-&gt; export_GridPoint
+  export_zoomViewportAt -.-&gt; export_GridViewport
+  export_zoomViewportAt -.-&gt; export_GridZoomLimits
+</pre>
+    </details>
+  </article><article class="item" data-search="getAxisTicks sequence diagrams/sequences/get-axis-ticks.mmd">
+    <h3>getAxisTicks sequence</h3>
+    <p class="muted"><code>diagrams/sequences/get-axis-ticks.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_adaptiveStep as adaptiveStep
+  participant participant_getAxisTicks as getAxisTicks
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_provider as provider
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getAxisTicks-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_provider: provider()
+  participant_provider--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep--&gt;&gt;participant_getAxisTicks: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_adaptiveStep as adaptiveStep
+  participant participant_getAxisTicks as getAxisTicks
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_provider as provider
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getAxisTicks-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_provider: provider()
+  participant_provider--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep--&gt;&gt;participant_getAxisTicks: return
+</pre>
+    </details>
+  </article><article class="item" data-search="getVisibleGridItems sequence diagrams/sequences/get-visible-grid-items.mmd">
+    <h3>getVisibleGridItems sequence</h3>
+    <p class="muted"><code>diagrams/sequences/get-visible-grid-items.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_getVisibleGridItems as getVisibleGridItems
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleGridItems-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getVisibleGridItems: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_getVisibleGridItems as getVisibleGridItems
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleGridItems-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getVisibleGridItems: return
+</pre>
+    </details>
+  </article><article class="item" data-search="getVisibleWorldBounds sequence diagrams/sequences/get-visible-world-bounds.mmd">
+    <h3>getVisibleWorldBounds sequence</h3>
+    <p class="muted"><code>diagrams/sequences/get-visible-world-bounds.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+</pre>
+    </details>
+  </article><article class="item" data-search="snapWorldCoordinate sequence diagrams/sequences/snap-world-coordinate.mmd">
+    <h3>snapWorldCoordinate sequence</h3>
+    <p class="muted"><code>diagrams/sequences/snap-world-coordinate.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_resolver as resolver
+  participant participant_snapWorldCoordinate as snapWorldCoordinate
+  participant_snapWorldCoordinate-&gt;&gt;participant_resolver: resolver()
+  participant_resolver--&gt;&gt;participant_snapWorldCoordinate: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_resolver as resolver
+  participant participant_snapWorldCoordinate as snapWorldCoordinate
+  participant_snapWorldCoordinate-&gt;&gt;participant_resolver: resolver()
+  participant_resolver--&gt;&gt;participant_snapWorldCoordinate: return
+</pre>
+    </details>
+  </article><article class="item" data-search="zoomViewportAt sequence diagrams/sequences/zoom-viewport-at.mmd">
+    <h3>zoomViewportAt sequence</h3>
+    <p class="muted"><code>diagrams/sequences/zoom-viewport-at.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_viewportToWorld as viewportToWorld
+  participant participant_zoomViewportAt as zoomViewportAt
+  participant_zoomViewportAt-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_zoomViewportAt: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_viewportToWorld as viewportToWorld
+  participant participant_zoomViewportAt as zoomViewportAt
+  participant_zoomViewportAt-&gt;&gt;participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld--&gt;&gt;participant_zoomViewportAt: return
+</pre>
+    </details>
+  </article>
+    </section>
+        </section>
+        <section id="view-src-features-axes-getaxisticks-ts" class="view" data-view="src/features/axes/getAxisTicks.ts" hidden>
+    <section class="panel">
+      <h2>src/features/axes/getAxisTicks.ts</h2>
+      <article class="item" data-search="getAxisTicks src/features/axes/getAxisTicks.ts Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.">
+    <h3>getAxisTicks</h3>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:8:1</code></p>
+    <p>Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.</p>
+    
+  </article><article class="item" data-search="adaptiveStep src/features/axes/getAxisTicks.ts ">
+    <h3>adaptiveStep</h3>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:49:1</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-items-getvisiblegriditems-ts" class="view" data-view="src/features/items/getVisibleGridItems.ts" hidden>
+    <section class="panel">
+      <h2>src/features/items/getVisibleGridItems.ts</h2>
+      <article class="item" data-search="getVisibleGridItems src/features/items/getVisibleGridItems.ts Cull offscreen rectangular items without materializing logical grid cells.">
+    <h3>getVisibleGridItems</h3>
+    <p class="muted"><code>src/features/items/getVisibleGridItems.ts:6:1</code></p>
+    <p>Cull offscreen rectangular items without materializing logical grid cells.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-snap-snapworldcoordinate-ts" class="view" data-view="src/features/snap/snapWorldCoordinate.ts" hidden>
+    <section class="panel">
+      <h2>src/features/snap/snapWorldCoordinate.ts</h2>
+      <article class="item" data-search="snapWorldCoordinate src/features/snap/snapWorldCoordinate.ts Snap a world coordinate without consulting zoom or grid-line density.">
+    <h3>snapWorldCoordinate</h3>
+    <p class="muted"><code>src/features/snap/snapWorldCoordinate.ts:4:1</code></p>
+    <p>Snap a world coordinate without consulting zoom or grid-line density.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-getvisibleworldbounds-ts" class="view" data-view="src/features/viewport/getVisibleWorldBounds.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/getVisibleWorldBounds.ts</h2>
+      <article class="item" data-search="getVisibleWorldBounds src/features/viewport/getVisibleWorldBounds.ts Calculate the visible world rectangle, optionally expanded by pixel overscan.">
+    <h3>getVisibleWorldBounds</h3>
+    <p class="muted"><code>src/features/viewport/getVisibleWorldBounds.ts:5:1</code></p>
+    <p>Calculate the visible world rectangle, optionally expanded by pixel overscan.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-panviewport-ts" class="view" data-view="src/features/viewport/panViewport.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/panViewport.ts</h2>
+      <article class="item" data-search="panViewport src/features/viewport/panViewport.ts Pan by pixel displacement; dragging to the right reveals world coordinates to the left.">
+    <h3>panViewport</h3>
+    <p class="muted"><code>src/features/viewport/panViewport.ts:4:1</code></p>
+    <p>Pan by pixel displacement; dragging to the right reveals world coordinates to the left.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-viewporttoworld-ts" class="view" data-view="src/features/viewport/viewportToWorld.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/viewportToWorld.ts</h2>
+      <article class="item" data-search="viewportToWorld src/features/viewport/viewportToWorld.ts Transform a viewport pixel coordinate back into world space.">
+    <h3>viewportToWorld</h3>
+    <p class="muted"><code>src/features/viewport/viewportToWorld.ts:4:1</code></p>
+    <p>Transform a viewport pixel coordinate back into world space.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-worldtoviewport-ts" class="view" data-view="src/features/viewport/worldToViewport.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/worldToViewport.ts</h2>
+      <article class="item" data-search="worldToViewport src/features/viewport/worldToViewport.ts Transform stable world coordinates to screen pixels.">
+    <h3>worldToViewport</h3>
+    <p class="muted"><code>src/features/viewport/worldToViewport.ts:4:1</code></p>
+    <p>Transform stable world coordinates to screen pixels.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-zoomviewportat-ts" class="view" data-view="src/features/viewport/zoomViewportAt.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/zoomViewportAt.ts</h2>
+      <article class="item" data-search="zoomViewportAt src/features/viewport/zoomViewportAt.ts Zoom around a fixed pixel focal point without moving its underlying world coordinate.">
+    <h3>zoomViewportAt</h3>
+    <p class="muted"><code>src/features/viewport/zoomViewportAt.ts:5:1</code></p>
+    <p>Zoom around a fixed pixel focal point without moving its underlying world coordinate.</p>
+    
+  </article>
+    </section>
+  </section>
+      </main>
+    </div>
+    <script>
+      const search = document.getElementById('search');
+      const navButtons = Array.from(document.querySelectorAll('[data-target]'));
+      const views = Array.from(document.querySelectorAll('[data-view]'));
+
+      function getActiveView() {
+        return document.querySelector('[data-view]:not([hidden])');
+      }
+
+      function applySearch() {
+        const value = search?.value.trim().toLowerCase() || '';
+        const activeView = getActiveView();
+        const items = Array.from(activeView?.querySelectorAll('[data-search]') || []);
+
+        for (const item of items) {
+          const haystack = (item.getAttribute('data-search') || '').toLowerCase();
+          item.style.display = value === '' || haystack.includes(value) ? '' : 'none';
+        }
+      }
+
+      for (const button of navButtons) {
+        button.addEventListener('click', () => {
+          const target = button.getAttribute('data-target');
+
+          for (const view of views) {
+            view.hidden = view.getAttribute('data-view') !== target;
+          }
+
+          for (const item of navButtons) {
+            item.setAttribute('aria-current', item === button ? 'page' : 'false');
+          }
+
+          if (search) search.value = '';
+          applySearch();
+        });
+      }
+
+      search?.addEventListener('input', applySearch);
+    </script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+  </body>
+</html>

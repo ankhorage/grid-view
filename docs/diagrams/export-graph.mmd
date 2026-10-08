@@ -1,0 +1,84 @@
+graph LR
+  module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
+  module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
+  module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
+  module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
+  module_src_features_viewport_getVisibleWorldBounds_ts["src/features/viewport/getVisibleWorldBounds.ts"]
+  module_src_features_viewport_panViewport_ts["src/features/viewport/panViewport.ts"]
+  module_src_features_viewport_viewportToWorld_ts["src/features/viewport/viewportToWorld.ts"]
+  module_src_features_viewport_worldToViewport_ts["src/features/viewport/worldToViewport.ts"]
+  module_src_features_viewport_zoomViewportAt_ts["src/features/viewport/zoomViewportAt.ts"]
+  module_src_index_ts["src/index.ts"]
+  module_src_types_axes_ts["src/types/axes.ts"]
+  module_src_types_grid_ts["src/types/grid.ts"]
+  module_src_types_items_ts["src/types/items.ts"]
+  module_src_types_snap_ts["src/types/snap.ts"]
+  export_getAxisTicks["getAxisTicks"]
+  module_src_features_axes_getAxisTicks_ts --> export_getAxisTicks
+  export_getAxisTicks -.-> export_GridAxisName
+  export_getAxisTicks -.-> export_GridAxisTick
+  export_getAxisTicks -.-> export_GridTickProvider
+  export_getAxisTicks -.-> export_GridTickSpecification
+  export_getAxisTicks -.-> export_GridViewport
+  export_getVisibleGridItems["getVisibleGridItems"]
+  module_src_features_items_getVisibleGridItems_ts --> export_getVisibleGridItems
+  export_getVisibleGridItems -.-> export_GridViewport
+  export_getVisibleWorldBounds["getVisibleWorldBounds"]
+  module_src_features_viewport_getVisibleWorldBounds_ts --> export_getVisibleWorldBounds
+  export_getVisibleWorldBounds -.-> export_GridRect
+  export_getVisibleWorldBounds -.-> export_GridViewport
+  export_GridAxisCategory["GridAxisCategory"]
+  module_src_types_axes_ts --> export_GridAxisCategory
+  export_GridAxisDefinition["GridAxisDefinition"]
+  module_src_types_axes_ts --> export_GridAxisDefinition
+  export_GridAxisDefinition -.-> export_GridAxisCategory
+  export_GridAxisDefinition -.-> export_GridAxisKind
+  export_GridAxisKind["GridAxisKind"]
+  module_src_types_axes_ts --> export_GridAxisKind
+  export_GridAxisName["GridAxisName"]
+  module_src_types_axes_ts --> export_GridAxisName
+  export_GridAxisTick["GridAxisTick"]
+  module_src_types_axes_ts --> export_GridAxisTick
+  export_GridPoint["GridPoint"]
+  module_src_types_grid_ts --> export_GridPoint
+  export_GridRect["GridRect"]
+  module_src_types_grid_ts --> export_GridRect
+  export_GridRectItem["GridRectItem"]
+  module_src_types_items_ts --> export_GridRectItem
+  export_GridSnapResolver["GridSnapResolver"]
+  module_src_types_snap_ts --> export_GridSnapResolver
+  export_GridSnapSpecification["GridSnapSpecification"]
+  module_src_types_snap_ts --> export_GridSnapSpecification
+  export_GridTickContext["GridTickContext"]
+  module_src_types_axes_ts --> export_GridTickContext
+  export_GridTickContext -.-> export_GridAxisName
+  export_GridTickContext -.-> export_GridViewport
+  export_GridTickProvider["GridTickProvider"]
+  module_src_types_axes_ts --> export_GridTickProvider
+  export_GridTickSpecification["GridTickSpecification"]
+  module_src_types_axes_ts --> export_GridTickSpecification
+  export_GridViewport["GridViewport"]
+  module_src_types_grid_ts --> export_GridViewport
+  export_GridZoomLimits["GridZoomLimits"]
+  module_src_types_grid_ts --> export_GridZoomLimits
+  export_panViewport["panViewport"]
+  module_src_features_viewport_panViewport_ts --> export_panViewport
+  export_panViewport -.-> export_GridPoint
+  export_panViewport -.-> export_GridViewport
+  export_snapWorldCoordinate["snapWorldCoordinate"]
+  module_src_features_snap_snapWorldCoordinate_ts --> export_snapWorldCoordinate
+  export_snapWorldCoordinate -.-> export_GridSnapResolver
+  export_snapWorldCoordinate -.-> export_GridSnapSpecification
+  export_viewportToWorld["viewportToWorld"]
+  module_src_features_viewport_viewportToWorld_ts --> export_viewportToWorld
+  export_viewportToWorld -.-> export_GridPoint
+  export_viewportToWorld -.-> export_GridViewport
+  export_worldToViewport["worldToViewport"]
+  module_src_features_viewport_worldToViewport_ts --> export_worldToViewport
+  export_worldToViewport -.-> export_GridPoint
+  export_worldToViewport -.-> export_GridViewport
+  export_zoomViewportAt["zoomViewportAt"]
+  module_src_features_viewport_zoomViewportAt_ts --> export_zoomViewportAt
+  export_zoomViewportAt -.-> export_GridPoint
+  export_zoomViewportAt -.-> export_GridViewport
+  export_zoomViewportAt -.-> export_GridZoomLimits

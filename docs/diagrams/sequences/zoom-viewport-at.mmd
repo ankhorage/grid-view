@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_viewportToWorld as viewportToWorld
+  participant participant_zoomViewportAt as zoomViewportAt
+  participant_zoomViewportAt->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld-->>participant_zoomViewportAt: return

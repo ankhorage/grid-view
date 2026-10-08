@@ -1,0 +1,33 @@
+graph LR
+  module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
+  module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
+  module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
+  module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
+  module_src_features_viewport_getVisibleWorldBounds_ts["src/features/viewport/getVisibleWorldBounds.ts"]
+  module_src_features_viewport_panViewport_ts["src/features/viewport/panViewport.ts"]
+  module_src_features_viewport_viewportToWorld_ts["src/features/viewport/viewportToWorld.ts"]
+  module_src_features_viewport_worldToViewport_ts["src/features/viewport/worldToViewport.ts"]
+  module_src_features_viewport_zoomViewportAt_ts["src/features/viewport/zoomViewportAt.ts"]
+  module_src_index_ts["src/index.ts"]
+  module_src_types_axes_ts["src/types/axes.ts"]
+  module_src_types_grid_ts["src/types/grid.ts"]
+  module_src_types_items_ts["src/types/items.ts"]
+  module_src_types_snap_ts["src/types/snap.ts"]
+  module_src_features_axes_getAxisTicks_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_axes_getAxisTicks_ts --> module_src_types_axes_ts
+  module_src_features_axes_getAxisTicks_ts --> module_src_types_grid_ts
+  module_src_features_grid_view_test_ts --> module_src_index_ts
+  module_src_features_grid_view_test_ts --> module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_items_getVisibleGridItems_ts --> module_src_types_grid_ts
+  module_src_features_items_getVisibleGridItems_ts --> module_src_types_items_ts
+  module_src_features_snap_snapWorldCoordinate_ts --> module_src_types_snap_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --> module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_getVisibleWorldBounds_ts --> module_src_types_grid_ts
+  module_src_features_viewport_panViewport_ts --> module_src_types_grid_ts
+  module_src_features_viewport_viewportToWorld_ts --> module_src_types_grid_ts
+  module_src_features_viewport_worldToViewport_ts --> module_src_types_grid_ts
+  module_src_features_viewport_zoomViewportAt_ts --> module_src_features_viewport_viewportToWorld_ts
+  module_src_features_viewport_zoomViewportAt_ts --> module_src_types_grid_ts
+  module_src_types_axes_ts --> module_src_types_grid_ts
+  module_src_types_items_ts --> module_src_types_grid_ts
