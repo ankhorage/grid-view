@@ -4,7 +4,7 @@
 
 Kind: `function`
 Module: `src/features/axes/getAxisTicks.ts`
-Source: `src/features/axes/getAxisTicks.ts:11:1`
+Source: `src/features/axes/getAxisTicks.ts:12:1`
 
 Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.
 
@@ -230,6 +230,23 @@ Pan by pixel displacement; dragging to the right reveals world coordinates to th
 
 - `(viewport: GridViewport, displacement: GridPoint) => GridViewport`
   - displacement: `GridPoint`
+  - viewport: `GridViewport`
+  - returns: `GridViewport`
+
+## revealWorldRect
+
+Kind: `function`
+Module: `src/features/viewport/revealWorldRect.ts`
+Source: `src/features/viewport/revealWorldRect.ts:7:1`
+
+Minimally pans a viewport so that a world rectangle is visible inside pixel padding.
+Oversized rectangles align their leading edges because neither axis can show them in full.
+
+### Signatures
+
+- `(viewport: GridViewport, rect: GridRect, paddingPixels?: number) => GridViewport`
+  - paddingPixels: `number` (optional)
+  - rect: `GridRect`
   - viewport: `GridViewport`
   - returns: `GridViewport`
 

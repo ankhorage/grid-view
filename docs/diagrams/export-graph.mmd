@@ -5,6 +5,7 @@ graph LR
   module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
   module_src_features_viewport_getVisibleWorldBounds_ts["src/features/viewport/getVisibleWorldBounds.ts"]
   module_src_features_viewport_panViewport_ts["src/features/viewport/panViewport.ts"]
+  module_src_features_viewport_revealWorldRect_ts["src/features/viewport/revealWorldRect.ts"]
   module_src_features_viewport_viewportToWorld_ts["src/features/viewport/viewportToWorld.ts"]
   module_src_features_viewport_worldToViewport_ts["src/features/viewport/worldToViewport.ts"]
   module_src_features_viewport_zoomViewportAt_ts["src/features/viewport/zoomViewportAt.ts"]
@@ -65,6 +66,10 @@ graph LR
   module_src_features_viewport_panViewport_ts --> export_panViewport
   export_panViewport -.-> export_GridPoint
   export_panViewport -.-> export_GridViewport
+  export_revealWorldRect["revealWorldRect"]
+  module_src_features_viewport_revealWorldRect_ts --> export_revealWorldRect
+  export_revealWorldRect -.-> export_GridRect
+  export_revealWorldRect -.-> export_GridViewport
   export_snapWorldCoordinate["snapWorldCoordinate"]
   module_src_features_snap_snapWorldCoordinate_ts --> export_snapWorldCoordinate
   export_snapWorldCoordinate -.-> export_GridSnapResolver

@@ -129,7 +129,7 @@
             <li>
     <button class="nav-button" type="button" data-target="src/features/axes/getAxisTicks.ts">
       src/features/axes/getAxisTicks.ts
-      <small>2 functions</small>
+      <small>5 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/items/getVisibleGridItems.ts">
@@ -150,6 +150,11 @@
     <button class="nav-button" type="button" data-target="src/features/viewport/panViewport.ts">
       src/features/viewport/panViewport.ts
       <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/viewport/revealWorldRect.ts">
+      src/features/viewport/revealWorldRect.ts
+      <small>3 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/viewport/viewportToWorld.ts">
@@ -176,9 +181,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>23</strong><span class="muted">public exports</span></div>
+        <div><strong>24</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>14</strong><span class="muted">modules</span></div>
+        <div><strong>15</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -220,6 +225,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
     <p><strong>Exports:</strong> <code>panViewport</code></p>
+  </article><article class="item" data-search="src/features/viewport/revealWorldRect.ts src/types/grid.ts revealWorldRect">
+    <h3>src/features/viewport/revealWorldRect.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/grid.ts</code></p>
+    <p><strong>Exports:</strong> <code>revealWorldRect</code></p>
   </article><article class="item" data-search="src/features/viewport/viewportToWorld.ts src/types/grid.ts viewportToWorld">
     <h3>src/features/viewport/viewportToWorld.ts</h3>
     <p class="muted">Referenced module</p>
@@ -235,11 +245,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/viewport/viewportToWorld.ts</code>, <code>src/types/grid.ts</code></p>
     <p><strong>Exports:</strong> <code>zoomViewportAt</code></p>
-  </article><article class="item" data-search="src/index.ts getAxisTicks getVisibleGridItems getVisibleWorldBounds GridAxisCategory GridAxisDefinition GridAxisKind GridAxisName GridAxisTick GridPoint GridRect GridRectItem GridSnapResolver GridSnapSpecification GridTickContext GridTickProvider GridTickSpecification GridViewport GridZoomLimits panViewport snapWorldCoordinate viewportToWorld worldToViewport zoomViewportAt">
+  </article><article class="item" data-search="src/index.ts getAxisTicks getVisibleGridItems getVisibleWorldBounds GridAxisCategory GridAxisDefinition GridAxisKind GridAxisName GridAxisTick GridPoint GridRect GridRectItem GridSnapResolver GridSnapSpecification GridTickContext GridTickProvider GridTickSpecification GridViewport GridZoomLimits panViewport revealWorldRect snapWorldCoordinate viewportToWorld worldToViewport zoomViewportAt">
     <h3>src/index.ts</h3>
     <p class="muted">Configured entrypoint</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>getAxisTicks</code>, <code>getVisibleGridItems</code>, <code>getVisibleWorldBounds</code>, <code>GridAxisCategory</code>, <code>GridAxisDefinition</code>, <code>GridAxisKind</code>, <code>GridAxisName</code>, <code>GridAxisTick</code>, <code>GridPoint</code>, <code>GridRect</code>, <code>GridRectItem</code>, <code>GridSnapResolver</code>, <code>GridSnapSpecification</code>, <code>GridTickContext</code>, <code>GridTickProvider</code>, <code>GridTickSpecification</code>, <code>GridViewport</code>, <code>GridZoomLimits</code>, <code>panViewport</code>, <code>snapWorldCoordinate</code>, <code>viewportToWorld</code>, <code>worldToViewport</code>, <code>zoomViewportAt</code></p>
+    <p><strong>Exports:</strong> <code>getAxisTicks</code>, <code>getVisibleGridItems</code>, <code>getVisibleWorldBounds</code>, <code>GridAxisCategory</code>, <code>GridAxisDefinition</code>, <code>GridAxisKind</code>, <code>GridAxisName</code>, <code>GridAxisTick</code>, <code>GridPoint</code>, <code>GridRect</code>, <code>GridRectItem</code>, <code>GridSnapResolver</code>, <code>GridSnapSpecification</code>, <code>GridTickContext</code>, <code>GridTickProvider</code>, <code>GridTickSpecification</code>, <code>GridViewport</code>, <code>GridZoomLimits</code>, <code>panViewport</code>, <code>revealWorldRect</code>, <code>snapWorldCoordinate</code>, <code>viewportToWorld</code>, <code>worldToViewport</code>, <code>zoomViewportAt</code></p>
   </article><article class="item" data-search="src/types/axes.ts src/types/grid.ts GridAxisCategory GridAxisDefinition GridAxisKind GridAxisName GridAxisTick GridTickContext GridTickProvider GridTickSpecification">
     <h3>src/types/axes.ts</h3>
     <p class="muted">Referenced module</p>
@@ -270,7 +280,7 @@
               <article class="item" id="symbol-getaxisticks" data-search="getAxisTicks  function src/features/axes/getAxisTicks.ts Generate only visible ruler ticks; a domain adapter may supply irregular boundaries. GridAxisName GridAxisTick GridTickProvider GridTickSpecification GridViewport (viewport: GridViewport, axis: GridAxisName, specification: GridTickSpecification, provider?: GridTickProvider | undefined) =&gt; readonly GridAxisTick[]">
     <h4>getAxisTicks</h4>
     
-    <p class="muted">function • <code>src/features/axes/getAxisTicks.ts:11:1</code></p>
+    <p class="muted">function • <code>src/features/axes/getAxisTicks.ts:12:1</code></p>
     <p>Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -440,6 +450,46 @@
                   <tr>
                         <td><code>displacement</code></td>
                         <td><code>GridPoint</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>viewport</code></td>
+                        <td><code>GridViewport</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>GridViewport</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/viewport/revealWorldRect.ts</h3>
+              <article class="item" id="symbol-revealworldrect" data-search="revealWorldRect  function src/features/viewport/revealWorldRect.ts Minimally pans a viewport so that a world rectangle is visible inside pixel padding.&#10;Oversized rectangles align their leading edges because neither axis can show them in full. GridRect GridViewport (viewport: GridViewport, rect: GridRect, paddingPixels?: number) =&gt; GridViewport">
+    <h4>revealWorldRect</h4>
+    
+    <p class="muted">function • <code>src/features/viewport/revealWorldRect.ts:7:1</code></p>
+    <p>Minimally pans a viewport so that a world rectangle is visible inside pixel padding.
+Oversized rectangles align their leading edges because neither axis can show them in full.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">GridRect</li><li class="chip">GridViewport</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(viewport: GridViewport, rect: GridRect, paddingPixels?: number) =&gt; GridViewport</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>paddingPixels</code></td>
+                        <td><code>number</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>rect</code></td>
+                        <td><code>GridRect</code></td>
                         <td>yes</td>
                         <td></td>
                       </tr><tr>
@@ -1026,6 +1076,9 @@
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
   package__ankhorage_grid_view -.-&gt; module_src_features_viewport_panViewport_ts
   module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_revealWorldRect_ts
+  module_src_features_viewport_revealWorldRect_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   package__ankhorage_grid_view -.-&gt; module_src_features_viewport_viewportToWorld_ts
   module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
@@ -1078,6 +1131,9 @@
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
   package__ankhorage_grid_view -.-&gt; module_src_features_viewport_panViewport_ts
   module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
+  package__ankhorage_grid_view -.-&gt; module_src_features_viewport_revealWorldRect_ts
+  module_src_features_viewport_revealWorldRect_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   package__ankhorage_grid_view -.-&gt; module_src_features_viewport_viewportToWorld_ts
   module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
@@ -1111,6 +1167,7 @@
   module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
   module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
   module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
@@ -1131,6 +1188,7 @@
   module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
   module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_revealWorldRect_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
@@ -1147,6 +1205,7 @@
   module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
   module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
   module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
@@ -1167,6 +1226,7 @@
   module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_features_viewport_viewportToWorld_ts
   module_src_features_viewport_getVisibleWorldBounds_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_panViewport_ts --&gt; module_src_types_grid_ts
+  module_src_features_viewport_revealWorldRect_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_viewportToWorld_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_worldToViewport_ts --&gt; module_src_types_grid_ts
   module_src_features_viewport_zoomViewportAt_ts --&gt; module_src_features_viewport_viewportToWorld_ts
@@ -1185,6 +1245,7 @@
   module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
   module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
   module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
@@ -1245,6 +1306,10 @@
   module_src_features_viewport_panViewport_ts --&gt; export_panViewport
   export_panViewport -.-&gt; export_GridPoint
   export_panViewport -.-&gt; export_GridViewport
+  export_revealWorldRect[&quot;revealWorldRect&quot;]
+  module_src_features_viewport_revealWorldRect_ts --&gt; export_revealWorldRect
+  export_revealWorldRect -.-&gt; export_GridRect
+  export_revealWorldRect -.-&gt; export_GridViewport
   export_snapWorldCoordinate[&quot;snapWorldCoordinate&quot;]
   module_src_features_snap_snapWorldCoordinate_ts --&gt; export_snapWorldCoordinate
   export_snapWorldCoordinate -.-&gt; export_GridSnapResolver
@@ -1272,6 +1337,7 @@
   module_src_features_snap_snapWorldCoordinate_ts[&quot;src/features/snap/snapWorldCoordinate.ts&quot;]
   module_src_features_viewport_getVisibleWorldBounds_ts[&quot;src/features/viewport/getVisibleWorldBounds.ts&quot;]
   module_src_features_viewport_panViewport_ts[&quot;src/features/viewport/panViewport.ts&quot;]
+  module_src_features_viewport_revealWorldRect_ts[&quot;src/features/viewport/revealWorldRect.ts&quot;]
   module_src_features_viewport_viewportToWorld_ts[&quot;src/features/viewport/viewportToWorld.ts&quot;]
   module_src_features_viewport_worldToViewport_ts[&quot;src/features/viewport/worldToViewport.ts&quot;]
   module_src_features_viewport_zoomViewportAt_ts[&quot;src/features/viewport/zoomViewportAt.ts&quot;]
@@ -1332,6 +1398,10 @@
   module_src_features_viewport_panViewport_ts --&gt; export_panViewport
   export_panViewport -.-&gt; export_GridPoint
   export_panViewport -.-&gt; export_GridViewport
+  export_revealWorldRect[&quot;revealWorldRect&quot;]
+  module_src_features_viewport_revealWorldRect_ts --&gt; export_revealWorldRect
+  export_revealWorldRect -.-&gt; export_GridRect
+  export_revealWorldRect -.-&gt; export_GridViewport
   export_snapWorldCoordinate[&quot;snapWorldCoordinate&quot;]
   module_src_features_snap_snapWorldCoordinate_ts --&gt; export_snapWorldCoordinate
   export_snapWorldCoordinate -.-&gt; export_GridSnapResolver
@@ -1357,34 +1427,52 @@
     <div class="mermaid">sequenceDiagram
   participant participant_adaptiveStep as adaptiveStep
   participant participant_getAxisTicks as getAxisTicks
+  participant participant_getGeneratedTicks as getGeneratedTicks
+  participant participant_getProvidedTicks as getProvidedTicks
+  participant participant_getTickContext as getTickContext
   participant participant_getVisibleWorldBounds as getVisibleWorldBounds
   participant participant_provider as provider
   participant participant_viewportToWorld as viewportToWorld
-  participant_getAxisTicks-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getAxisTicks-&gt;&gt;participant_getTickContext: getTickContext()
+  participant_getTickContext-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
   participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
   participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
-  participant_getVisibleWorldBounds--&gt;&gt;participant_getAxisTicks: return
-  participant_getAxisTicks-&gt;&gt;participant_provider: provider()
-  participant_provider--&gt;&gt;participant_getAxisTicks: return
-  participant_getAxisTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
-  participant_adaptiveStep--&gt;&gt;participant_getAxisTicks: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getTickContext: return
+  participant_getTickContext--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_getProvidedTicks: getProvidedTicks()
+  participant_getProvidedTicks-&gt;&gt;participant_provider: provider()
+  participant_provider--&gt;&gt;participant_getProvidedTicks: return
+  participant_getProvidedTicks--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_getGeneratedTicks: getGeneratedTicks()
+  participant_getGeneratedTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep--&gt;&gt;participant_getGeneratedTicks: return
+  participant_getGeneratedTicks--&gt;&gt;participant_getAxisTicks: return
 </div>
     <details>
       <summary>View Mermaid source</summary>
       <pre>sequenceDiagram
   participant participant_adaptiveStep as adaptiveStep
   participant participant_getAxisTicks as getAxisTicks
+  participant participant_getGeneratedTicks as getGeneratedTicks
+  participant participant_getProvidedTicks as getProvidedTicks
+  participant participant_getTickContext as getTickContext
   participant participant_getVisibleWorldBounds as getVisibleWorldBounds
   participant participant_provider as provider
   participant participant_viewportToWorld as viewportToWorld
-  participant_getAxisTicks-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getAxisTicks-&gt;&gt;participant_getTickContext: getTickContext()
+  participant_getTickContext-&gt;&gt;participant_getVisibleWorldBounds: getVisibleWorldBounds()
   participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
   participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
-  participant_getVisibleWorldBounds--&gt;&gt;participant_getAxisTicks: return
-  participant_getAxisTicks-&gt;&gt;participant_provider: provider()
-  participant_provider--&gt;&gt;participant_getAxisTicks: return
-  participant_getAxisTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
-  participant_adaptiveStep--&gt;&gt;participant_getAxisTicks: return
+  participant_getVisibleWorldBounds--&gt;&gt;participant_getTickContext: return
+  participant_getTickContext--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_getProvidedTicks: getProvidedTicks()
+  participant_getProvidedTicks-&gt;&gt;participant_provider: provider()
+  participant_provider--&gt;&gt;participant_getProvidedTicks: return
+  participant_getProvidedTicks--&gt;&gt;participant_getAxisTicks: return
+  participant_getAxisTicks-&gt;&gt;participant_getGeneratedTicks: getGeneratedTicks()
+  participant_getGeneratedTicks-&gt;&gt;participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep--&gt;&gt;participant_getGeneratedTicks: return
+  participant_getGeneratedTicks--&gt;&gt;participant_getAxisTicks: return
 </pre>
     </details>
   </article><article class="item" data-search="getVisibleGridItems sequence diagrams/sequences/get-visible-grid-items.mmd">
@@ -1427,6 +1515,30 @@
   participant participant_viewportToWorld as viewportToWorld
   participant_getVisibleWorldBounds-&gt;&gt;participant_viewportToWorld: viewportToWorld()
   participant_viewportToWorld--&gt;&gt;participant_getVisibleWorldBounds: return
+</pre>
+    </details>
+  </article><article class="item" data-search="revealWorldRect sequence diagrams/sequences/reveal-world-rect.mmd">
+    <h3>revealWorldRect sequence</h3>
+    <p class="muted"><code>diagrams/sequences/reveal-world-rect.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_revealAxis as revealAxis
+  participant participant_revealWorldRect as revealWorldRect
+  participant participant_validateRevealInput as validateRevealInput
+  participant_revealWorldRect-&gt;&gt;participant_validateRevealInput: validateRevealInput()
+  participant_validateRevealInput--&gt;&gt;participant_revealWorldRect: return
+  participant_revealWorldRect-&gt;&gt;participant_revealAxis: revealAxis()
+  participant_revealAxis--&gt;&gt;participant_revealWorldRect: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_revealAxis as revealAxis
+  participant participant_revealWorldRect as revealWorldRect
+  participant participant_validateRevealInput as validateRevealInput
+  participant_revealWorldRect-&gt;&gt;participant_validateRevealInput: validateRevealInput()
+  participant_validateRevealInput--&gt;&gt;participant_revealWorldRect: return
+  participant_revealWorldRect-&gt;&gt;participant_revealAxis: revealAxis()
+  participant_revealAxis--&gt;&gt;participant_revealWorldRect: return
 </pre>
     </details>
   </article><article class="item" data-search="snapWorldCoordinate sequence diagrams/sequences/snap-world-coordinate.mmd">
@@ -1473,13 +1585,28 @@
       <h2>src/features/axes/getAxisTicks.ts</h2>
       <article class="item" data-search="getAxisTicks src/features/axes/getAxisTicks.ts Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.">
     <h3>getAxisTicks</h3>
-    <p class="muted"><code>src/features/axes/getAxisTicks.ts:11:1</code></p>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:12:1</code></p>
     <p>Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.</p>
     
-  </article><article class="item" data-search="adaptiveStep src/features/axes/getAxisTicks.ts ">
+  </article><article class="item" data-search="getTickContext src/features/axes/getAxisTicks.ts Derive one axis-specific visible interval for a ruler operation.">
+    <h3>getTickContext</h3>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:26:1</code></p>
+    <p>Derive one axis-specific visible interval for a ruler operation.</p>
+    
+  </article><article class="item" data-search="getProvidedTicks src/features/axes/getAxisTicks.ts Filter externally supplied domain ticks to the visible axis interval.">
+    <h3>getProvidedTicks</h3>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:50:1</code></p>
+    <p>Filter externally supplied domain ticks to the visible axis interval.</p>
+    
+  </article><article class="item" data-search="getGeneratedTicks src/features/axes/getAxisTicks.ts Generate bounded fixed or adaptive ruler ticks for one visible axis interval.">
+    <h3>getGeneratedTicks</h3>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:62:1</code></p>
+    <p>Generate bounded fixed or adaptive ruler ticks for one visible axis interval.</p>
+    
+  </article><article class="item" data-search="adaptiveStep src/features/axes/getAxisTicks.ts Select a readable decade-based ruler increment for a minimum world distance.">
     <h3>adaptiveStep</h3>
-    <p class="muted"><code>src/features/axes/getAxisTicks.ts:55:1</code></p>
-    <p class="empty">No description available.</p>
+    <p class="muted"><code>src/features/axes/getAxisTicks.ts:94:1</code></p>
+    <p>Select a readable decade-based ruler increment for a minimum world distance.</p>
     
   </article>
     </section>
@@ -1520,6 +1647,27 @@
     <h3>panViewport</h3>
     <p class="muted"><code>src/features/viewport/panViewport.ts:4:1</code></p>
     <p>Pan by pixel displacement; dragging to the right reveals world coordinates to the left.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-viewport-revealworldrect-ts" class="view" data-view="src/features/viewport/revealWorldRect.ts" hidden>
+    <section class="panel">
+      <h2>src/features/viewport/revealWorldRect.ts</h2>
+      <article class="item" data-search="revealWorldRect src/features/viewport/revealWorldRect.ts Minimally pans a viewport so that a world rectangle is visible inside pixel padding.&#10;Oversized rectangles align their leading edges because neither axis can show them in full.">
+    <h3>revealWorldRect</h3>
+    <p class="muted"><code>src/features/viewport/revealWorldRect.ts:7:1</code></p>
+    <p>Minimally pans a viewport so that a world rectangle is visible inside pixel padding.
+Oversized rectangles align their leading edges because neither axis can show them in full.</p>
+    
+  </article><article class="item" data-search="revealAxis src/features/viewport/revealWorldRect.ts Resolve the minimal world-coordinate offset that exposes one axis of a rectangle.">
+    <h3>revealAxis</h3>
+    <p class="muted"><code>src/features/viewport/revealWorldRect.ts:35:1</code></p>
+    <p>Resolve the minimal world-coordinate offset that exposes one axis of a rectangle.</p>
+    
+  </article><article class="item" data-search="validateRevealInput src/features/viewport/revealWorldRect.ts Reject geometry that cannot produce a meaningful visible viewport interior.">
+    <h3>validateRevealInput</h3>
+    <p class="muted"><code>src/features/viewport/revealWorldRect.ts:56:1</code></p>
+    <p>Reject geometry that cannot produce a meaningful visible viewport interior.</p>
     
   </article>
     </section>

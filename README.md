@@ -3,7 +3,7 @@
 
 # @ankhorage/grid-view
 
-![license: MIT](././docs/badges/license.svg) ![npm: v0.1.1](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
+![license: MIT](././docs/badges/license.svg) ![npm: v0.2.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
 
 Platform-neutral grid viewport, axes, snapping and virtualization geometry for Ankhorage.
 
@@ -18,5 +18,6 @@ Platform-neutral grid viewport, axes, snapping and virtualization geometry for A
 - [getAxisTicks sequence](././docs/diagrams/sequences/get-axis-ticks.mmd)
 - [getVisibleGridItems sequence](././docs/diagrams/sequences/get-visible-grid-items.mmd)
 - [getVisibleWorldBounds sequence](././docs/diagrams/sequences/get-visible-world-bounds.mmd)
+- [revealWorldRect sequence](././docs/diagrams/sequences/reveal-world-rect.mmd)
 - [snapWorldCoordinate sequence](././docs/diagrams/sequences/snap-world-coordinate.mmd)
 - [zoomViewportAt sequence](././docs/diagrams/sequences/zoom-viewport-at.mmd)

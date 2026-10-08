@@ -1,14 +1,23 @@
 sequenceDiagram
   participant participant_adaptiveStep as adaptiveStep
   participant participant_getAxisTicks as getAxisTicks
+  participant participant_getGeneratedTicks as getGeneratedTicks
+  participant participant_getProvidedTicks as getProvidedTicks
+  participant participant_getTickContext as getTickContext
   participant participant_getVisibleWorldBounds as getVisibleWorldBounds
   participant participant_provider as provider
   participant participant_viewportToWorld as viewportToWorld
-  participant_getAxisTicks->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getAxisTicks->>participant_getTickContext: getTickContext()
+  participant_getTickContext->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
   participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
   participant_viewportToWorld-->>participant_getVisibleWorldBounds: return
-  participant_getVisibleWorldBounds-->>participant_getAxisTicks: return
-  participant_getAxisTicks->>participant_provider: provider()
-  participant_provider-->>participant_getAxisTicks: return
-  participant_getAxisTicks->>participant_adaptiveStep: adaptiveStep()
-  participant_adaptiveStep-->>participant_getAxisTicks: return
+  participant_getVisibleWorldBounds-->>participant_getTickContext: return
+  participant_getTickContext-->>participant_getAxisTicks: return
+  participant_getAxisTicks->>participant_getProvidedTicks: getProvidedTicks()
+  participant_getProvidedTicks->>participant_provider: provider()
+  participant_provider-->>participant_getProvidedTicks: return
+  participant_getProvidedTicks-->>participant_getAxisTicks: return
+  participant_getAxisTicks->>participant_getGeneratedTicks: getGeneratedTicks()
+  participant_getGeneratedTicks->>participant_adaptiveStep: adaptiveStep()
+  participant_adaptiveStep-->>participant_getGeneratedTicks: return
+  participant_getGeneratedTicks-->>participant_getAxisTicks: return

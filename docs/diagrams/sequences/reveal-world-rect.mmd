@@ -1,0 +1,8 @@
+sequenceDiagram
+  participant participant_revealAxis as revealAxis
+  participant participant_revealWorldRect as revealWorldRect
+  participant participant_validateRevealInput as validateRevealInput
+  participant_revealWorldRect->>participant_validateRevealInput: validateRevealInput()
+  participant_validateRevealInput-->>participant_revealWorldRect: return
+  participant_revealWorldRect->>participant_revealAxis: revealAxis()
+  participant_revealAxis-->>participant_revealWorldRect: return

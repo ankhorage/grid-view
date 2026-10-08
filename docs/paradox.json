@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.1",
+      "value": "v0.2.0",
       "color": "cb3837"
     },
     {
@@ -137,6 +137,16 @@
       ]
     },
     {
+      "path": "src/features/viewport/revealWorldRect.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/grid.ts"
+      ],
+      "exports": [
+        "revealWorldRect"
+      ]
+    },
+    {
       "path": "src/features/viewport/viewportToWorld.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -191,6 +201,7 @@
         "GridViewport",
         "GridZoomLimits",
         "panViewport",
+        "revealWorldRect",
         "snapWorldCoordinate",
         "viewportToWorld",
         "worldToViewport",
@@ -257,7 +268,7 @@
       "modulePath": "src/features/axes/getAxisTicks.ts",
       "sourceLocation": {
         "filePath": "src/features/axes/getAxisTicks.ts",
-        "line": 11,
+        "line": 12,
         "column": 1
       },
       "exportPaths": [
@@ -1037,6 +1048,57 @@
       "structuredRows": []
     },
     {
+      "name": "revealWorldRect",
+      "title": null,
+      "description": "Minimally pans a viewport so that a world rectangle is visible inside pixel padding.\nOversized rectangles align their leading edges because neither axis can show them in full.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/viewport/revealWorldRect.ts",
+      "sourceLocation": {
+        "filePath": "src/features/viewport/revealWorldRect.ts",
+        "line": 7,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridRect",
+        "GridViewport"
+      ],
+      "signatures": [
+        {
+          "label": "(viewport: GridViewport, rect: GridRect, paddingPixels?: number) => GridViewport",
+          "parameters": [
+            {
+              "name": "paddingPixels",
+              "type": "number",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "rect",
+              "type": "GridRect",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "viewport",
+              "type": "GridViewport",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "GridViewport",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "snapWorldCoordinate",
       "title": null,
       "description": "Snap a world coordinate without consulting zoom or grid-line density.",
@@ -1245,18 +1307,51 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/axes/getAxisTicks.ts",
-        "line": 11,
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "getTickContext",
+      "description": "Derive one axis-specific visible interval for a ruler operation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisTicks.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
+    {
+      "name": "getProvidedTicks",
+      "description": "Filter externally supplied domain ticks to the visible axis interval.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisTicks.ts",
+        "line": 50,
+        "column": 1
+      }
+    },
+    {
+      "name": "getGeneratedTicks",
+      "description": "Generate bounded fixed or adaptive ruler ticks for one visible axis interval.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisTicks.ts",
+        "line": 62,
         "column": 1
       }
     },
     {
       "name": "adaptiveStep",
-      "description": null,
+      "description": "Select a readable decade-based ruler increment for a minimum world distance.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/axes/getAxisTicks.ts",
-        "line": 55,
+        "line": 94,
         "column": 1
       }
     },
@@ -1301,6 +1396,39 @@
       "sourceLocation": {
         "filePath": "src/features/viewport/panViewport.ts",
         "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "revealWorldRect",
+      "description": "Minimally pans a viewport so that a world rectangle is visible inside pixel padding.\nOversized rectangles align their leading edges because neither axis can show them in full.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/revealWorldRect.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "revealAxis",
+      "description": "Resolve the minimal world-coordinate offset that exposes one axis of a rectangle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/revealWorldRect.ts",
+        "line": 35,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateRevealInput",
+      "description": "Reject geometry that cannot produce a meaningful visible viewport interior.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/revealWorldRect.ts",
+        "line": 56,
         "column": 1
       }
     },
@@ -1373,6 +1501,14 @@
     },
     {
       "kind": "export",
+      "name": "revealWorldRect",
+      "sourcePath": "src/features/viewport/revealWorldRect.ts",
+      "symbolName": "revealWorldRect",
+      "description": "Minimally pans a viewport so that a world rectangle is visible inside pixel padding.\nOversized rectangles align their leading edges because neither axis can show them in full.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "snapWorldCoordinate",
       "sourcePath": "src/features/snap/snapWorldCoordinate.ts",
       "symbolName": "snapWorldCoordinate",
@@ -1429,6 +1565,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/viewport/panViewport.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/viewport/revealWorldRect.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -1537,6 +1678,11 @@
         "sourcePath": "src/features/viewport/panViewport.ts"
       },
       {
+        "fromPath": "src/features/viewport/revealWorldRect.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
         "fromPath": "src/features/viewport/viewportToWorld.ts",
         "toPath": "src/types/grid.ts",
         "sourcePath": "src/features/viewport/viewportToWorld.ts"
@@ -1608,6 +1754,12 @@
       },
       {
         "fromSymbol": "src/features/grid-view.test.ts",
+        "toSymbol": "revealWorldRect",
+        "callExpression": "revealWorldRect",
+        "sourcePath": "src/features/grid-view.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/grid-view.test.ts",
         "toSymbol": "snapWorldCoordinate",
         "callExpression": "snapWorldCoordinate",
         "sourcePath": "src/features/grid-view.test.ts"
@@ -1626,18 +1778,36 @@
       },
       {
         "fromSymbol": "getAxisTicks",
+        "toSymbol": "getTickContext",
+        "callExpression": "getTickContext",
+        "sourcePath": "src/features/axes/getAxisTicks.ts"
+      },
+      {
+        "fromSymbol": "getAxisTicks",
+        "toSymbol": "getProvidedTicks",
+        "callExpression": "getProvidedTicks",
+        "sourcePath": "src/features/axes/getAxisTicks.ts"
+      },
+      {
+        "fromSymbol": "getAxisTicks",
+        "toSymbol": "getGeneratedTicks",
+        "callExpression": "getGeneratedTicks",
+        "sourcePath": "src/features/axes/getAxisTicks.ts"
+      },
+      {
+        "fromSymbol": "getTickContext",
         "toSymbol": "getVisibleWorldBounds",
         "callExpression": "getVisibleWorldBounds",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
       },
       {
-        "fromSymbol": "getAxisTicks",
+        "fromSymbol": "getProvidedTicks",
         "toSymbol": "provider",
         "callExpression": "provider",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
       },
       {
-        "fromSymbol": "getAxisTicks",
+        "fromSymbol": "getGeneratedTicks",
         "toSymbol": "adaptiveStep",
         "callExpression": "adaptiveStep",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
@@ -1659,6 +1829,18 @@
         "toSymbol": "viewportToWorld",
         "callExpression": "viewportToWorld",
         "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
+        "toSymbol": "validateRevealInput",
+        "callExpression": "validateRevealInput",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
+        "toSymbol": "revealAxis",
+        "callExpression": "revealAxis",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
       },
       {
         "fromSymbol": "zoomViewportAt",
@@ -1732,6 +1914,16 @@
         "fromSymbol": "panViewport",
         "toType": "GridViewport",
         "sourcePath": "src/features/viewport/panViewport.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
+        "toType": "GridRect",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
+        "toType": "GridViewport",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
       },
       {
         "fromSymbol": "viewportToWorld",

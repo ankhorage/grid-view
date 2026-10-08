@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/grid-view",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Platform-neutral grid viewport, axes, snapping and virtualization geometry for Ankhorage.",
   "license": "MIT",
   "type": "module",
