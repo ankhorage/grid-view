@@ -1,9 +1,11 @@
 import type { GridPoint, GridViewport } from '../../types/grid.js';
+import { assertValidViewport } from './assertValidViewport.js';
 
 /*** Transform a viewport pixel coordinate back into world space. */
 export function viewportToWorld(point: GridPoint, viewport: GridViewport): GridPoint {
-  if (viewport.pixelsPerUnitX <= 0 || viewport.pixelsPerUnitY <= 0) {
-    throw new RangeError('Viewport scales must be positive.');
+  assertValidViewport(viewport);
+  if (![point.x, point.y].every(Number.isFinite)) {
+    throw new RangeError('Viewport points must be finite.');
   }
   return {
     x: viewport.offsetX + point.x / viewport.pixelsPerUnitX,

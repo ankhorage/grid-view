@@ -11,6 +11,11 @@ export interface GridAxisCategory {
   readonly size: number;
 }
 
+/** A visible category boundary is ruler geometry, not an interaction snap target. */
+export interface GridAxisCategoryTick extends GridAxisTick {
+  readonly categoryId: string;
+}
+
 /** A domain adapter maps its values into the generic numeric axis. */
 export interface GridAxisDefinition {
   readonly kind: GridAxisKind;
