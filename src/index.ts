@@ -1,6 +1,10 @@
 export { getAxisCategoryTicks } from './features/axes/getAxisCategoryTicks.js';
 export { getAxisTicks } from './features/axes/getAxisTicks.js';
 export { getVisibleGridItems } from './features/items/getVisibleGridItems.js';
+export { getLaneIntervalPlacement } from './features/layout/getLaneIntervalPlacement.js';
+export { getMatrixCellPlacement } from './features/layout/getMatrixCellPlacement.js';
+export { getVisibleLaneIntervals } from './features/layout/getVisibleLaneIntervals.js';
+export { getVisibleMatrixCells } from './features/layout/getVisibleMatrixCells.js';
 export { snapWorldCoordinate } from './features/snap/snapWorldCoordinate.js';
 export { constrainViewport } from './features/viewport/constrainViewport.js';
 export { getVisibleWorldBounds } from './features/viewport/getVisibleWorldBounds.js';
@@ -29,4 +33,13 @@ export type {
   GridZoomLimits,
 } from './types/grid.js';
 export type { GridRectItem } from './types/items.js';
+export type {
+  GridLane,
+  GridLaneInterval,
+  GridLaneIntervalPlacement,
+  GridMatrixAxisEntry,
+  GridMatrixCell,
+  GridMatrixCellPlacement,
+  GridMatrixLayout,
+} from './types/layout.js';
 export type { GridSnapResolver, GridSnapSpecification } from './types/snap.js';
