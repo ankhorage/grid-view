@@ -110,6 +110,31 @@ describe('layout validation', () => {
   });
 });
 
+describe('world-coordinate overflow validation', () => {
+  test('rejects matrix axis and lane interval overflow through public APIs', () => {
+    expect(() =>
+      getMatrixCellPlacement(
+        {
+          rows: [
+            { id: 'r0', size: Number.MAX_VALUE },
+            { id: 'r1', size: Number.MAX_VALUE },
+          ],
+          columns: [{ id: 'c0', size: 1 }],
+        },
+        { id: 'cell', rowId: 'r1', columnId: 'c0' },
+      ),
+    ).toThrow('Layout axis cumulative world coordinates must be finite.');
+    expect(() =>
+      getLaneIntervalPlacement([{ id: 'lane', height: 1 }], {
+        id: 'interval',
+        laneId: 'lane',
+        start: Number.MAX_VALUE,
+        extent: Number.MAX_VALUE,
+      }),
+    ).toThrow('Lane interval end coordinates must be finite.');
+  });
+});
+
 /*** Create large variable-topology inputs without ever constructing their logical cell product. */
 function createLargeMatrixLayout() {
   return {

@@ -14,10 +14,14 @@ export function createGridAxisMetrics(entries: readonly GridMatrixAxisEntry[]): 
     if (!Number.isFinite(entry.size) || entry.size <= 0) {
       throw new RangeError('Layout axis entry sizes must be finite positive numbers.');
     }
+    const end = offset + entry.size;
+    if (!Number.isFinite(end)) {
+      throw new RangeError('Layout axis cumulative world coordinates must be finite.');
+    }
     indexes.set(entry.id, index);
     offsets.push(offset);
     sizes.push(entry.size);
-    offset += entry.size;
+    offset = end;
   });
 
   return { indexes, offsets, sizes };

@@ -18,6 +18,9 @@ export function resolveLaneIntervalPlacement(
   ) {
     throw new RangeError('Lane intervals require an ID, finite start, and positive extent.');
   }
+  if (!Number.isFinite(interval.start + interval.extent)) {
+    throw new RangeError('Lane interval end coordinates must be finite.');
+  }
   const laneIndex = lanes.indexes.get(interval.laneId);
   if (laneIndex === undefined) {
     throw new RangeError('Lane intervals must reference an existing lane.');
