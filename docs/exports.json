@@ -1,5 +1,103 @@
 [
   {
+    "name": "constrainViewport",
+    "title": null,
+    "description": "Constrain a viewport to finite world bounds while preserving valid unconstrained viewports.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/viewport/constrainViewport.ts",
+    "sourceLocation": {
+      "filePath": "src/features/viewport/constrainViewport.ts",
+      "line": 9,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridViewport",
+      "GridViewportConstraints"
+    ],
+    "signatures": [
+      {
+        "label": "(viewport: GridViewport, constraints?: GridViewportConstraints | undefined) => GridViewport",
+        "parameters": [
+          {
+            "name": "constraints",
+            "type": "GridViewportConstraints | undefined",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "viewport",
+            "type": "GridViewport",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "GridViewport",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "getAxisCategoryTicks",
+    "title": null,
+    "description": "Project variable-width category starts into visible-only major ruler tick candidates.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/axes/getAxisCategoryTicks.ts",
+    "sourceLocation": {
+      "filePath": "src/features/axes/getAxisCategoryTicks.ts",
+      "line": 6,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridAxisCategory",
+      "GridAxisCategoryTick",
+      "GridAxisName",
+      "GridViewport"
+    ],
+    "signatures": [
+      {
+        "label": "(viewport: GridViewport, axis: GridAxisName, categories: readonly GridAxisCategory[]) => readonly GridAxisCategoryTick[]",
+        "parameters": [
+          {
+            "name": "axis",
+            "type": "GridAxisName",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "categories",
+            "type": "readonly GridAxisCategory[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "viewport",
+            "type": "GridViewport",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly GridAxisCategoryTick[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "getAxisTicks",
     "title": null,
     "description": "Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.",
@@ -120,7 +218,7 @@
     "modulePath": "src/features/viewport/getVisibleWorldBounds.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/getVisibleWorldBounds.ts",
-      "line": 5,
+      "line": 6,
       "column": 1
     },
     "exportPaths": [
@@ -199,7 +297,7 @@
     "structuredRows": []
   },
   {
-    "name": "GridAxisDefinition",
+    "name": "GridAxisCategoryTick",
     "title": null,
     "description": null,
     "isReadme": false,
@@ -210,6 +308,57 @@
     "sourceLocation": {
       "filePath": "src/types/axes.ts",
       "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "categoryId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "label",
+        "kind": "property",
+        "type": "string",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "level",
+        "kind": "property",
+        "type": "\"major\" | \"minor\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "position",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridAxisDefinition",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/axes.ts",
+    "sourceLocation": {
+      "filePath": "src/types/axes.ts",
+      "line": 20,
       "column": 1
     },
     "exportPaths": [
@@ -300,7 +449,7 @@
     "modulePath": "src/types/axes.ts",
     "sourceLocation": {
       "filePath": "src/types/axes.ts",
-      "line": 22,
+      "line": 27,
       "column": 1
     },
     "exportPaths": [
@@ -534,7 +683,7 @@
     "modulePath": "src/types/axes.ts",
     "sourceLocation": {
       "filePath": "src/types/axes.ts",
-      "line": 47,
+      "line": 52,
       "column": 1
     },
     "exportPaths": [
@@ -595,7 +744,7 @@
     "modulePath": "src/types/axes.ts",
     "sourceLocation": {
       "filePath": "src/types/axes.ts",
-      "line": 55,
+      "line": 60,
       "column": 1
     },
     "exportPaths": [
@@ -617,7 +766,7 @@
     "modulePath": "src/types/axes.ts",
     "sourceLocation": {
       "filePath": "src/types/axes.ts",
-      "line": 28,
+      "line": 33,
       "column": 1
     },
     "exportPaths": [
@@ -694,6 +843,89 @@
     "structuredRows": []
   },
   {
+    "name": "GridViewportAlignment",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/grid.ts",
+    "sourceLocation": {
+      "filePath": "src/types/grid.ts",
+      "line": 32,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "GridViewportConstraints",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/grid.ts",
+    "sourceLocation": {
+      "filePath": "src/types/grid.ts",
+      "line": 39,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridRect",
+      "GridViewportAlignment"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "alignmentX",
+        "kind": "property",
+        "type": "GridViewportAlignment",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "alignmentY",
+        "kind": "property",
+        "type": "GridViewportAlignment",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "overscrollX",
+        "kind": "property",
+        "type": "number",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "overscrollY",
+        "kind": "property",
+        "type": "number",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "world",
+        "kind": "property",
+        "type": "GridRect",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "GridZoomLimits",
     "title": null,
     "description": null,
@@ -755,7 +987,7 @@
     "modulePath": "src/features/viewport/panViewport.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/panViewport.ts",
-      "line": 4,
+      "line": 5,
       "column": 1
     },
     "exportPaths": [
@@ -763,12 +995,19 @@
     ],
     "relatedSymbols": [
       "GridPoint",
-      "GridViewport"
+      "GridViewport",
+      "GridViewportConstraints"
     ],
     "signatures": [
       {
-        "label": "(viewport: GridViewport, displacement: GridPoint) => GridViewport",
+        "label": "(viewport: GridViewport, displacement: GridPoint, constraints?: GridViewportConstraints | undefined) => GridViewport",
         "parameters": [
+          {
+            "name": "constraints",
+            "type": "GridViewportConstraints | undefined",
+            "required": false,
+            "description": null
+          },
           {
             "name": "displacement",
             "type": "GridPoint",
@@ -800,7 +1039,7 @@
     "modulePath": "src/features/viewport/revealWorldRect.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/revealWorldRect.ts",
-      "line": 7,
+      "line": 8,
       "column": 1
     },
     "exportPaths": [
@@ -808,12 +1047,19 @@
     ],
     "relatedSymbols": [
       "GridRect",
-      "GridViewport"
+      "GridViewport",
+      "GridViewportConstraints"
     ],
     "signatures": [
       {
-        "label": "(viewport: GridViewport, rect: GridRect, paddingPixels?: number) => GridViewport",
+        "label": "(viewport: GridViewport, rect: GridRect, paddingPixels?: number, constraints?: GridViewportConstraints | undefined) => GridViewport",
         "parameters": [
+          {
+            "name": "constraints",
+            "type": "GridViewportConstraints | undefined",
+            "required": false,
+            "description": null
+          },
           {
             "name": "paddingPixels",
             "type": "number",
@@ -902,7 +1148,7 @@
     "modulePath": "src/features/viewport/viewportToWorld.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/viewportToWorld.ts",
-      "line": 4,
+      "line": 5,
       "column": 1
     },
     "exportPaths": [
@@ -947,7 +1193,7 @@
     "modulePath": "src/features/viewport/worldToViewport.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/worldToViewport.ts",
-      "line": 4,
+      "line": 5,
       "column": 1
     },
     "exportPaths": [
@@ -992,7 +1238,7 @@
     "modulePath": "src/features/viewport/zoomViewportAt.ts",
     "sourceLocation": {
       "filePath": "src/features/viewport/zoomViewportAt.ts",
-      "line": 5,
+      "line": 11,
       "column": 1
     },
     "exportPaths": [
@@ -1001,12 +1247,19 @@
     "relatedSymbols": [
       "GridPoint",
       "GridViewport",
+      "GridViewportConstraints",
       "GridZoomLimits"
     ],
     "signatures": [
       {
-        "label": "(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, \"pixelsPerUnitX\" | \"pixelsPerUnitY\">, limits?: GridZoomLimits) => GridViewport",
+        "label": "(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, \"pixelsPerUnitX\" | \"pixelsPerUnitY\">, limits?: GridZoomLimits, constraints?: GridViewportConstraints | undefined) => GridViewport",
         "parameters": [
+          {
+            "name": "constraints",
+            "type": "GridViewportConstraints | undefined",
+            "required": false,
+            "description": null
+          },
           {
             "name": "focalPoint",
             "type": "GridPoint",

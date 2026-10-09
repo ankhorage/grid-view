@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.0",
+      "value": "v0.3.0",
       "color": "cb3837"
     },
     {
@@ -73,6 +73,18 @@
   ],
   "modules": [
     {
+      "path": "src/features/axes/getAxisCategoryTicks.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/viewport/getVisibleWorldBounds.ts",
+        "src/types/axes.ts",
+        "src/types/grid.ts"
+      ],
+      "exports": [
+        "getAxisCategoryTicks"
+      ]
+    },
+    {
       "path": "src/features/axes/getAxisTicks.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -116,9 +128,31 @@
       ]
     },
     {
+      "path": "src/features/viewport/assertValidViewport.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/grid.ts"
+      ],
+      "exports": [
+        "assertValidViewport"
+      ]
+    },
+    {
+      "path": "src/features/viewport/constrainViewport.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/viewport/assertValidViewport.ts",
+        "src/types/grid.ts"
+      ],
+      "exports": [
+        "constrainViewport"
+      ]
+    },
+    {
       "path": "src/features/viewport/getVisibleWorldBounds.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/assertValidViewport.ts",
         "src/features/viewport/viewportToWorld.ts",
         "src/types/grid.ts"
       ],
@@ -130,6 +164,7 @@
       "path": "src/features/viewport/panViewport.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/constrainViewport.ts",
         "src/types/grid.ts"
       ],
       "exports": [
@@ -140,6 +175,7 @@
       "path": "src/features/viewport/revealWorldRect.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/constrainViewport.ts",
         "src/types/grid.ts"
       ],
       "exports": [
@@ -150,6 +186,7 @@
       "path": "src/features/viewport/viewportToWorld.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/assertValidViewport.ts",
         "src/types/grid.ts"
       ],
       "exports": [
@@ -160,6 +197,7 @@
       "path": "src/features/viewport/worldToViewport.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/assertValidViewport.ts",
         "src/types/grid.ts"
       ],
       "exports": [
@@ -170,6 +208,7 @@
       "path": "src/features/viewport/zoomViewportAt.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/viewport/constrainViewport.ts",
         "src/features/viewport/viewportToWorld.ts",
         "src/types/grid.ts"
       ],
@@ -182,10 +221,13 @@
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
+        "constrainViewport",
+        "getAxisCategoryTicks",
         "getAxisTicks",
         "getVisibleGridItems",
         "getVisibleWorldBounds",
         "GridAxisCategory",
+        "GridAxisCategoryTick",
         "GridAxisDefinition",
         "GridAxisKind",
         "GridAxisName",
@@ -199,6 +241,8 @@
         "GridTickProvider",
         "GridTickSpecification",
         "GridViewport",
+        "GridViewportAlignment",
+        "GridViewportConstraints",
         "GridZoomLimits",
         "panViewport",
         "revealWorldRect",
@@ -216,6 +260,7 @@
       ],
       "exports": [
         "GridAxisCategory",
+        "GridAxisCategoryTick",
         "GridAxisDefinition",
         "GridAxisKind",
         "GridAxisName",
@@ -233,6 +278,8 @@
         "GridPoint",
         "GridRect",
         "GridViewport",
+        "GridViewportAlignment",
+        "GridViewportConstraints",
         "GridZoomLimits"
       ]
     },
@@ -257,6 +304,104 @@
     }
   ],
   "exports": [
+    {
+      "name": "constrainViewport",
+      "title": null,
+      "description": "Constrain a viewport to finite world bounds while preserving valid unconstrained viewports.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/viewport/constrainViewport.ts",
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 9,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridViewport",
+        "GridViewportConstraints"
+      ],
+      "signatures": [
+        {
+          "label": "(viewport: GridViewport, constraints?: GridViewportConstraints | undefined) => GridViewport",
+          "parameters": [
+            {
+              "name": "constraints",
+              "type": "GridViewportConstraints | undefined",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "viewport",
+              "type": "GridViewport",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "GridViewport",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "getAxisCategoryTicks",
+      "title": null,
+      "description": "Project variable-width category starts into visible-only major ruler tick candidates.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/axes/getAxisCategoryTicks.ts",
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisCategoryTicks.ts",
+        "line": 6,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridAxisCategory",
+        "GridAxisCategoryTick",
+        "GridAxisName",
+        "GridViewport"
+      ],
+      "signatures": [
+        {
+          "label": "(viewport: GridViewport, axis: GridAxisName, categories: readonly GridAxisCategory[]) => readonly GridAxisCategoryTick[]",
+          "parameters": [
+            {
+              "name": "axis",
+              "type": "GridAxisName",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "categories",
+              "type": "readonly GridAxisCategory[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "viewport",
+              "type": "GridViewport",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "readonly GridAxisCategoryTick[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
     {
       "name": "getAxisTicks",
       "title": null,
@@ -378,7 +523,7 @@
       "modulePath": "src/features/viewport/getVisibleWorldBounds.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/getVisibleWorldBounds.ts",
-        "line": 5,
+        "line": 6,
         "column": 1
       },
       "exportPaths": [
@@ -457,7 +602,7 @@
       "structuredRows": []
     },
     {
-      "name": "GridAxisDefinition",
+      "name": "GridAxisCategoryTick",
       "title": null,
       "description": null,
       "isReadme": false,
@@ -468,6 +613,57 @@
       "sourceLocation": {
         "filePath": "src/types/axes.ts",
         "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "categoryId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "label",
+          "kind": "property",
+          "type": "string",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "level",
+          "kind": "property",
+          "type": "\"major\" | \"minor\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "position",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridAxisDefinition",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/axes.ts",
+      "sourceLocation": {
+        "filePath": "src/types/axes.ts",
+        "line": 20,
         "column": 1
       },
       "exportPaths": [
@@ -558,7 +754,7 @@
       "modulePath": "src/types/axes.ts",
       "sourceLocation": {
         "filePath": "src/types/axes.ts",
-        "line": 22,
+        "line": 27,
         "column": 1
       },
       "exportPaths": [
@@ -792,7 +988,7 @@
       "modulePath": "src/types/axes.ts",
       "sourceLocation": {
         "filePath": "src/types/axes.ts",
-        "line": 47,
+        "line": 52,
         "column": 1
       },
       "exportPaths": [
@@ -853,7 +1049,7 @@
       "modulePath": "src/types/axes.ts",
       "sourceLocation": {
         "filePath": "src/types/axes.ts",
-        "line": 55,
+        "line": 60,
         "column": 1
       },
       "exportPaths": [
@@ -875,7 +1071,7 @@
       "modulePath": "src/types/axes.ts",
       "sourceLocation": {
         "filePath": "src/types/axes.ts",
-        "line": 28,
+        "line": 33,
         "column": 1
       },
       "exportPaths": [
@@ -952,6 +1148,89 @@
       "structuredRows": []
     },
     {
+      "name": "GridViewportAlignment",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/grid.ts",
+      "sourceLocation": {
+        "filePath": "src/types/grid.ts",
+        "line": 32,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "GridViewportConstraints",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/grid.ts",
+      "sourceLocation": {
+        "filePath": "src/types/grid.ts",
+        "line": 39,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridRect",
+        "GridViewportAlignment"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "alignmentX",
+          "kind": "property",
+          "type": "GridViewportAlignment",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "alignmentY",
+          "kind": "property",
+          "type": "GridViewportAlignment",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "overscrollX",
+          "kind": "property",
+          "type": "number",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "overscrollY",
+          "kind": "property",
+          "type": "number",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "world",
+          "kind": "property",
+          "type": "GridRect",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "GridZoomLimits",
       "title": null,
       "description": null,
@@ -1013,7 +1292,7 @@
       "modulePath": "src/features/viewport/panViewport.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/panViewport.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       },
       "exportPaths": [
@@ -1021,12 +1300,19 @@
       ],
       "relatedSymbols": [
         "GridPoint",
-        "GridViewport"
+        "GridViewport",
+        "GridViewportConstraints"
       ],
       "signatures": [
         {
-          "label": "(viewport: GridViewport, displacement: GridPoint) => GridViewport",
+          "label": "(viewport: GridViewport, displacement: GridPoint, constraints?: GridViewportConstraints | undefined) => GridViewport",
           "parameters": [
+            {
+              "name": "constraints",
+              "type": "GridViewportConstraints | undefined",
+              "required": false,
+              "description": null
+            },
             {
               "name": "displacement",
               "type": "GridPoint",
@@ -1058,7 +1344,7 @@
       "modulePath": "src/features/viewport/revealWorldRect.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/revealWorldRect.ts",
-        "line": 7,
+        "line": 8,
         "column": 1
       },
       "exportPaths": [
@@ -1066,12 +1352,19 @@
       ],
       "relatedSymbols": [
         "GridRect",
-        "GridViewport"
+        "GridViewport",
+        "GridViewportConstraints"
       ],
       "signatures": [
         {
-          "label": "(viewport: GridViewport, rect: GridRect, paddingPixels?: number) => GridViewport",
+          "label": "(viewport: GridViewport, rect: GridRect, paddingPixels?: number, constraints?: GridViewportConstraints | undefined) => GridViewport",
           "parameters": [
+            {
+              "name": "constraints",
+              "type": "GridViewportConstraints | undefined",
+              "required": false,
+              "description": null
+            },
             {
               "name": "paddingPixels",
               "type": "number",
@@ -1160,7 +1453,7 @@
       "modulePath": "src/features/viewport/viewportToWorld.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/viewportToWorld.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       },
       "exportPaths": [
@@ -1205,7 +1498,7 @@
       "modulePath": "src/features/viewport/worldToViewport.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/worldToViewport.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       },
       "exportPaths": [
@@ -1250,7 +1543,7 @@
       "modulePath": "src/features/viewport/zoomViewportAt.ts",
       "sourceLocation": {
         "filePath": "src/features/viewport/zoomViewportAt.ts",
-        "line": 5,
+        "line": 11,
         "column": 1
       },
       "exportPaths": [
@@ -1259,12 +1552,19 @@
       "relatedSymbols": [
         "GridPoint",
         "GridViewport",
+        "GridViewportConstraints",
         "GridZoomLimits"
       ],
       "signatures": [
         {
-          "label": "(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, \"pixelsPerUnitX\" | \"pixelsPerUnitY\">, limits?: GridZoomLimits) => GridViewport",
+          "label": "(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, \"pixelsPerUnitX\" | \"pixelsPerUnitY\">, limits?: GridZoomLimits, constraints?: GridViewportConstraints | undefined) => GridViewport",
           "parameters": [
+            {
+              "name": "constraints",
+              "type": "GridViewportConstraints | undefined",
+              "required": false,
+              "description": null
+            },
             {
               "name": "focalPoint",
               "type": "GridPoint",
@@ -1300,6 +1600,28 @@
   ],
   "components": [],
   "sourceFunctions": [
+    {
+      "name": "getAxisCategoryTicks",
+      "description": "Project variable-width category starts into visible-only major ruler tick candidates.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisCategoryTicks.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateCategory",
+      "description": "Validate one serializable category interval before it becomes ruler geometry.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/axes/getAxisCategoryTicks.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
     {
       "name": "getAxisTicks",
       "description": "Generate only visible ruler ticks; a domain adapter may supply irregular boundaries.",
@@ -1378,13 +1700,79 @@
       }
     },
     {
+      "name": "assertValidViewport",
+      "description": "Reject viewport geometry that would produce non-finite coordinate transforms.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/assertValidViewport.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "constrainViewport",
+      "description": "Constrain a viewport to finite world bounds while preserving valid unconstrained viewports.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "constrainAxis",
+      "description": "Constrain one world axis, aligning undersized bounded content deterministically.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "getAlignmentFactor",
+      "description": "Convert an alignment name to its dimensionless leading-edge factor.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateConstraints",
+      "description": "Validate serializable viewport bounds before they affect interaction geometry.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "isAlignment",
+      "description": "Identify the finite set of supported undersized-world alignment values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/constrainViewport.ts",
+        "line": 82,
+        "column": 1
+      }
+    },
+    {
       "name": "getVisibleWorldBounds",
       "description": "Calculate the visible world rectangle, optionally expanded by pixel overscan.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/getVisibleWorldBounds.ts",
-        "line": 5,
+        "line": 6,
         "column": 1
       }
     },
@@ -1395,7 +1783,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/panViewport.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       }
     },
@@ -1406,7 +1794,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/revealWorldRect.ts",
-        "line": 7,
+        "line": 8,
         "column": 1
       }
     },
@@ -1417,7 +1805,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/revealWorldRect.ts",
-        "line": 35,
+        "line": 40,
         "column": 1
       }
     },
@@ -1428,7 +1816,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/revealWorldRect.ts",
-        "line": 56,
+        "line": 61,
         "column": 1
       }
     },
@@ -1439,7 +1827,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/viewportToWorld.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       }
     },
@@ -1450,7 +1838,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/worldToViewport.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       }
     },
@@ -1461,12 +1849,39 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/viewport/zoomViewportAt.ts",
-        "line": 5,
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "constrainScale",
+      "description": "Apply one valid independent axis scale range.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/viewport/zoomViewportAt.ts",
+        "line": 41,
         "column": 1
       }
     }
   ],
   "sequenceScenarios": [
+    {
+      "kind": "export",
+      "name": "constrainViewport",
+      "sourcePath": "src/features/viewport/constrainViewport.ts",
+      "symbolName": "constrainViewport",
+      "description": "Constrain a viewport to finite world bounds while preserving valid unconstrained viewports.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "getAxisCategoryTicks",
+      "sourcePath": "src/features/axes/getAxisCategoryTicks.ts",
+      "symbolName": "getAxisCategoryTicks",
+      "description": "Project variable-width category starts into visible-only major ruler tick candidates.",
+      "isReadme": false
+    },
     {
       "kind": "export",
       "name": "getAxisTicks",
@@ -1544,6 +1959,11 @@
     "imports": [
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/axes/getAxisCategoryTicks.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/features/axes/getAxisTicks.ts",
         "sourcePath": "src/index.ts"
       },
@@ -1555,6 +1975,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/snap/snapWorldCoordinate.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/viewport/constrainViewport.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -1628,6 +2053,21 @@
         "sourcePath": "src/types/items.ts"
       },
       {
+        "fromPath": "src/features/axes/getAxisCategoryTicks.ts",
+        "toPath": "src/types/axes.ts",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromPath": "src/features/axes/getAxisCategoryTicks.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromPath": "src/features/axes/getAxisCategoryTicks.ts",
+        "toPath": "src/features/viewport/getVisibleWorldBounds.ts",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
         "fromPath": "src/features/axes/getAxisTicks.ts",
         "toPath": "src/types/axes.ts",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
@@ -1663,8 +2103,28 @@
         "sourcePath": "src/features/snap/snapWorldCoordinate.ts"
       },
       {
+        "fromPath": "src/features/viewport/assertValidViewport.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/assertValidViewport.ts"
+      },
+      {
+        "fromPath": "src/features/viewport/constrainViewport.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromPath": "src/features/viewport/constrainViewport.ts",
+        "toPath": "src/features/viewport/assertValidViewport.ts",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
         "fromPath": "src/features/viewport/getVisibleWorldBounds.ts",
         "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
+      },
+      {
+        "fromPath": "src/features/viewport/getVisibleWorldBounds.ts",
+        "toPath": "src/features/viewport/assertValidViewport.ts",
         "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
       },
       {
@@ -1678,8 +2138,18 @@
         "sourcePath": "src/features/viewport/panViewport.ts"
       },
       {
+        "fromPath": "src/features/viewport/panViewport.ts",
+        "toPath": "src/features/viewport/constrainViewport.ts",
+        "sourcePath": "src/features/viewport/panViewport.ts"
+      },
+      {
         "fromPath": "src/features/viewport/revealWorldRect.ts",
         "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromPath": "src/features/viewport/revealWorldRect.ts",
+        "toPath": "src/features/viewport/constrainViewport.ts",
         "sourcePath": "src/features/viewport/revealWorldRect.ts"
       },
       {
@@ -1688,13 +2158,28 @@
         "sourcePath": "src/features/viewport/viewportToWorld.ts"
       },
       {
+        "fromPath": "src/features/viewport/viewportToWorld.ts",
+        "toPath": "src/features/viewport/assertValidViewport.ts",
+        "sourcePath": "src/features/viewport/viewportToWorld.ts"
+      },
+      {
         "fromPath": "src/features/viewport/worldToViewport.ts",
         "toPath": "src/types/grid.ts",
         "sourcePath": "src/features/viewport/worldToViewport.ts"
       },
       {
+        "fromPath": "src/features/viewport/worldToViewport.ts",
+        "toPath": "src/features/viewport/assertValidViewport.ts",
+        "sourcePath": "src/features/viewport/worldToViewport.ts"
+      },
+      {
         "fromPath": "src/features/viewport/zoomViewportAt.ts",
         "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromPath": "src/features/viewport/zoomViewportAt.ts",
+        "toPath": "src/features/viewport/constrainViewport.ts",
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
       },
       {
@@ -1760,6 +2245,12 @@
       },
       {
         "fromSymbol": "src/features/grid-view.test.ts",
+        "toSymbol": "constrainViewport",
+        "callExpression": "constrainViewport",
+        "sourcePath": "src/features/grid-view.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/grid-view.test.ts",
         "toSymbol": "snapWorldCoordinate",
         "callExpression": "snapWorldCoordinate",
         "sourcePath": "src/features/grid-view.test.ts"
@@ -1772,9 +2263,27 @@
       },
       {
         "fromSymbol": "src/features/grid-view.test.ts",
+        "toSymbol": "getAxisCategoryTicks",
+        "callExpression": "getAxisCategoryTicks",
+        "sourcePath": "src/features/grid-view.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/grid-view.test.ts",
         "toSymbol": "getVisibleGridItems",
         "callExpression": "getVisibleGridItems",
         "sourcePath": "src/features/grid-view.test.ts"
+      },
+      {
+        "fromSymbol": "getAxisCategoryTicks",
+        "toSymbol": "getVisibleWorldBounds",
+        "callExpression": "getVisibleWorldBounds",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromSymbol": "src/features/axes/getAxisCategoryTicks.ts",
+        "toSymbol": "validateCategory",
+        "callExpression": "validateCategory",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
       },
       {
         "fromSymbol": "getAxisTicks",
@@ -1825,10 +2334,52 @@
         "sourcePath": "src/features/snap/snapWorldCoordinate.ts"
       },
       {
+        "fromSymbol": "constrainViewport",
+        "toSymbol": "assertValidViewport",
+        "callExpression": "assertValidViewport",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "constrainViewport",
+        "toSymbol": "validateConstraints",
+        "callExpression": "validateConstraints",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "constrainViewport",
+        "toSymbol": "constrainAxis",
+        "callExpression": "constrainAxis",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "constrainAxis",
+        "toSymbol": "getAlignmentFactor",
+        "callExpression": "getAlignmentFactor",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "src/features/viewport/constrainViewport.ts",
+        "toSymbol": "isAlignment",
+        "callExpression": "isAlignment",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "getVisibleWorldBounds",
+        "toSymbol": "assertValidViewport",
+        "callExpression": "assertValidViewport",
+        "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
+      },
+      {
         "fromSymbol": "getVisibleWorldBounds",
         "toSymbol": "viewportToWorld",
         "callExpression": "viewportToWorld",
         "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
+      },
+      {
+        "fromSymbol": "panViewport",
+        "toSymbol": "constrainViewport",
+        "callExpression": "constrainViewport",
+        "sourcePath": "src/features/viewport/panViewport.ts"
       },
       {
         "fromSymbol": "revealWorldRect",
@@ -1838,18 +2389,68 @@
       },
       {
         "fromSymbol": "revealWorldRect",
+        "toSymbol": "constrainViewport",
+        "callExpression": "constrainViewport",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
         "toSymbol": "revealAxis",
         "callExpression": "revealAxis",
         "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromSymbol": "viewportToWorld",
+        "toSymbol": "assertValidViewport",
+        "callExpression": "assertValidViewport",
+        "sourcePath": "src/features/viewport/viewportToWorld.ts"
+      },
+      {
+        "fromSymbol": "worldToViewport",
+        "toSymbol": "assertValidViewport",
+        "callExpression": "assertValidViewport",
+        "sourcePath": "src/features/viewport/worldToViewport.ts"
       },
       {
         "fromSymbol": "zoomViewportAt",
         "toSymbol": "viewportToWorld",
         "callExpression": "viewportToWorld",
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromSymbol": "zoomViewportAt",
+        "toSymbol": "constrainScale",
+        "callExpression": "constrainScale",
+        "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromSymbol": "zoomViewportAt",
+        "toSymbol": "constrainViewport",
+        "callExpression": "constrainViewport",
+        "sourcePath": "src/features/viewport/zoomViewportAt.ts"
       }
     ],
     "typeReferences": [
+      {
+        "fromSymbol": "getAxisCategoryTicks",
+        "toType": "GridAxisCategory",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromSymbol": "getAxisCategoryTicks",
+        "toType": "GridAxisCategoryTick",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromSymbol": "getAxisCategoryTicks",
+        "toType": "GridAxisName",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
+      {
+        "fromSymbol": "getAxisCategoryTicks",
+        "toType": "GridViewport",
+        "sourcePath": "src/features/axes/getAxisCategoryTicks.ts"
+      },
       {
         "fromSymbol": "getAxisTicks",
         "toType": "GridAxisName",
@@ -1896,6 +2497,16 @@
         "sourcePath": "src/features/snap/snapWorldCoordinate.ts"
       },
       {
+        "fromSymbol": "constrainViewport",
+        "toType": "GridViewport",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
+        "fromSymbol": "constrainViewport",
+        "toType": "GridViewportConstraints",
+        "sourcePath": "src/features/viewport/constrainViewport.ts"
+      },
+      {
         "fromSymbol": "getVisibleWorldBounds",
         "toType": "GridRect",
         "sourcePath": "src/features/viewport/getVisibleWorldBounds.ts"
@@ -1916,6 +2527,11 @@
         "sourcePath": "src/features/viewport/panViewport.ts"
       },
       {
+        "fromSymbol": "panViewport",
+        "toType": "GridViewportConstraints",
+        "sourcePath": "src/features/viewport/panViewport.ts"
+      },
+      {
         "fromSymbol": "revealWorldRect",
         "toType": "GridRect",
         "sourcePath": "src/features/viewport/revealWorldRect.ts"
@@ -1923,6 +2539,11 @@
       {
         "fromSymbol": "revealWorldRect",
         "toType": "GridViewport",
+        "sourcePath": "src/features/viewport/revealWorldRect.ts"
+      },
+      {
+        "fromSymbol": "revealWorldRect",
+        "toType": "GridViewportConstraints",
         "sourcePath": "src/features/viewport/revealWorldRect.ts"
       },
       {
@@ -1953,6 +2574,11 @@
       {
         "fromSymbol": "zoomViewportAt",
         "toType": "GridViewport",
+        "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromSymbol": "zoomViewportAt",
+        "toType": "GridViewportConstraints",
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
       },
       {
@@ -1984,6 +2610,16 @@
         "fromSymbol": "GridTickContext",
         "toType": "GridViewport",
         "sourcePath": "src/types/axes.ts"
+      },
+      {
+        "fromSymbol": "GridViewportConstraints",
+        "toType": "GridRect",
+        "sourcePath": "src/types/grid.ts"
+      },
+      {
+        "fromSymbol": "GridViewportConstraints",
+        "toType": "GridViewportAlignment",
+        "sourcePath": "src/types/grid.ts"
       }
     ],
     "componentComposition": []

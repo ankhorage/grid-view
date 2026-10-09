@@ -1,8 +1,11 @@
 graph LR
+  module_src_features_axes_getAxisCategoryTicks_ts["src/features/axes/getAxisCategoryTicks.ts"]
   module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
   module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
   module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
   module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
+  module_src_features_viewport_assertValidViewport_ts["src/features/viewport/assertValidViewport.ts"]
+  module_src_features_viewport_constrainViewport_ts["src/features/viewport/constrainViewport.ts"]
   module_src_features_viewport_getVisibleWorldBounds_ts["src/features/viewport/getVisibleWorldBounds.ts"]
   module_src_features_viewport_panViewport_ts["src/features/viewport/panViewport.ts"]
   module_src_features_viewport_revealWorldRect_ts["src/features/viewport/revealWorldRect.ts"]
@@ -14,6 +17,16 @@ graph LR
   module_src_types_grid_ts["src/types/grid.ts"]
   module_src_types_items_ts["src/types/items.ts"]
   module_src_types_snap_ts["src/types/snap.ts"]
+  export_constrainViewport["constrainViewport"]
+  module_src_features_viewport_constrainViewport_ts --> export_constrainViewport
+  export_constrainViewport -.-> export_GridViewport
+  export_constrainViewport -.-> export_GridViewportConstraints
+  export_getAxisCategoryTicks["getAxisCategoryTicks"]
+  module_src_features_axes_getAxisCategoryTicks_ts --> export_getAxisCategoryTicks
+  export_getAxisCategoryTicks -.-> export_GridAxisCategory
+  export_getAxisCategoryTicks -.-> export_GridAxisCategoryTick
+  export_getAxisCategoryTicks -.-> export_GridAxisName
+  export_getAxisCategoryTicks -.-> export_GridViewport
   export_getAxisTicks["getAxisTicks"]
   module_src_features_axes_getAxisTicks_ts --> export_getAxisTicks
   export_getAxisTicks -.-> export_GridAxisName
@@ -30,6 +43,8 @@ graph LR
   export_getVisibleWorldBounds -.-> export_GridViewport
   export_GridAxisCategory["GridAxisCategory"]
   module_src_types_axes_ts --> export_GridAxisCategory
+  export_GridAxisCategoryTick["GridAxisCategoryTick"]
+  module_src_types_axes_ts --> export_GridAxisCategoryTick
   export_GridAxisDefinition["GridAxisDefinition"]
   module_src_types_axes_ts --> export_GridAxisDefinition
   export_GridAxisDefinition -.-> export_GridAxisCategory
@@ -60,16 +75,24 @@ graph LR
   module_src_types_axes_ts --> export_GridTickSpecification
   export_GridViewport["GridViewport"]
   module_src_types_grid_ts --> export_GridViewport
+  export_GridViewportAlignment["GridViewportAlignment"]
+  module_src_types_grid_ts --> export_GridViewportAlignment
+  export_GridViewportConstraints["GridViewportConstraints"]
+  module_src_types_grid_ts --> export_GridViewportConstraints
+  export_GridViewportConstraints -.-> export_GridRect
+  export_GridViewportConstraints -.-> export_GridViewportAlignment
   export_GridZoomLimits["GridZoomLimits"]
   module_src_types_grid_ts --> export_GridZoomLimits
   export_panViewport["panViewport"]
   module_src_features_viewport_panViewport_ts --> export_panViewport
   export_panViewport -.-> export_GridPoint
   export_panViewport -.-> export_GridViewport
+  export_panViewport -.-> export_GridViewportConstraints
   export_revealWorldRect["revealWorldRect"]
   module_src_features_viewport_revealWorldRect_ts --> export_revealWorldRect
   export_revealWorldRect -.-> export_GridRect
   export_revealWorldRect -.-> export_GridViewport
+  export_revealWorldRect -.-> export_GridViewportConstraints
   export_snapWorldCoordinate["snapWorldCoordinate"]
   module_src_features_snap_snapWorldCoordinate_ts --> export_snapWorldCoordinate
   export_snapWorldCoordinate -.-> export_GridSnapResolver
@@ -86,4 +109,5 @@ graph LR
   module_src_features_viewport_zoomViewportAt_ts --> export_zoomViewportAt
   export_zoomViewportAt -.-> export_GridPoint
   export_zoomViewportAt -.-> export_GridViewport
+  export_zoomViewportAt -.-> export_GridViewportConstraints
   export_zoomViewportAt -.-> export_GridZoomLimits

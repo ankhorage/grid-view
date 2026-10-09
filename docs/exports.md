@@ -1,5 +1,36 @@
 # Public API
 
+## constrainViewport
+
+Kind: `function`
+Module: `src/features/viewport/constrainViewport.ts`
+Source: `src/features/viewport/constrainViewport.ts:9:1`
+
+Constrain a viewport to finite world bounds while preserving valid unconstrained viewports.
+
+### Signatures
+
+- `(viewport: GridViewport, constraints?: GridViewportConstraints | undefined) => GridViewport`
+  - constraints: `GridViewportConstraints | undefined` (optional)
+  - viewport: `GridViewport`
+  - returns: `GridViewport`
+
+## getAxisCategoryTicks
+
+Kind: `function`
+Module: `src/features/axes/getAxisCategoryTicks.ts`
+Source: `src/features/axes/getAxisCategoryTicks.ts:6:1`
+
+Project variable-width category starts into visible-only major ruler tick candidates.
+
+### Signatures
+
+- `(viewport: GridViewport, axis: GridAxisName, categories: readonly GridAxisCategory[]) => readonly GridAxisCategoryTick[]`
+  - axis: `GridAxisName`
+  - categories: `readonly GridAxisCategory[]`
+  - viewport: `GridViewport`
+  - returns: `readonly GridAxisCategoryTick[]`
+
 ## getAxisTicks
 
 Kind: `function`
@@ -37,7 +68,7 @@ Cull offscreen rectangular items without materializing logical grid cells.
 
 Kind: `function`
 Module: `src/features/viewport/getVisibleWorldBounds.ts`
-Source: `src/features/viewport/getVisibleWorldBounds.ts:5:1`
+Source: `src/features/viewport/getVisibleWorldBounds.ts:6:1`
 
 Calculate the visible world rectangle, optionally expanded by pixel overscan.
 
@@ -62,11 +93,26 @@ Source: `src/types/axes.ts:8:1`
 | size | property | `number` | yes |  |
 | start | property | `number` | yes |  |
 
-## GridAxisDefinition
+## GridAxisCategoryTick
 
 Kind: `type`
 Module: `src/types/axes.ts`
 Source: `src/types/axes.ts:15:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| categoryId | property | `string` | yes |  |
+| label | property | `string` | no |  |
+| level | property | `"major" \| "minor"` | yes |  |
+| position | property | `number` | yes |  |
+
+## GridAxisDefinition
+
+Kind: `type`
+Module: `src/types/axes.ts`
+Source: `src/types/axes.ts:20:1`
 
 ### Members
 
@@ -92,7 +138,7 @@ Source: `src/types/axes.ts:5:1`
 
 Kind: `type`
 Module: `src/types/axes.ts`
-Source: `src/types/axes.ts:22:1`
+Source: `src/types/axes.ts:27:1`
 
 ### Members
 
@@ -162,7 +208,7 @@ Source: `src/types/snap.ts:2:1`
 
 Kind: `type`
 Module: `src/types/axes.ts`
-Source: `src/types/axes.ts:47:1`
+Source: `src/types/axes.ts:52:1`
 
 ### Members
 
@@ -178,13 +224,13 @@ Source: `src/types/axes.ts:47:1`
 
 Kind: `unknown`
 Module: `src/types/axes.ts`
-Source: `src/types/axes.ts:55:1`
+Source: `src/types/axes.ts:60:1`
 
 ## GridTickSpecification
 
 Kind: `unknown`
 Module: `src/types/axes.ts`
-Source: `src/types/axes.ts:28:1`
+Source: `src/types/axes.ts:33:1`
 
 ## GridViewport
 
@@ -202,6 +248,28 @@ Source: `src/types/grid.ts:14:1`
 | pixelsPerUnitX | property | `number` | yes |  |
 | pixelsPerUnitY | property | `number` | yes |  |
 | width | property | `number` | yes |  |
+
+## GridViewportAlignment
+
+Kind: `unknown`
+Module: `src/types/grid.ts`
+Source: `src/types/grid.ts:32:1`
+
+## GridViewportConstraints
+
+Kind: `type`
+Module: `src/types/grid.ts`
+Source: `src/types/grid.ts:39:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| alignmentX | property | `GridViewportAlignment` | no |  |
+| alignmentY | property | `GridViewportAlignment` | no |  |
+| overscrollX | property | `number` | no |  |
+| overscrollY | property | `number` | no |  |
+| world | property | `GridRect` | yes |  |
 
 ## GridZoomLimits
 
@@ -222,13 +290,14 @@ Source: `src/types/grid.ts:24:1`
 
 Kind: `function`
 Module: `src/features/viewport/panViewport.ts`
-Source: `src/features/viewport/panViewport.ts:4:1`
+Source: `src/features/viewport/panViewport.ts:5:1`
 
 Pan by pixel displacement; dragging to the right reveals world coordinates to the left.
 
 ### Signatures
 
-- `(viewport: GridViewport, displacement: GridPoint) => GridViewport`
+- `(viewport: GridViewport, displacement: GridPoint, constraints?: GridViewportConstraints | undefined) => GridViewport`
+  - constraints: `GridViewportConstraints | undefined` (optional)
   - displacement: `GridPoint`
   - viewport: `GridViewport`
   - returns: `GridViewport`
@@ -237,14 +306,15 @@ Pan by pixel displacement; dragging to the right reveals world coordinates to th
 
 Kind: `function`
 Module: `src/features/viewport/revealWorldRect.ts`
-Source: `src/features/viewport/revealWorldRect.ts:7:1`
+Source: `src/features/viewport/revealWorldRect.ts:8:1`
 
 Minimally pans a viewport so that a world rectangle is visible inside pixel padding.
 Oversized rectangles align their leading edges because neither axis can show them in full.
 
 ### Signatures
 
-- `(viewport: GridViewport, rect: GridRect, paddingPixels?: number) => GridViewport`
+- `(viewport: GridViewport, rect: GridRect, paddingPixels?: number, constraints?: GridViewportConstraints | undefined) => GridViewport`
+  - constraints: `GridViewportConstraints | undefined` (optional)
   - paddingPixels: `number` (optional)
   - rect: `GridRect`
   - viewport: `GridViewport`
@@ -270,7 +340,7 @@ Snap a world coordinate without consulting zoom or grid-line density.
 
 Kind: `function`
 Module: `src/features/viewport/viewportToWorld.ts`
-Source: `src/features/viewport/viewportToWorld.ts:4:1`
+Source: `src/features/viewport/viewportToWorld.ts:5:1`
 
 Transform a viewport pixel coordinate back into world space.
 
@@ -285,7 +355,7 @@ Transform a viewport pixel coordinate back into world space.
 
 Kind: `function`
 Module: `src/features/viewport/worldToViewport.ts`
-Source: `src/features/viewport/worldToViewport.ts:4:1`
+Source: `src/features/viewport/worldToViewport.ts:5:1`
 
 Transform stable world coordinates to screen pixels.
 
@@ -300,13 +370,14 @@ Transform stable world coordinates to screen pixels.
 
 Kind: `function`
 Module: `src/features/viewport/zoomViewportAt.ts`
-Source: `src/features/viewport/zoomViewportAt.ts:5:1`
+Source: `src/features/viewport/zoomViewportAt.ts:11:1`
 
 Zoom around a fixed pixel focal point without moving its underlying world coordinate.
 
 ### Signatures
 
-- `(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, "pixelsPerUnitX" | "pixelsPerUnitY">, limits?: GridZoomLimits) => GridViewport`
+- `(viewport: GridViewport, focalPoint: GridPoint, nextScale: Pick<GridViewport, "pixelsPerUnitX" | "pixelsPerUnitY">, limits?: GridZoomLimits, constraints?: GridViewportConstraints | undefined) => GridViewport`
+  - constraints: `GridViewportConstraints | undefined` (optional)
   - focalPoint: `GridPoint`
   - limits: `GridZoomLimits` (optional)
   - nextScale: `Pick<GridViewport, "pixelsPerUnitX" | "pixelsPerUnitY">`

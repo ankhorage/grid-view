@@ -1,5 +1,25 @@
 sequenceDiagram
+  participant participant_assertValidViewport as assertValidViewport
+  participant participant_constrainAxis as constrainAxis
+  participant participant_constrainScale as constrainScale
+  participant participant_constrainViewport as constrainViewport
+  participant participant_getAlignmentFactor as getAlignmentFactor
+  participant participant_validateConstraints as validateConstraints
   participant participant_viewportToWorld as viewportToWorld
   participant participant_zoomViewportAt as zoomViewportAt
   participant_zoomViewportAt->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld->>participant_assertValidViewport: assertValidViewport()
+  participant_assertValidViewport-->>participant_viewportToWorld: return
   participant_viewportToWorld-->>participant_zoomViewportAt: return
+  participant_zoomViewportAt->>participant_constrainScale: constrainScale()
+  participant_constrainScale-->>participant_zoomViewportAt: return
+  participant_zoomViewportAt->>participant_constrainViewport: constrainViewport()
+  participant_constrainViewport->>participant_assertValidViewport: assertValidViewport()
+  participant_assertValidViewport-->>participant_constrainViewport: return
+  participant_constrainViewport->>participant_validateConstraints: validateConstraints()
+  participant_validateConstraints-->>participant_constrainViewport: return
+  participant_constrainViewport->>participant_constrainAxis: constrainAxis()
+  participant_constrainAxis->>participant_getAlignmentFactor: getAlignmentFactor()
+  participant_getAlignmentFactor-->>participant_constrainAxis: return
+  participant_constrainAxis-->>participant_constrainViewport: return
+  participant_constrainViewport-->>participant_zoomViewportAt: return

@@ -3,13 +3,7 @@ sequenceDiagram
   participant participant_constrainAxis as constrainAxis
   participant participant_constrainViewport as constrainViewport
   participant participant_getAlignmentFactor as getAlignmentFactor
-  participant participant_revealAxis as revealAxis
-  participant participant_revealWorldRect as revealWorldRect
   participant participant_validateConstraints as validateConstraints
-  participant participant_validateRevealInput as validateRevealInput
-  participant_revealWorldRect->>participant_validateRevealInput: validateRevealInput()
-  participant_validateRevealInput-->>participant_revealWorldRect: return
-  participant_revealWorldRect->>participant_constrainViewport: constrainViewport()
   participant_constrainViewport->>participant_assertValidViewport: assertValidViewport()
   participant_assertValidViewport-->>participant_constrainViewport: return
   participant_constrainViewport->>participant_validateConstraints: validateConstraints()
@@ -18,6 +12,3 @@ sequenceDiagram
   participant_constrainAxis->>participant_getAlignmentFactor: getAlignmentFactor()
   participant_getAlignmentFactor-->>participant_constrainAxis: return
   participant_constrainAxis-->>participant_constrainViewport: return
-  participant_constrainViewport-->>participant_revealWorldRect: return
-  participant_revealWorldRect->>participant_revealAxis: revealAxis()
-  participant_revealAxis-->>participant_revealWorldRect: return

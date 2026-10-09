@@ -1,13 +1,13 @@
 sequenceDiagram
   participant participant_assertValidViewport as assertValidViewport
-  participant participant_getVisibleGridItems as getVisibleGridItems
+  participant participant_getAxisCategoryTicks as getAxisCategoryTicks
   participant participant_getVisibleWorldBounds as getVisibleWorldBounds
   participant participant_viewportToWorld as viewportToWorld
-  participant_getVisibleGridItems->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getAxisCategoryTicks->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
   participant_getVisibleWorldBounds->>participant_assertValidViewport: assertValidViewport()
   participant_assertValidViewport-->>participant_getVisibleWorldBounds: return
   participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
   participant_viewportToWorld->>participant_assertValidViewport: assertValidViewport()
   participant_assertValidViewport-->>participant_viewportToWorld: return
   participant_viewportToWorld-->>participant_getVisibleWorldBounds: return
-  participant_getVisibleWorldBounds-->>participant_getVisibleGridItems: return
+  participant_getVisibleWorldBounds-->>participant_getAxisCategoryTicks: return

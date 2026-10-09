@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_assertValidViewport as assertValidViewport
+  participant participant_viewportToWorld as viewportToWorld
+  participant_viewportToWorld->>participant_assertValidViewport: assertValidViewport()
+  participant_assertValidViewport-->>participant_viewportToWorld: return

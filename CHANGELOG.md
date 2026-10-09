@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- 9e0a8fc: Add constrained 2D viewport operations and visible category ruler geometry.
+
 ## 0.2.0
 
 ### Minor Changes

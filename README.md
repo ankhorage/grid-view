@@ -3,7 +3,7 @@
 
 # @ankhorage/grid-view
 
-![license: MIT](././docs/badges/license.svg) ![npm: v0.2.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
+![license: MIT](././docs/badges/license.svg) ![npm: v0.3.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![paradox: canonical](././docs/badges/docs.svg)
 
 Platform-neutral grid viewport, axes, snapping and virtualization geometry for Ankhorage.
 
@@ -15,9 +15,13 @@ Platform-neutral grid viewport, axes, snapping and virtualization geometry for A
 - [Architecture overview](././docs/diagrams/architecture-overview.mmd)
 - [Module relationships](././docs/diagrams/module-relationships.mmd)
 - [Export graph](././docs/diagrams/export-graph.mmd)
-- [getAxisTicks sequence](././docs/diagrams/sequences/get-axis-ticks.mmd)
+- [constrainViewport sequence](././docs/diagrams/sequences/constrain-viewport.mmd)
+- [getAxisCategoryTicks sequence](././docs/diagrams/sequences/get-axis-category-ticks.mmd)
 - [getVisibleGridItems sequence](././docs/diagrams/sequences/get-visible-grid-items.mmd)
 - [getVisibleWorldBounds sequence](././docs/diagrams/sequences/get-visible-world-bounds.mmd)
+- [panViewport sequence](././docs/diagrams/sequences/pan-viewport.mmd)
 - [revealWorldRect sequence](././docs/diagrams/sequences/reveal-world-rect.mmd)
 - [snapWorldCoordinate sequence](././docs/diagrams/sequences/snap-world-coordinate.mmd)
+- [viewportToWorld sequence](././docs/diagrams/sequences/viewport-to-world.mmd)
+- [worldToViewport sequence](././docs/diagrams/sequences/world-to-viewport.mmd)
 - [zoomViewportAt sequence](././docs/diagrams/sequences/zoom-viewport-at.mmd)
