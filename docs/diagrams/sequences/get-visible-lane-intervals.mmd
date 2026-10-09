@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant participant_assertValidViewport as assertValidViewport
+  participant participant_createGridAxisMetrics as createGridAxisMetrics
+  participant participant_getVisibleLaneIntervals as getVisibleLaneIntervals
+  participant participant_getVisibleWorldBounds as getVisibleWorldBounds
+  participant participant_validateUniqueIds as validateUniqueIds
+  participant participant_viewportToWorld as viewportToWorld
+  participant_getVisibleLaneIntervals->>participant_createGridAxisMetrics: createGridAxisMetrics()
+  participant_createGridAxisMetrics-->>participant_getVisibleLaneIntervals: return
+  participant_getVisibleLaneIntervals->>participant_getVisibleWorldBounds: getVisibleWorldBounds()
+  participant_getVisibleWorldBounds->>participant_assertValidViewport: assertValidViewport()
+  participant_assertValidViewport-->>participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds->>participant_viewportToWorld: viewportToWorld()
+  participant_viewportToWorld->>participant_assertValidViewport: assertValidViewport()
+  participant_assertValidViewport-->>participant_viewportToWorld: return
+  participant_viewportToWorld-->>participant_getVisibleWorldBounds: return
+  participant_getVisibleWorldBounds-->>participant_getVisibleLaneIntervals: return
+  participant_getVisibleLaneIntervals->>participant_validateUniqueIds: validateUniqueIds()
+  participant_validateUniqueIds-->>participant_getVisibleLaneIntervals: return

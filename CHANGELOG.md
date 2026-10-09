@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- 159dae5: Add headless sparse matrix placement and virtualized interval-lane geometry.
+
 ## 0.3.0
 
 ### Minor Changes

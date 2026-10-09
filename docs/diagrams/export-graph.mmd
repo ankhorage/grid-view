@@ -3,6 +3,15 @@ graph LR
   module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
   module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
   module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
+  module_src_features_layout_createGridAxisMetrics_ts["src/features/layout/createGridAxisMetrics.ts"]
+  module_src_features_layout_getLaneIntervalPlacement_ts["src/features/layout/getLaneIntervalPlacement.ts"]
+  module_src_features_layout_getMatrixCellPlacement_ts["src/features/layout/getMatrixCellPlacement.ts"]
+  module_src_features_layout_getVisibleLaneIntervals_ts["src/features/layout/getVisibleLaneIntervals.ts"]
+  module_src_features_layout_getVisibleMatrixCells_ts["src/features/layout/getVisibleMatrixCells.ts"]
+  module_src_features_layout_layout_test_ts["src/features/layout/layout.test.ts"]
+  module_src_features_layout_utils_readGridAxisMetric_ts["src/features/layout/utils/readGridAxisMetric.ts"]
+  module_src_features_layout_utils_resolveLaneIntervalPlacement_ts["src/features/layout/utils/resolveLaneIntervalPlacement.ts"]
+  module_src_features_layout_utils_resolveMatrixCellPlacement_ts["src/features/layout/utils/resolveMatrixCellPlacement.ts"]
   module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
   module_src_features_viewport_assertValidViewport_ts["src/features/viewport/assertValidViewport.ts"]
   module_src_features_viewport_constrainViewport_ts["src/features/viewport/constrainViewport.ts"]
@@ -16,6 +25,7 @@ graph LR
   module_src_types_axes_ts["src/types/axes.ts"]
   module_src_types_grid_ts["src/types/grid.ts"]
   module_src_types_items_ts["src/types/items.ts"]
+  module_src_types_layout_ts["src/types/layout.ts"]
   module_src_types_snap_ts["src/types/snap.ts"]
   export_constrainViewport["constrainViewport"]
   module_src_features_viewport_constrainViewport_ts --> export_constrainViewport
@@ -34,9 +44,31 @@ graph LR
   export_getAxisTicks -.-> export_GridTickProvider
   export_getAxisTicks -.-> export_GridTickSpecification
   export_getAxisTicks -.-> export_GridViewport
+  export_getLaneIntervalPlacement["getLaneIntervalPlacement"]
+  module_src_features_layout_getLaneIntervalPlacement_ts --> export_getLaneIntervalPlacement
+  export_getLaneIntervalPlacement -.-> export_GridLane
+  export_getLaneIntervalPlacement -.-> export_GridLaneInterval
+  export_getLaneIntervalPlacement -.-> export_GridLaneIntervalPlacement
+  export_getMatrixCellPlacement["getMatrixCellPlacement"]
+  module_src_features_layout_getMatrixCellPlacement_ts --> export_getMatrixCellPlacement
+  export_getMatrixCellPlacement -.-> export_GridMatrixCell
+  export_getMatrixCellPlacement -.-> export_GridMatrixCellPlacement
+  export_getMatrixCellPlacement -.-> export_GridMatrixLayout
   export_getVisibleGridItems["getVisibleGridItems"]
   module_src_features_items_getVisibleGridItems_ts --> export_getVisibleGridItems
   export_getVisibleGridItems -.-> export_GridViewport
+  export_getVisibleLaneIntervals["getVisibleLaneIntervals"]
+  module_src_features_layout_getVisibleLaneIntervals_ts --> export_getVisibleLaneIntervals
+  export_getVisibleLaneIntervals -.-> export_GridLane
+  export_getVisibleLaneIntervals -.-> export_GridLaneInterval
+  export_getVisibleLaneIntervals -.-> export_GridLaneIntervalPlacement
+  export_getVisibleLaneIntervals -.-> export_GridViewport
+  export_getVisibleMatrixCells["getVisibleMatrixCells"]
+  module_src_features_layout_getVisibleMatrixCells_ts --> export_getVisibleMatrixCells
+  export_getVisibleMatrixCells -.-> export_GridMatrixCell
+  export_getVisibleMatrixCells -.-> export_GridMatrixCellPlacement
+  export_getVisibleMatrixCells -.-> export_GridMatrixLayout
+  export_getVisibleMatrixCells -.-> export_GridViewport
   export_getVisibleWorldBounds["getVisibleWorldBounds"]
   module_src_features_viewport_getVisibleWorldBounds_ts --> export_getVisibleWorldBounds
   export_getVisibleWorldBounds -.-> export_GridRect
@@ -55,6 +87,21 @@ graph LR
   module_src_types_axes_ts --> export_GridAxisName
   export_GridAxisTick["GridAxisTick"]
   module_src_types_axes_ts --> export_GridAxisTick
+  export_GridLane["GridLane"]
+  module_src_types_layout_ts --> export_GridLane
+  export_GridLaneInterval["GridLaneInterval"]
+  module_src_types_layout_ts --> export_GridLaneInterval
+  export_GridLaneIntervalPlacement["GridLaneIntervalPlacement"]
+  module_src_types_layout_ts --> export_GridLaneIntervalPlacement
+  export_GridMatrixAxisEntry["GridMatrixAxisEntry"]
+  module_src_types_layout_ts --> export_GridMatrixAxisEntry
+  export_GridMatrixCell["GridMatrixCell"]
+  module_src_types_layout_ts --> export_GridMatrixCell
+  export_GridMatrixCellPlacement["GridMatrixCellPlacement"]
+  module_src_types_layout_ts --> export_GridMatrixCellPlacement
+  export_GridMatrixLayout["GridMatrixLayout"]
+  module_src_types_layout_ts --> export_GridMatrixLayout
+  export_GridMatrixLayout -.-> export_GridMatrixAxisEntry
   export_GridPoint["GridPoint"]
   module_src_types_grid_ts --> export_GridPoint
   export_GridRect["GridRect"]

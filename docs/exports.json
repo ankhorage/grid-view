@@ -158,6 +158,98 @@
     "structuredRows": []
   },
   {
+    "name": "getLaneIntervalPlacement",
+    "title": null,
+    "description": "Resolve one lane interval into its deterministic world-space rectangle.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/layout/getLaneIntervalPlacement.ts",
+    "sourceLocation": {
+      "filePath": "src/features/layout/getLaneIntervalPlacement.ts",
+      "line": 6,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridLane",
+      "GridLaneInterval",
+      "GridLaneIntervalPlacement"
+    ],
+    "signatures": [
+      {
+        "label": "(lanes: readonly GridLane[], interval: GridLaneInterval) => GridLaneIntervalPlacement",
+        "parameters": [
+          {
+            "name": "interval",
+            "type": "GridLaneInterval",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "lanes",
+            "type": "readonly GridLane[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "GridLaneIntervalPlacement",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "getMatrixCellPlacement",
+    "title": null,
+    "description": "Resolve one sparse matrix cell into its deterministic world-space rectangle.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/layout/getMatrixCellPlacement.ts",
+    "sourceLocation": {
+      "filePath": "src/features/layout/getMatrixCellPlacement.ts",
+      "line": 10,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMatrixCell",
+      "GridMatrixCellPlacement",
+      "GridMatrixLayout"
+    ],
+    "signatures": [
+      {
+        "label": "(layout: GridMatrixLayout, cell: GridMatrixCell) => GridMatrixCellPlacement",
+        "parameters": [
+          {
+            "name": "cell",
+            "type": "GridMatrixCell",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "layout",
+            "type": "GridMatrixLayout",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "GridMatrixCellPlacement",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "getVisibleGridItems",
     "title": null,
     "description": "Cull offscreen rectangular items without materializing logical grid cells.",
@@ -201,6 +293,124 @@
           }
         ],
         "returnType": "readonly T[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "getVisibleLaneIntervals",
+    "title": null,
+    "description": "Enumerate lane intervals intersecting both viewport axes in stable input order.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/layout/getVisibleLaneIntervals.ts",
+    "sourceLocation": {
+      "filePath": "src/features/layout/getVisibleLaneIntervals.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridLane",
+      "GridLaneInterval",
+      "GridLaneIntervalPlacement",
+      "GridViewport"
+    ],
+    "signatures": [
+      {
+        "label": "(lanes: readonly GridLane[], intervals: readonly GridLaneInterval[], viewport: GridViewport, overscanPixels?: number) => readonly GridLaneIntervalPlacement[]",
+        "parameters": [
+          {
+            "name": "intervals",
+            "type": "readonly GridLaneInterval[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "lanes",
+            "type": "readonly GridLane[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "overscanPixels",
+            "type": "number",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "viewport",
+            "type": "GridViewport",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly GridLaneIntervalPlacement[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "getVisibleMatrixCells",
+    "title": null,
+    "description": "Enumerate only sparse matrix cells intersecting the viewport in stable input order.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/layout/getVisibleMatrixCells.ts",
+    "sourceLocation": {
+      "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+      "line": 13,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMatrixCell",
+      "GridMatrixCellPlacement",
+      "GridMatrixLayout",
+      "GridViewport"
+    ],
+    "signatures": [
+      {
+        "label": "(layout: GridMatrixLayout, cells: readonly GridMatrixCell[], viewport: GridViewport, overscanPixels?: number) => readonly GridMatrixCellPlacement[]",
+        "parameters": [
+          {
+            "name": "cells",
+            "type": "readonly GridMatrixCell[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "layout",
+            "type": "GridMatrixLayout",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "overscanPixels",
+            "type": "number",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "viewport",
+            "type": "GridViewport",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly GridMatrixCellPlacement[]",
         "returnDescription": null
       }
     ],
@@ -476,6 +686,386 @@
         "name": "position",
         "kind": "property",
         "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridLane",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 38,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "height",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridLaneInterval",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 44,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "extent",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "laneId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "start",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridLaneIntervalPlacement",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 52,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "extent",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "height",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "laneId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "laneIndex",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "start",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "width",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "x",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "y",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMatrixAxisEntry",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 2,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "size",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMatrixCell",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "columnId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rowId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMatrixCellPlacement",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 28,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "columnId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "columnIndex",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "height",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rowId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rowIndex",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "width",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "x",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "y",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMatrixLayout",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/layout.ts",
+    "sourceLocation": {
+      "filePath": "src/types/layout.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMatrixAxisEntry"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "columns",
+        "kind": "property",
+        "type": "readonly GridMatrixAxisEntry[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rows",
+        "kind": "property",
+        "type": "readonly GridMatrixAxisEntry[]",
         "required": true,
         "description": null
       }

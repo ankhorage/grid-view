@@ -48,6 +48,36 @@ Generate only visible ruler ticks; a domain adapter may supply irregular boundar
   - viewport: `GridViewport`
   - returns: `readonly GridAxisTick[]`
 
+## getLaneIntervalPlacement
+
+Kind: `function`
+Module: `src/features/layout/getLaneIntervalPlacement.ts`
+Source: `src/features/layout/getLaneIntervalPlacement.ts:6:1`
+
+Resolve one lane interval into its deterministic world-space rectangle.
+
+### Signatures
+
+- `(lanes: readonly GridLane[], interval: GridLaneInterval) => GridLaneIntervalPlacement`
+  - interval: `GridLaneInterval`
+  - lanes: `readonly GridLane[]`
+  - returns: `GridLaneIntervalPlacement`
+
+## getMatrixCellPlacement
+
+Kind: `function`
+Module: `src/features/layout/getMatrixCellPlacement.ts`
+Source: `src/features/layout/getMatrixCellPlacement.ts:10:1`
+
+Resolve one sparse matrix cell into its deterministic world-space rectangle.
+
+### Signatures
+
+- `(layout: GridMatrixLayout, cell: GridMatrixCell) => GridMatrixCellPlacement`
+  - cell: `GridMatrixCell`
+  - layout: `GridMatrixLayout`
+  - returns: `GridMatrixCellPlacement`
+
 ## getVisibleGridItems
 
 Kind: `function`
@@ -63,6 +93,40 @@ Cull offscreen rectangular items without materializing logical grid cells.
   - overscanPixels: `number` (optional)
   - viewport: `GridViewport`
   - returns: `readonly T[]`
+
+## getVisibleLaneIntervals
+
+Kind: `function`
+Module: `src/features/layout/getVisibleLaneIntervals.ts`
+Source: `src/features/layout/getVisibleLaneIntervals.ts:8:1`
+
+Enumerate lane intervals intersecting both viewport axes in stable input order.
+
+### Signatures
+
+- `(lanes: readonly GridLane[], intervals: readonly GridLaneInterval[], viewport: GridViewport, overscanPixels?: number) => readonly GridLaneIntervalPlacement[]`
+  - intervals: `readonly GridLaneInterval[]`
+  - lanes: `readonly GridLane[]`
+  - overscanPixels: `number` (optional)
+  - viewport: `GridViewport`
+  - returns: `readonly GridLaneIntervalPlacement[]`
+
+## getVisibleMatrixCells
+
+Kind: `function`
+Module: `src/features/layout/getVisibleMatrixCells.ts`
+Source: `src/features/layout/getVisibleMatrixCells.ts:13:1`
+
+Enumerate only sparse matrix cells intersecting the viewport in stable input order.
+
+### Signatures
+
+- `(layout: GridMatrixLayout, cells: readonly GridMatrixCell[], viewport: GridViewport, overscanPixels?: number) => readonly GridMatrixCellPlacement[]`
+  - cells: `readonly GridMatrixCell[]`
+  - layout: `GridMatrixLayout`
+  - overscanPixels: `number` (optional)
+  - viewport: `GridViewport`
+  - returns: `readonly GridMatrixCellPlacement[]`
 
 ## getVisibleWorldBounds
 
@@ -147,6 +211,114 @@ Source: `src/types/axes.ts:27:1`
 | label | property | `string` | no |  |
 | level | property | `"major" \| "minor"` | yes |  |
 | position | property | `number` | yes |  |
+
+## GridLane
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:38:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| height | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+
+## GridLaneInterval
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:44:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| extent | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+| laneId | property | `string` | yes |  |
+| start | property | `number` | yes |  |
+
+## GridLaneIntervalPlacement
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:52:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| extent | property | `number` | yes |  |
+| height | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+| laneId | property | `string` | yes |  |
+| laneIndex | property | `number` | yes |  |
+| start | property | `number` | yes |  |
+| width | property | `number` | yes |  |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
+
+## GridMatrixAxisEntry
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:2:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `string` | yes |  |
+| size | property | `number` | yes |  |
+
+## GridMatrixCell
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:8:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| columnId | property | `string` | yes |  |
+| id | property | `string` | yes |  |
+| rowId | property | `string` | yes |  |
+
+## GridMatrixCellPlacement
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:28:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| columnId | property | `string` | yes |  |
+| columnIndex | property | `number` | yes |  |
+| height | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+| rowId | property | `string` | yes |  |
+| rowIndex | property | `number` | yes |  |
+| width | property | `number` | yes |  |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
+
+## GridMatrixLayout
+
+Kind: `type`
+Module: `src/types/layout.ts`
+Source: `src/types/layout.ts:15:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| columns | property | `readonly GridMatrixAxisEntry[]` | yes |  |
+| rows | property | `readonly GridMatrixAxisEntry[]` | yes |  |
 
 ## GridPoint
 

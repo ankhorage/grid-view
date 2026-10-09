@@ -21,6 +21,47 @@ graph TD
   module_src_features_items_getVisibleGridItems_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_types_grid_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_types_items_ts
+  module_src_features_layout_createGridAxisMetrics_ts["src/features/layout/createGridAxisMetrics.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_createGridAxisMetrics_ts
+  module_src_features_layout_createGridAxisMetrics_ts --> module_src_types_layout_ts
+  module_src_features_layout_getLaneIntervalPlacement_ts["src/features/layout/getLaneIntervalPlacement.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_getLaneIntervalPlacement_ts
+  module_src_features_layout_getLaneIntervalPlacement_ts --> module_src_features_layout_createGridAxisMetrics_ts
+  module_src_features_layout_getLaneIntervalPlacement_ts --> module_src_features_layout_utils_resolveLaneIntervalPlacement_ts
+  module_src_features_layout_getLaneIntervalPlacement_ts --> module_src_types_layout_ts
+  module_src_features_layout_getMatrixCellPlacement_ts["src/features/layout/getMatrixCellPlacement.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_getMatrixCellPlacement_ts
+  module_src_features_layout_getMatrixCellPlacement_ts --> module_src_features_layout_createGridAxisMetrics_ts
+  module_src_features_layout_getMatrixCellPlacement_ts --> module_src_features_layout_utils_resolveMatrixCellPlacement_ts
+  module_src_features_layout_getMatrixCellPlacement_ts --> module_src_types_layout_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts["src/features/layout/getVisibleLaneIntervals.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_getVisibleLaneIntervals_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts --> module_src_features_layout_createGridAxisMetrics_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts --> module_src_features_layout_utils_resolveLaneIntervalPlacement_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts --> module_src_types_grid_ts
+  module_src_features_layout_getVisibleLaneIntervals_ts --> module_src_types_layout_ts
+  module_src_features_layout_getVisibleMatrixCells_ts["src/features/layout/getVisibleMatrixCells.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_getVisibleMatrixCells_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_features_layout_createGridAxisMetrics_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_features_layout_utils_readGridAxisMetric_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_features_layout_utils_resolveMatrixCellPlacement_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_types_grid_ts
+  module_src_features_layout_getVisibleMatrixCells_ts --> module_src_types_layout_ts
+  module_src_features_layout_layout_test_ts["src/features/layout/layout.test.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_layout_test_ts
+  module_src_features_layout_layout_test_ts --> module_src_index_ts
+  module_src_features_layout_utils_readGridAxisMetric_ts["src/features/layout/utils/readGridAxisMetric.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_utils_readGridAxisMetric_ts
+  module_src_features_layout_utils_resolveLaneIntervalPlacement_ts["src/features/layout/utils/resolveLaneIntervalPlacement.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_utils_resolveLaneIntervalPlacement_ts
+  module_src_features_layout_utils_resolveLaneIntervalPlacement_ts --> module_src_features_layout_utils_readGridAxisMetric_ts
+  module_src_features_layout_utils_resolveLaneIntervalPlacement_ts --> module_src_types_layout_ts
+  module_src_features_layout_utils_resolveMatrixCellPlacement_ts["src/features/layout/utils/resolveMatrixCellPlacement.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_layout_utils_resolveMatrixCellPlacement_ts
+  module_src_features_layout_utils_resolveMatrixCellPlacement_ts --> module_src_features_layout_utils_readGridAxisMetric_ts
+  module_src_features_layout_utils_resolveMatrixCellPlacement_ts --> module_src_types_layout_ts
   module_src_features_snap_snapWorldCoordinate_ts["src/features/snap/snapWorldCoordinate.ts"]
   package__ankhorage_grid_view -.-> module_src_features_snap_snapWorldCoordinate_ts
   module_src_features_snap_snapWorldCoordinate_ts --> module_src_types_snap_ts
@@ -66,5 +107,7 @@ graph TD
   module_src_types_items_ts["src/types/items.ts"]
   package__ankhorage_grid_view -.-> module_src_types_items_ts
   module_src_types_items_ts --> module_src_types_grid_ts
+  module_src_types_layout_ts["src/types/layout.ts"]
+  package__ankhorage_grid_view -.-> module_src_types_layout_ts
   module_src_types_snap_ts["src/types/snap.ts"]
   package__ankhorage_grid_view -.-> module_src_types_snap_ts

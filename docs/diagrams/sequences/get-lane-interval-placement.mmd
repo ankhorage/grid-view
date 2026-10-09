@@ -1,0 +1,11 @@
+sequenceDiagram
+  participant participant_createGridAxisMetrics as createGridAxisMetrics
+  participant participant_getLaneIntervalPlacement as getLaneIntervalPlacement
+  participant participant_readGridAxisMetric as readGridAxisMetric
+  participant participant_resolveLaneIntervalPlacement as resolveLaneIntervalPlacement
+  participant_getLaneIntervalPlacement->>participant_createGridAxisMetrics: createGridAxisMetrics()
+  participant_createGridAxisMetrics-->>participant_getLaneIntervalPlacement: return
+  participant_getLaneIntervalPlacement->>participant_resolveLaneIntervalPlacement: resolveLaneIntervalPlacement()
+  participant_resolveLaneIntervalPlacement->>participant_readGridAxisMetric: readGridAxisMetric()
+  participant_readGridAxisMetric-->>participant_resolveLaneIntervalPlacement: return
+  participant_resolveLaneIntervalPlacement-->>participant_getLaneIntervalPlacement: return

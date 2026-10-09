@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.0",
+      "value": "v0.4.0",
       "color": "cb3837"
     },
     {
@@ -115,6 +115,107 @@
       ],
       "exports": [
         "getVisibleGridItems"
+      ]
+    },
+    {
+      "path": "src/features/layout/createGridAxisMetrics.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "createGridAxisMetrics"
+      ]
+    },
+    {
+      "path": "src/features/layout/getLaneIntervalPlacement.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/createGridAxisMetrics.ts",
+        "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "getLaneIntervalPlacement"
+      ]
+    },
+    {
+      "path": "src/features/layout/getMatrixCellPlacement.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/createGridAxisMetrics.ts",
+        "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "getMatrixCellPlacement"
+      ]
+    },
+    {
+      "path": "src/features/layout/getVisibleLaneIntervals.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/createGridAxisMetrics.ts",
+        "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "src/features/viewport/getVisibleWorldBounds.ts",
+        "src/types/grid.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "getVisibleLaneIntervals"
+      ]
+    },
+    {
+      "path": "src/features/layout/getVisibleMatrixCells.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/createGridAxisMetrics.ts",
+        "src/features/layout/utils/readGridAxisMetric.ts",
+        "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "src/features/viewport/getVisibleWorldBounds.ts",
+        "src/types/grid.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "getVisibleMatrixCells"
+      ]
+    },
+    {
+      "path": "src/features/layout/layout.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/layout/utils/readGridAxisMetric.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "readGridAxisMetric"
+      ]
+    },
+    {
+      "path": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/utils/readGridAxisMetric.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "resolveLaneIntervalPlacement"
+      ]
+    },
+    {
+      "path": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/layout/utils/readGridAxisMetric.ts",
+        "src/types/layout.ts"
+      ],
+      "exports": [
+        "resolveMatrixCellPlacement"
       ]
     },
     {
@@ -224,7 +325,11 @@
         "constrainViewport",
         "getAxisCategoryTicks",
         "getAxisTicks",
+        "getLaneIntervalPlacement",
+        "getMatrixCellPlacement",
         "getVisibleGridItems",
+        "getVisibleLaneIntervals",
+        "getVisibleMatrixCells",
         "getVisibleWorldBounds",
         "GridAxisCategory",
         "GridAxisCategoryTick",
@@ -232,6 +337,13 @@
         "GridAxisKind",
         "GridAxisName",
         "GridAxisTick",
+        "GridLane",
+        "GridLaneInterval",
+        "GridLaneIntervalPlacement",
+        "GridMatrixAxisEntry",
+        "GridMatrixCell",
+        "GridMatrixCellPlacement",
+        "GridMatrixLayout",
         "GridPoint",
         "GridRect",
         "GridRectItem",
@@ -291,6 +403,21 @@
       ],
       "exports": [
         "GridRectItem"
+      ]
+    },
+    {
+      "path": "src/types/layout.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "GridAxisMetrics",
+        "GridLane",
+        "GridLaneInterval",
+        "GridLaneIntervalPlacement",
+        "GridMatrixAxisEntry",
+        "GridMatrixCell",
+        "GridMatrixCellPlacement",
+        "GridMatrixLayout"
       ]
     },
     {
@@ -463,6 +590,98 @@
       "structuredRows": []
     },
     {
+      "name": "getLaneIntervalPlacement",
+      "title": null,
+      "description": "Resolve one lane interval into its deterministic world-space rectangle.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/layout/getLaneIntervalPlacement.ts",
+      "sourceLocation": {
+        "filePath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "line": 6,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridLane",
+        "GridLaneInterval",
+        "GridLaneIntervalPlacement"
+      ],
+      "signatures": [
+        {
+          "label": "(lanes: readonly GridLane[], interval: GridLaneInterval) => GridLaneIntervalPlacement",
+          "parameters": [
+            {
+              "name": "interval",
+              "type": "GridLaneInterval",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "lanes",
+              "type": "readonly GridLane[]",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "GridLaneIntervalPlacement",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "getMatrixCellPlacement",
+      "title": null,
+      "description": "Resolve one sparse matrix cell into its deterministic world-space rectangle.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/layout/getMatrixCellPlacement.ts",
+      "sourceLocation": {
+        "filePath": "src/features/layout/getMatrixCellPlacement.ts",
+        "line": 10,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMatrixCell",
+        "GridMatrixCellPlacement",
+        "GridMatrixLayout"
+      ],
+      "signatures": [
+        {
+          "label": "(layout: GridMatrixLayout, cell: GridMatrixCell) => GridMatrixCellPlacement",
+          "parameters": [
+            {
+              "name": "cell",
+              "type": "GridMatrixCell",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "layout",
+              "type": "GridMatrixLayout",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "GridMatrixCellPlacement",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "getVisibleGridItems",
       "title": null,
       "description": "Cull offscreen rectangular items without materializing logical grid cells.",
@@ -506,6 +725,124 @@
             }
           ],
           "returnType": "readonly T[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "getVisibleLaneIntervals",
+      "title": null,
+      "description": "Enumerate lane intervals intersecting both viewport axes in stable input order.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/layout/getVisibleLaneIntervals.ts",
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "line": 8,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridLane",
+        "GridLaneInterval",
+        "GridLaneIntervalPlacement",
+        "GridViewport"
+      ],
+      "signatures": [
+        {
+          "label": "(lanes: readonly GridLane[], intervals: readonly GridLaneInterval[], viewport: GridViewport, overscanPixels?: number) => readonly GridLaneIntervalPlacement[]",
+          "parameters": [
+            {
+              "name": "intervals",
+              "type": "readonly GridLaneInterval[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "lanes",
+              "type": "readonly GridLane[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "overscanPixels",
+              "type": "number",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "viewport",
+              "type": "GridViewport",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "readonly GridLaneIntervalPlacement[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "getVisibleMatrixCells",
+      "title": null,
+      "description": "Enumerate only sparse matrix cells intersecting the viewport in stable input order.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/layout/getVisibleMatrixCells.ts",
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 13,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMatrixCell",
+        "GridMatrixCellPlacement",
+        "GridMatrixLayout",
+        "GridViewport"
+      ],
+      "signatures": [
+        {
+          "label": "(layout: GridMatrixLayout, cells: readonly GridMatrixCell[], viewport: GridViewport, overscanPixels?: number) => readonly GridMatrixCellPlacement[]",
+          "parameters": [
+            {
+              "name": "cells",
+              "type": "readonly GridMatrixCell[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "layout",
+              "type": "GridMatrixLayout",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "overscanPixels",
+              "type": "number",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "viewport",
+              "type": "GridViewport",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "readonly GridMatrixCellPlacement[]",
           "returnDescription": null
         }
       ],
@@ -781,6 +1118,386 @@
           "name": "position",
           "kind": "property",
           "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridLane",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 38,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "height",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridLaneInterval",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 44,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "extent",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "laneId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "start",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridLaneIntervalPlacement",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 52,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "extent",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "laneId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "laneIndex",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "start",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "width",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "x",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "y",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMatrixAxisEntry",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 2,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMatrixCell",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 8,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "columnId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rowId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMatrixCellPlacement",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 28,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "columnId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "columnIndex",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rowId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rowIndex",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "width",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "x",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "y",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMatrixLayout",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/layout.ts",
+      "sourceLocation": {
+        "filePath": "src/types/layout.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMatrixAxisEntry"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "columns",
+          "kind": "property",
+          "type": "readonly GridMatrixAxisEntry[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rows",
+          "kind": "property",
+          "type": "readonly GridMatrixAxisEntry[]",
           "required": true,
           "description": null
         }
@@ -1689,6 +2406,182 @@
       }
     },
     {
+      "name": "createGridAxisMetrics",
+      "description": "Build validated lookup and cumulative world geometry for one ordered layout axis.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/createGridAxisMetrics.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "getLaneIntervalPlacement",
+      "description": "Resolve one lane interval into its deterministic world-space rectangle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "getMatrixCellPlacement",
+      "description": "Resolve one sparse matrix cell into its deterministic world-space rectangle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getMatrixCellPlacement.ts",
+        "line": 10,
+        "column": 1
+      }
+    },
+    {
+      "name": "getVisibleLaneIntervals",
+      "description": "Enumerate lane intervals intersecting both viewport axes in stable input order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "line": 8,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateUniqueIds",
+      "description": "Reject ambiguous interval catalogues whose stable identities cannot be preserved.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "intersects",
+      "description": "Determine whether two one-dimensional world intervals overlap or touch at their boundaries.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "line": 38,
+        "column": 1
+      }
+    },
+    {
+      "name": "getVisibleMatrixCells",
+      "description": "Enumerate only sparse matrix cells intersecting the viewport in stable input order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 13,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateUniqueIds",
+      "description": "Reject ambiguous sparse catalogues whose stable identities cannot be preserved.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 41,
+        "column": 1
+      }
+    },
+    {
+      "name": "getIntersectingRange",
+      "description": "Find the inclusive axis-index interval whose entries intersect a world-space window.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "findFirstEndingAtOrAfter",
+      "description": "Find the first entry whose trailing edge reaches a world coordinate.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 67,
+        "column": 1
+      }
+    },
+    {
+      "name": "findLastStartingAtOrBefore",
+      "description": "Find the final entry whose leading edge does not exceed a world coordinate.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/getVisibleMatrixCells.ts",
+        "line": 88,
+        "column": 1
+      }
+    },
+    {
+      "name": "createLargeMatrixLayout",
+      "description": "Create large variable-topology inputs without ever constructing their logical cell product.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/layout.test.ts",
+        "line": 139,
+        "column": 1
+      }
+    },
+    {
+      "name": "createViewport",
+      "description": "Create a world-coordinate viewport for concise layout fixtures.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/layout.test.ts",
+        "line": 147,
+        "column": 1
+      }
+    },
+    {
+      "name": "readGridAxisMetric",
+      "description": "Read an indexed axis metric while preserving the invariant that validated indexes exist.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/utils/readGridAxisMetric.ts",
+        "line": 2,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveLaneIntervalPlacement",
+      "description": "Resolve an interval after its ordered lane metrics have been indexed.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveMatrixCellPlacement",
+      "description": "Resolve a sparse cell after its row and column metrics have been indexed.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
       "name": "snapWorldCoordinate",
       "description": "Snap a world coordinate without consulting zoom or grid-line density.",
       "see": [],
@@ -1892,10 +2785,42 @@
     },
     {
       "kind": "export",
+      "name": "getLaneIntervalPlacement",
+      "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts",
+      "symbolName": "getLaneIntervalPlacement",
+      "description": "Resolve one lane interval into its deterministic world-space rectangle.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "getMatrixCellPlacement",
+      "sourcePath": "src/features/layout/getMatrixCellPlacement.ts",
+      "symbolName": "getMatrixCellPlacement",
+      "description": "Resolve one sparse matrix cell into its deterministic world-space rectangle.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "getVisibleGridItems",
       "sourcePath": "src/features/items/getVisibleGridItems.ts",
       "symbolName": "getVisibleGridItems",
       "description": "Cull offscreen rectangular items without materializing logical grid cells.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "getVisibleLaneIntervals",
+      "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts",
+      "symbolName": "getVisibleLaneIntervals",
+      "description": "Enumerate lane intervals intersecting both viewport axes in stable input order.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "getVisibleMatrixCells",
+      "sourcePath": "src/features/layout/getVisibleMatrixCells.ts",
+      "symbolName": "getVisibleMatrixCells",
+      "description": "Enumerate only sparse matrix cells intersecting the viewport in stable input order.",
       "isReadme": false
     },
     {
@@ -1974,6 +2899,26 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/layout/getMatrixCellPlacement.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/features/snap/snapWorldCoordinate.ts",
         "sourcePath": "src/index.ts"
       },
@@ -2025,6 +2970,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/types/items.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/layout.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -2096,6 +3046,101 @@
         "fromPath": "src/features/items/getVisibleGridItems.ts",
         "toPath": "src/features/viewport/getVisibleWorldBounds.ts",
         "sourcePath": "src/features/items/getVisibleGridItems.ts"
+      },
+      {
+        "fromPath": "src/features/layout/createGridAxisMetrics.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/createGridAxisMetrics.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "toPath": "src/features/layout/createGridAxisMetrics.ts",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getLaneIntervalPlacement.ts",
+        "toPath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getMatrixCellPlacement.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getMatrixCellPlacement.ts",
+        "toPath": "src/features/layout/createGridAxisMetrics.ts",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getMatrixCellPlacement.ts",
+        "toPath": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toPath": "src/features/viewport/getVisibleWorldBounds.ts",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toPath": "src/features/layout/createGridAxisMetrics.ts",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toPath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/features/viewport/getVisibleWorldBounds.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/features/layout/createGridAxisMetrics.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/features/layout/utils/readGridAxisMetric.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/getVisibleMatrixCells.ts",
+        "toPath": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromPath": "src/features/layout/layout.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/features/layout/layout.test.ts"
       },
       {
         "fromPath": "src/features/snap/snapWorldCoordinate.ts",
@@ -2186,6 +3231,26 @@
         "fromPath": "src/features/viewport/zoomViewportAt.ts",
         "toPath": "src/features/viewport/viewportToWorld.ts",
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromPath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
+        "toPath": "src/features/layout/utils/readGridAxisMetric.ts",
+        "sourcePath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "toPath": "src/types/layout.ts",
+        "sourcePath": "src/features/layout/utils/resolveMatrixCellPlacement.ts"
+      },
+      {
+        "fromPath": "src/features/layout/utils/resolveMatrixCellPlacement.ts",
+        "toPath": "src/features/layout/utils/readGridAxisMetric.ts",
+        "sourcePath": "src/features/layout/utils/resolveMatrixCellPlacement.ts"
       }
     ],
     "calls": [
@@ -2328,6 +3393,168 @@
         "sourcePath": "src/features/items/getVisibleGridItems.ts"
       },
       {
+        "fromSymbol": "getLaneIntervalPlacement",
+        "toSymbol": "createGridAxisMetrics",
+        "callExpression": "createGridAxisMetrics",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "getLaneIntervalPlacement",
+        "toSymbol": "resolveLaneIntervalPlacement",
+        "callExpression": "resolveLaneIntervalPlacement",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "getMatrixCellPlacement",
+        "toSymbol": "createGridAxisMetrics",
+        "callExpression": "createGridAxisMetrics",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromSymbol": "getMatrixCellPlacement",
+        "toSymbol": "resolveMatrixCellPlacement",
+        "callExpression": "resolveMatrixCellPlacement",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toSymbol": "createGridAxisMetrics",
+        "callExpression": "createGridAxisMetrics",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toSymbol": "getVisibleWorldBounds",
+        "callExpression": "getVisibleWorldBounds",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toSymbol": "validateUniqueIds",
+        "callExpression": "validateUniqueIds",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toSymbol": "resolveLaneIntervalPlacement",
+        "callExpression": "resolveLaneIntervalPlacement",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/getVisibleLaneIntervals.ts",
+        "toSymbol": "intersects",
+        "callExpression": "intersects",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toSymbol": "createGridAxisMetrics",
+        "callExpression": "createGridAxisMetrics",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toSymbol": "validateUniqueIds",
+        "callExpression": "validateUniqueIds",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toSymbol": "getVisibleWorldBounds",
+        "callExpression": "getVisibleWorldBounds",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toSymbol": "getIntersectingRange",
+        "callExpression": "getIntersectingRange",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/getVisibleMatrixCells.ts",
+        "toSymbol": "resolveMatrixCellPlacement",
+        "callExpression": "resolveMatrixCellPlacement",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getIntersectingRange",
+        "toSymbol": "findFirstEndingAtOrAfter",
+        "callExpression": "findFirstEndingAtOrAfter",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getIntersectingRange",
+        "toSymbol": "findLastStartingAtOrBefore",
+        "callExpression": "findLastStartingAtOrBefore",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "findFirstEndingAtOrAfter",
+        "toSymbol": "readGridAxisMetric",
+        "callExpression": "readGridAxisMetric",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "findLastStartingAtOrBefore",
+        "toSymbol": "readGridAxisMetric",
+        "callExpression": "readGridAxisMetric",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "getMatrixCellPlacement",
+        "callExpression": "getMatrixCellPlacement",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "createLargeMatrixLayout",
+        "callExpression": "createLargeMatrixLayout",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "getVisibleMatrixCells",
+        "callExpression": "getVisibleMatrixCells",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "createViewport",
+        "callExpression": "createViewport",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "getLaneIntervalPlacement",
+        "callExpression": "getLaneIntervalPlacement",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/layout/layout.test.ts",
+        "toSymbol": "getVisibleLaneIntervals",
+        "callExpression": "getVisibleLaneIntervals",
+        "sourcePath": "src/features/layout/layout.test.ts"
+      },
+      {
         "fromSymbol": "snapWorldCoordinate",
         "toSymbol": "resolver",
         "callExpression": "resolver",
@@ -2428,6 +3655,18 @@
         "toSymbol": "constrainViewport",
         "callExpression": "constrainViewport",
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
+      },
+      {
+        "fromSymbol": "resolveLaneIntervalPlacement",
+        "toSymbol": "readGridAxisMetric",
+        "callExpression": "readGridAxisMetric",
+        "sourcePath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "resolveMatrixCellPlacement",
+        "toSymbol": "readGridAxisMetric",
+        "callExpression": "readGridAxisMetric",
+        "sourcePath": "src/features/layout/utils/resolveMatrixCellPlacement.ts"
       }
     ],
     "typeReferences": [
@@ -2485,6 +3724,76 @@
         "fromSymbol": "getVisibleGridItems",
         "toType": "T",
         "sourcePath": "src/features/items/getVisibleGridItems.ts"
+      },
+      {
+        "fromSymbol": "getLaneIntervalPlacement",
+        "toType": "GridLane",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "getLaneIntervalPlacement",
+        "toType": "GridLaneInterval",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "getLaneIntervalPlacement",
+        "toType": "GridLaneIntervalPlacement",
+        "sourcePath": "src/features/layout/getLaneIntervalPlacement.ts"
+      },
+      {
+        "fromSymbol": "getMatrixCellPlacement",
+        "toType": "GridMatrixCell",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromSymbol": "getMatrixCellPlacement",
+        "toType": "GridMatrixCellPlacement",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromSymbol": "getMatrixCellPlacement",
+        "toType": "GridMatrixLayout",
+        "sourcePath": "src/features/layout/getMatrixCellPlacement.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toType": "GridLane",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toType": "GridLaneInterval",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toType": "GridLaneIntervalPlacement",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleLaneIntervals",
+        "toType": "GridViewport",
+        "sourcePath": "src/features/layout/getVisibleLaneIntervals.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toType": "GridMatrixCell",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toType": "GridMatrixCellPlacement",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toType": "GridMatrixLayout",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
+      },
+      {
+        "fromSymbol": "getVisibleMatrixCells",
+        "toType": "GridViewport",
+        "sourcePath": "src/features/layout/getVisibleMatrixCells.ts"
       },
       {
         "fromSymbol": "snapWorldCoordinate",
@@ -2620,6 +3929,11 @@
         "fromSymbol": "GridViewportConstraints",
         "toType": "GridViewportAlignment",
         "sourcePath": "src/types/grid.ts"
+      },
+      {
+        "fromSymbol": "GridMatrixLayout",
+        "toType": "GridMatrixAxisEntry",
+        "sourcePath": "src/types/layout.ts"
       }
     ],
     "componentComposition": []

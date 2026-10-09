@@ -1,0 +1,11 @@
+sequenceDiagram
+  participant participant_createGridAxisMetrics as createGridAxisMetrics
+  participant participant_getMatrixCellPlacement as getMatrixCellPlacement
+  participant participant_readGridAxisMetric as readGridAxisMetric
+  participant participant_resolveMatrixCellPlacement as resolveMatrixCellPlacement
+  participant_getMatrixCellPlacement->>participant_createGridAxisMetrics: createGridAxisMetrics()
+  participant_createGridAxisMetrics-->>participant_getMatrixCellPlacement: return
+  participant_getMatrixCellPlacement->>participant_resolveMatrixCellPlacement: resolveMatrixCellPlacement()
+  participant_resolveMatrixCellPlacement->>participant_readGridAxisMetric: readGridAxisMetric()
+  participant_readGridAxisMetric-->>participant_resolveMatrixCellPlacement: return
+  participant_resolveMatrixCellPlacement-->>participant_getMatrixCellPlacement: return
