@@ -27,3 +27,19 @@ export interface GridZoomLimits {
   readonly minY?: number;
   readonly maxY?: number;
 }
+
+/** Alignment used when bounded world content is smaller than a viewport axis. */
+export type GridViewportAlignment = 'start' | 'center' | 'end';
+
+/**
+ * Serializable world bounds for viewport interaction. Overscroll is expressed in world units and
+ * extends the reachable offsets beyond each world edge. When the world is smaller than an axis,
+ * alignment fixes its position because no offset can keep both edges inside the viewport.
+ */
+export interface GridViewportConstraints {
+  readonly world: GridRect;
+  readonly overscrollX?: number;
+  readonly overscrollY?: number;
+  readonly alignmentX?: GridViewportAlignment;
+  readonly alignmentY?: GridViewportAlignment;
+}

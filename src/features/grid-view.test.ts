@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 
 import {
+  constrainViewport,
+  getAxisCategoryTicks,
   getAxisTicks,
   getVisibleGridItems,
   getVisibleWorldBounds,
@@ -11,7 +13,7 @@ import {
   worldToViewport,
   zoomViewportAt,
 } from '../index.js';
-import type { GridViewport } from '../types/grid.js';
+import type { GridViewport, GridViewportConstraints } from '../types/grid.js';
 
 const viewport: GridViewport = {
   width: 800,
@@ -102,6 +104,76 @@ describe('viewport visibility', () => {
   });
 });
 
+describe('constrained 2D viewport interaction', () => {
+  const constraints: GridViewportConstraints = {
+    world: { x: 0, y: 0, width: 300, height: 100 },
+  };
+
+  test('clamps pan independently at every finite world edge, including large offsets', () => {
+    expect(panViewport(viewport, { x: 10_000, y: 10_000 }, constraints)).toMatchObject({
+      offsetX: 0,
+      offsetY: 0,
+    });
+    expect(panViewport(viewport, { x: -10_000, y: -10_000 }, constraints)).toMatchObject({
+      offsetX: 100,
+      offsetY: 80,
+    });
+    expect(
+      panViewport(viewport, { x: -10_000, y: 0 }, { ...constraints, overscrollX: 5 }),
+    ).toMatchObject({ offsetX: 105 });
+  });
+
+  test('aligns world content smaller than a viewport deterministically', () => {
+    const smallWorld = { world: { x: 10, y: 20, width: 50, height: 10 } };
+    expect(constrainViewport(viewport, smallWorld)).toMatchObject({ offsetX: -65, offsetY: 15 });
+    expect(
+      constrainViewport(viewport, { ...smallWorld, alignmentX: 'start', alignmentY: 'end' }),
+    ).toMatchObject({ offsetX: 10, offsetY: 10 });
+  });
+});
+
+describe('constrained zoom and reveal', () => {
+  const constraints: GridViewportConstraints = {
+    world: { x: 0, y: 0, width: 300, height: 100 },
+  };
+
+  test('keeps focal world coordinates through asymmetric zoom until bounds intervene', () => {
+    const focal = { x: 400, y: 200 };
+    const initial = viewportToWorld(focal, viewport);
+    const zoomed = zoomViewportAt(
+      viewport,
+      focal,
+      { pixelsPerUnitX: 8, pixelsPerUnitY: 10 },
+      { minX: 2, maxX: 16, minY: 5, maxY: 20 },
+      constraints,
+    );
+    expect(viewportToWorld(focal, zoomed)).toEqual(initial);
+    expect(zoomed).toMatchObject({ pixelsPerUnitX: 8, pixelsPerUnitY: 10 });
+    expect(
+      zoomViewportAt(viewport, focal, { pixelsPerUnitX: 1, pixelsPerUnitY: 1 }, {}, constraints),
+    ).toMatchObject({ offsetX: -250, offsetY: -150 });
+  });
+
+  test('constrains reveal results and rejects invalid finite geometry consistently', () => {
+    expect(
+      revealWorldRect(viewport, { x: 290, y: 90, width: 10, height: 10 }, 0, constraints),
+    ).toMatchObject({ offsetX: 100, offsetY: 80 });
+    expect(() => panViewport(viewport, { x: Infinity, y: 0 })).toThrow();
+    expect(() =>
+      constrainViewport(viewport, { world: { x: 0, y: 0, width: Infinity, height: 1 } }),
+    ).toThrow();
+    expect(() =>
+      zoomViewportAt(
+        viewport,
+        { x: 0, y: 0 },
+        { pixelsPerUnitX: 1, pixelsPerUnitY: 1 },
+        { minX: 2, maxX: 1 },
+      ),
+    ).toThrow();
+    expect(() => worldToViewport({ x: Number.NaN, y: 0 }, viewport)).toThrow();
+  });
+});
+
 describe('visual ruler versus interaction snap', () => {
   test('snapping does not change across visual grid zoom levels', () => {
     const sixteenth = { mode: 'fixed' as const, step: 240 };
@@ -130,6 +202,25 @@ describe('visual ruler versus interaction snap', () => {
         ({ level }) => level === 'minor',
       ),
     ).toBe(true);
+  });
+});
+
+describe('axis projection geometry', () => {
+  test('emits only visible variable-width category boundaries without changing snap', () => {
+    expect(
+      getAxisCategoryTicks(viewport, 'x', [
+        { id: 'before', start: 99, size: 1 },
+        { id: 'one', start: 100, size: 37 },
+        { id: 'two', start: 137, size: 113 },
+        { id: 'three', start: 250, size: 50 },
+        { id: 'after', start: 301, size: 1 },
+      ]),
+    ).toEqual([
+      { categoryId: 'one', level: 'major', position: 100 },
+      { categoryId: 'two', level: 'major', position: 137 },
+      { categoryId: 'three', level: 'major', position: 250 },
+    ]);
+    expect(snapWorldCoordinate(491, { mode: 'fixed', step: 240 })).toBe(480);
   });
 });
 

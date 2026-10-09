@@ -1,8 +1,10 @@
 import type { GridRect, GridViewport } from '../../types/grid.js';
+import { assertValidViewport } from './assertValidViewport.js';
 import { viewportToWorld } from './viewportToWorld.js';
 
 /*** Calculate the visible world rectangle, optionally expanded by pixel overscan. */
 export function getVisibleWorldBounds(viewport: GridViewport, overscanPixels = 0): GridRect {
+  assertValidViewport(viewport);
   if (!Number.isFinite(overscanPixels) || overscanPixels < 0) {
     throw new RangeError('Overscan must be a finite nonnegative number.');
   }

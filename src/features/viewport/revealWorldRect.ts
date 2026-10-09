@@ -1,4 +1,5 @@
-import type { GridRect, GridViewport } from '../../types/grid.js';
+import type { GridRect, GridViewport, GridViewportConstraints } from '../../types/grid.js';
+import { constrainViewport } from './constrainViewport.js';
 
 /***
  * Minimally pans a viewport so that a world rectangle is visible inside pixel padding.
@@ -8,27 +9,31 @@ export function revealWorldRect(
   viewport: GridViewport,
   rect: GridRect,
   paddingPixels = 0,
+  constraints?: GridViewportConstraints,
 ): GridViewport {
   validateRevealInput(viewport, rect, paddingPixels);
-  return {
-    ...viewport,
-    offsetX: revealAxis(
-      viewport.offsetX,
-      viewport.width,
-      viewport.pixelsPerUnitX,
-      rect.x,
-      rect.width,
-      paddingPixels,
-    ),
-    offsetY: revealAxis(
-      viewport.offsetY,
-      viewport.height,
-      viewport.pixelsPerUnitY,
-      rect.y,
-      rect.height,
-      paddingPixels,
-    ),
-  };
+  return constrainViewport(
+    {
+      ...viewport,
+      offsetX: revealAxis(
+        viewport.offsetX,
+        viewport.width,
+        viewport.pixelsPerUnitX,
+        rect.x,
+        rect.width,
+        paddingPixels,
+      ),
+      offsetY: revealAxis(
+        viewport.offsetY,
+        viewport.height,
+        viewport.pixelsPerUnitY,
+        rect.y,
+        rect.height,
+        paddingPixels,
+      ),
+    },
+    constraints,
+  );
 }
 
 /*** Resolve the minimal world-coordinate offset that exposes one axis of a rectangle. */
