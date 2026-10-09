@@ -16,6 +16,36 @@ graph TD
   package__ankhorage_grid_view -.-> module_src_features_grid_view_test_ts
   module_src_features_grid_view_test_ts --> module_src_index_ts
   module_src_features_grid_view_test_ts --> module_src_types_grid_ts
+  module_src_features_interactions_hitTestWorldRects_ts["src/features/interactions/hitTestWorldRects.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_hitTestWorldRects_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_interactions_test_ts["src/features/interactions/interactions.test.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_interactions_test_ts
+  module_src_features_interactions_interactions_test_ts --> module_src_index_ts
+  module_src_features_interactions_moveWorldRects_ts["src/features/interactions/moveWorldRects.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_moveWorldRects_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_resizeWorldRect_ts["src/features/interactions/resizeWorldRect.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_resizeWorldRect_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_types_grid_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_resolveWorldSnapCandidate_ts["src/features/interactions/resolveWorldSnapCandidate.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_resolveWorldSnapCandidate_ts
+  module_src_features_interactions_resolveWorldSnapCandidate_ts --> module_src_features_snap_snapWorldCoordinate_ts
+  module_src_features_interactions_resolveWorldSnapCandidate_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_selectWorldRects_ts["src/features/interactions/selectWorldRects.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_selectWorldRects_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_utils_getWorldRectBounds_ts["src/features/interactions/utils/getWorldRectBounds.ts"]
+  package__ankhorage_grid_view -.-> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_utils_getWorldRectBounds_ts --> module_src_types_grid_ts
   module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
   package__ankhorage_grid_view -.-> module_src_features_items_getVisibleGridItems_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
@@ -104,6 +134,10 @@ graph TD
   module_src_types_axes_ts --> module_src_types_grid_ts
   module_src_types_grid_ts["src/types/grid.ts"]
   package__ankhorage_grid_view -.-> module_src_types_grid_ts
+  module_src_types_interactions_ts["src/types/interactions.ts"]
+  package__ankhorage_grid_view -.-> module_src_types_interactions_ts
+  module_src_types_interactions_ts --> module_src_types_items_ts
+  module_src_types_interactions_ts --> module_src_types_snap_ts
   module_src_types_items_ts["src/types/items.ts"]
   package__ankhorage_grid_view -.-> module_src_types_items_ts
   module_src_types_items_ts --> module_src_types_grid_ts

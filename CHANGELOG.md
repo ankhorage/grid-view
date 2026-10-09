@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- ad8ad2e: Add pure world-space rectangle selection, hit testing, movement, resizing, and candidate snapping geometry.
+
 ## 0.4.0
 
 ### Minor Changes

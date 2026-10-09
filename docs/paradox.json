@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.4.0",
+      "value": "v0.5.0",
       "color": "cb3837"
     },
     {
@@ -104,6 +104,83 @@
         "src/types/grid.ts"
       ],
       "exports": []
+    },
+    {
+      "path": "src/features/interactions/hitTestWorldRects.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/interactions/utils/getWorldRectBounds.ts",
+        "src/types/grid.ts",
+        "src/types/interactions.ts"
+      ],
+      "exports": [
+        "hitTestWorldRects"
+      ]
+    },
+    {
+      "path": "src/features/interactions/interactions.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/interactions/moveWorldRects.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/interactions/utils/getWorldRectBounds.ts",
+        "src/types/grid.ts",
+        "src/types/interactions.ts"
+      ],
+      "exports": [
+        "moveWorldRects"
+      ]
+    },
+    {
+      "path": "src/features/interactions/resizeWorldRect.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/interactions/utils/getWorldRectBounds.ts",
+        "src/types/grid.ts",
+        "src/types/interactions.ts"
+      ],
+      "exports": [
+        "resizeWorldRect"
+      ]
+    },
+    {
+      "path": "src/features/interactions/resolveWorldSnapCandidate.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/snap/snapWorldCoordinate.ts",
+        "src/types/interactions.ts"
+      ],
+      "exports": [
+        "resolveWorldSnapCandidate"
+      ]
+    },
+    {
+      "path": "src/features/interactions/selectWorldRects.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/interactions/utils/getWorldRectBounds.ts",
+        "src/types/grid.ts",
+        "src/types/interactions.ts"
+      ],
+      "exports": [
+        "selectWorldRects"
+      ]
+    },
+    {
+      "path": "src/features/interactions/utils/getWorldRectBounds.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/grid.ts"
+      ],
+      "exports": [
+        "getWorldRectBounds"
+      ]
     },
     {
       "path": "src/features/items/getVisibleGridItems.ts",
@@ -337,16 +414,25 @@
         "GridAxisKind",
         "GridAxisName",
         "GridAxisTick",
+        "GridCandidateSnapOptions",
+        "GridInteractionRectItem",
         "GridLane",
         "GridLaneInterval",
         "GridLaneIntervalPlacement",
+        "GridMarqueeSelectionMode",
+        "GridMarqueeSelectionOptions",
         "GridMatrixAxisEntry",
         "GridMatrixCell",
         "GridMatrixCellPlacement",
         "GridMatrixLayout",
+        "GridMoveOptions",
         "GridPoint",
         "GridRect",
         "GridRectItem",
+        "GridResizeHandle",
+        "GridResizeOptions",
+        "GridSnapCandidate",
+        "GridSnapCandidateKind",
         "GridSnapResolver",
         "GridSnapSpecification",
         "GridTickContext",
@@ -356,8 +442,13 @@
         "GridViewportAlignment",
         "GridViewportConstraints",
         "GridZoomLimits",
+        "hitTestWorldRects",
+        "moveWorldRects",
         "panViewport",
+        "resizeWorldRect",
+        "resolveWorldSnapCandidate",
         "revealWorldRect",
+        "selectWorldRects",
         "snapWorldCoordinate",
         "viewportToWorld",
         "worldToViewport",
@@ -393,6 +484,25 @@
         "GridViewportAlignment",
         "GridViewportConstraints",
         "GridZoomLimits"
+      ]
+    },
+    {
+      "path": "src/types/interactions.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/items.ts",
+        "src/types/snap.ts"
+      ],
+      "exports": [
+        "GridCandidateSnapOptions",
+        "GridInteractionRectItem",
+        "GridMarqueeSelectionMode",
+        "GridMarqueeSelectionOptions",
+        "GridMoveOptions",
+        "GridResizeHandle",
+        "GridResizeOptions",
+        "GridSnapCandidate",
+        "GridSnapCandidateKind"
       ]
     },
     {
@@ -1125,6 +1235,154 @@
       "structuredRows": []
     },
     {
+      "name": "GridCandidateSnapOptions",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 48,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridSnapCandidateKind",
+        "GridSnapResolver",
+        "GridSnapSpecification"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "enabled",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "pixelsPerUnit",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "priorities",
+          "kind": "property",
+          "type": "readonly GridSnapCandidateKind[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "scalarResolver",
+          "kind": "property",
+          "type": "GridSnapResolver",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "scalarSpecification",
+          "kind": "property",
+          "type": "GridSnapSpecification",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "tolerancePixels",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridInteractionRectItem",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 5,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "disabled",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "height",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "locked",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "resizable",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "width",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "x",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "y",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "GridLane",
       "title": null,
       "description": null,
@@ -1292,6 +1550,67 @@
           "name": "y",
           "kind": "property",
           "type": "number",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMarqueeSelectionMode",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 12,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "GridMarqueeSelectionOptions",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMarqueeSelectionMode"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "includeDisabled",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "mode",
+          "kind": "property",
+          "type": "GridMarqueeSelectionMode",
           "required": true,
           "description": null
         }
@@ -1505,6 +1824,43 @@
       "structuredRows": []
     },
     {
+      "name": "GridMoveOptions",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 21,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "includeDisabled",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "includeLocked",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "GridPoint",
       "title": null,
       "description": null,
@@ -1648,6 +2004,140 @@
           "description": null
         }
       ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridResizeHandle",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 27,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "GridResizeOptions",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 31,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "includeDisabled",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "includeLocked",
+          "kind": "property",
+          "type": "boolean",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "minimumHeight",
+          "kind": "property",
+          "type": "number",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "minimumWidth",
+          "kind": "property",
+          "type": "number",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridSnapCandidate",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 42,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridSnapCandidateKind"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "coordinate",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "GridSnapCandidateKind",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "GridSnapCandidateKind",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/interactions.ts",
+      "sourceLocation": {
+        "filePath": "src/types/interactions.ts",
+        "line": 39,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
       "structuredRows": []
     },
     {
@@ -1999,6 +2489,107 @@
       "structuredRows": []
     },
     {
+      "name": "hitTestWorldRects",
+      "title": null,
+      "description": "Return the first input-order world rectangle containing a finite point.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/interactions/hitTestWorldRects.ts",
+      "sourceLocation": {
+        "filePath": "src/features/interactions/hitTestWorldRects.ts",
+        "line": 6,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridPoint"
+      ],
+      "signatures": [
+        {
+          "label": "(items: readonly T[], point: GridPoint, includeDisabled?: boolean) => T | undefined",
+          "parameters": [
+            {
+              "name": "includeDisabled",
+              "type": "boolean",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "items",
+              "type": "readonly T[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "point",
+              "type": "GridPoint",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "T | undefined",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "moveWorldRects",
+      "title": null,
+      "description": "Move eligible world rectangles by a finite world delta while retaining input order and IDs.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/interactions/moveWorldRects.ts",
+      "sourceLocation": {
+        "filePath": "src/features/interactions/moveWorldRects.ts",
+        "line": 6,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMoveOptions",
+        "GridPoint"
+      ],
+      "signatures": [
+        {
+          "label": "(items: readonly T[], delta: GridPoint, options?: GridMoveOptions) => readonly T[]",
+          "parameters": [
+            {
+              "name": "delta",
+              "type": "GridPoint",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "items",
+              "type": "readonly T[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "options",
+              "type": "GridMoveOptions",
+              "required": false,
+              "description": null
+            }
+          ],
+          "returnType": "readonly T[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "panViewport",
       "title": null,
       "description": "Pan by pixel displacement; dragging to the right reveals world coordinates to the left.",
@@ -2044,6 +2635,115 @@
             }
           ],
           "returnType": "GridViewport",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "resizeWorldRect",
+      "title": null,
+      "description": "Resize an eligible world rectangle from one handle while preserving finite minimum dimensions.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/interactions/resizeWorldRect.ts",
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resizeWorldRect.ts",
+        "line": 10,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridPoint",
+        "GridResizeHandle",
+        "GridResizeOptions"
+      ],
+      "signatures": [
+        {
+          "label": "(item: T, handle: GridResizeHandle, delta: GridPoint, options?: GridResizeOptions) => T",
+          "parameters": [
+            {
+              "name": "delta",
+              "type": "GridPoint",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "handle",
+              "type": "GridResizeHandle",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "item",
+              "type": "T",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "options",
+              "type": "GridResizeOptions",
+              "required": false,
+              "description": null
+            }
+          ],
+          "returnType": "T",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "resolveWorldSnapCandidate",
+      "title": null,
+      "description": "Resolve one coordinate to the highest-priority in-tolerance candidate, then scalar snapping.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "line": 5,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridCandidateSnapOptions",
+        "GridSnapCandidate"
+      ],
+      "signatures": [
+        {
+          "label": "(value: number, candidates: readonly GridSnapCandidate[], options: GridCandidateSnapOptions) => number",
+          "parameters": [
+            {
+              "name": "candidates",
+              "type": "readonly GridSnapCandidate[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "options",
+              "type": "GridCandidateSnapOptions",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "value",
+              "type": "number",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "number",
           "returnDescription": null
         }
       ],
@@ -2102,6 +2802,57 @@
             }
           ],
           "returnType": "GridViewport",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "selectWorldRects",
+      "title": null,
+      "description": "Select input-order item IDs by normalized marquee containment or intersection.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/interactions/selectWorldRects.ts",
+      "sourceLocation": {
+        "filePath": "src/features/interactions/selectWorldRects.ts",
+        "line": 9,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "GridMarqueeSelectionOptions",
+        "GridRect"
+      ],
+      "signatures": [
+        {
+          "label": "(items: readonly T[], marquee: GridRect, options: GridMarqueeSelectionOptions) => readonly string[]",
+          "parameters": [
+            {
+              "name": "items",
+              "type": "readonly T[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "marquee",
+              "type": "GridRect",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "options",
+              "type": "GridMarqueeSelectionOptions",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "readonly string[]",
           "returnDescription": null
         }
       ],
@@ -2391,6 +3142,171 @@
       "sourceLocation": {
         "filePath": "src/features/axes/getAxisTicks.ts",
         "line": 94,
+        "column": 1
+      }
+    },
+    {
+      "name": "hitTestWorldRects",
+      "description": "Return the first input-order world rectangle containing a finite point.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/hitTestWorldRects.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertFinitePoint",
+      "description": "Reject a point that cannot participate in deterministic world-space geometry.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/hitTestWorldRects.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "moveWorldRects",
+      "description": "Move eligible world rectangles by a finite world delta while retaining input order and IDs.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/moveWorldRects.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "resizeWorldRect",
+      "description": "Resize an eligible world rectangle from one handle while preserving finite minimum dimensions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resizeWorldRect.ts",
+        "line": 10,
+        "column": 1
+      }
+    },
+    {
+      "name": "resizeAxis",
+      "description": "Resize a single world axis from its leading or trailing handle without permitting inversion.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resizeWorldRect.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertResizeInput",
+      "description": "Validate protected-item policy and geometry before deriving a resized rectangle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resizeWorldRect.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "isResizeHandle",
+      "description": "Identify handles that map to a physical world-rectangle edge.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resizeWorldRect.ts",
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveWorldSnapCandidate",
+      "description": "Resolve one coordinate to the highest-priority in-tolerance candidate, then scalar snapping.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasHigherCandidateRank",
+      "description": "Prefer explicit kind priority, then nearer distance, while preserving input order on exact ties.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "line": 39,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertSnapInput",
+      "description": "Reject ambiguous snap policies or non-finite candidate geometry before resolving.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertFiniteSnapValue",
+      "description": "Reject a coordinate that cannot safely participate in candidate snapping.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "selectWorldRects",
+      "description": "Select input-order item IDs by normalized marquee containment or intersection.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/selectWorldRects.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "containsWorldRect",
+      "description": "Check whether all four boundaries of one normalized rectangle lie within another.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/selectWorldRects.ts",
+        "line": 29,
+        "column": 1
+      }
+    },
+    {
+      "name": "intersectsWorldRect",
+      "description": "Check inclusive world-rectangle overlap so boundary touches remain selectable.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/selectWorldRects.ts",
+        "line": 42,
+        "column": 1
+      }
+    },
+    {
+      "name": "getWorldRectBounds",
+      "description": "Resolve finite inclusive world-rectangle bounds, optionally normalizing a directional rectangle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "line": 4,
         "column": 1
       }
     },
@@ -2833,6 +3749,22 @@
     },
     {
       "kind": "export",
+      "name": "hitTestWorldRects",
+      "sourcePath": "src/features/interactions/hitTestWorldRects.ts",
+      "symbolName": "hitTestWorldRects",
+      "description": "Return the first input-order world rectangle containing a finite point.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "moveWorldRects",
+      "sourcePath": "src/features/interactions/moveWorldRects.ts",
+      "symbolName": "moveWorldRects",
+      "description": "Move eligible world rectangles by a finite world delta while retaining input order and IDs.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "panViewport",
       "sourcePath": "src/features/viewport/panViewport.ts",
       "symbolName": "panViewport",
@@ -2841,10 +3773,34 @@
     },
     {
       "kind": "export",
+      "name": "resizeWorldRect",
+      "sourcePath": "src/features/interactions/resizeWorldRect.ts",
+      "symbolName": "resizeWorldRect",
+      "description": "Resize an eligible world rectangle from one handle while preserving finite minimum dimensions.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "resolveWorldSnapCandidate",
+      "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+      "symbolName": "resolveWorldSnapCandidate",
+      "description": "Resolve one coordinate to the highest-priority in-tolerance candidate, then scalar snapping.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "revealWorldRect",
       "sourcePath": "src/features/viewport/revealWorldRect.ts",
       "symbolName": "revealWorldRect",
       "description": "Minimally pans a viewport so that a world rectangle is visible inside pixel padding.\nOversized rectangles align their leading edges because neither axis can show them in full.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "selectWorldRects",
+      "sourcePath": "src/features/interactions/selectWorldRects.ts",
+      "symbolName": "selectWorldRects",
+      "description": "Select input-order item IDs by normalized marquee containment or intersection.",
       "isReadme": false
     },
     {
@@ -2890,6 +3846,31 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/axes/getAxisTicks.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/interactions/hitTestWorldRects.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/interactions/moveWorldRects.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/interactions/resizeWorldRect.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/interactions/selectWorldRects.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -2969,6 +3950,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/types/items.ts",
         "sourcePath": "src/index.ts"
       },
@@ -2996,6 +3982,16 @@
         "fromPath": "src/types/axes.ts",
         "toPath": "src/types/grid.ts",
         "sourcePath": "src/types/axes.ts"
+      },
+      {
+        "fromPath": "src/types/interactions.ts",
+        "toPath": "src/types/items.ts",
+        "sourcePath": "src/types/interactions.ts"
+      },
+      {
+        "fromPath": "src/types/interactions.ts",
+        "toPath": "src/types/snap.ts",
+        "sourcePath": "src/types/interactions.ts"
       },
       {
         "fromPath": "src/types/items.ts",
@@ -3031,6 +4027,81 @@
         "fromPath": "src/features/axes/getAxisTicks.ts",
         "toPath": "src/features/viewport/getVisibleWorldBounds.ts",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/hitTestWorldRects.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/hitTestWorldRects.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/hitTestWorldRects.ts",
+        "toPath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/interactions.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/moveWorldRects.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/moveWorldRects.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/moveWorldRects.ts",
+        "toPath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/resizeWorldRect.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/resizeWorldRect.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/resizeWorldRect.ts",
+        "toPath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "toPath": "src/features/snap/snapWorldCoordinate.ts",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/selectWorldRects.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/selectWorldRects.ts",
+        "toPath": "src/types/interactions.ts",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromPath": "src/features/interactions/selectWorldRects.ts",
+        "toPath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
       },
       {
         "fromPath": "src/features/items/getVisibleGridItems.ts",
@@ -3233,6 +4304,11 @@
         "sourcePath": "src/features/viewport/zoomViewportAt.ts"
       },
       {
+        "fromPath": "src/features/interactions/utils/getWorldRectBounds.ts",
+        "toPath": "src/types/grid.ts",
+        "sourcePath": "src/features/interactions/utils/getWorldRectBounds.ts"
+      },
+      {
         "fromPath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts",
         "toPath": "src/types/layout.ts",
         "sourcePath": "src/features/layout/utils/resolveLaneIntervalPlacement.ts"
@@ -3385,6 +4461,150 @@
         "toSymbol": "adaptiveStep",
         "callExpression": "adaptiveStep",
         "sourcePath": "src/features/axes/getAxisTicks.ts"
+      },
+      {
+        "fromSymbol": "hitTestWorldRects",
+        "toSymbol": "assertFinitePoint",
+        "callExpression": "assertFinitePoint",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/hitTestWorldRects.ts",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "hitTestWorldRects",
+        "callExpression": "hitTestWorldRects",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "selectWorldRects",
+        "callExpression": "selectWorldRects",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "moveWorldRects",
+        "callExpression": "moveWorldRects",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "resizeWorldRect",
+        "callExpression": "resizeWorldRect",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/interactions.test.ts",
+        "toSymbol": "resolveWorldSnapCandidate",
+        "callExpression": "resolveWorldSnapCandidate",
+        "sourcePath": "src/features/interactions/interactions.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/moveWorldRects.ts",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toSymbol": "assertResizeInput",
+        "callExpression": "assertResizeInput",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toSymbol": "resizeAxis",
+        "callExpression": "resizeAxis",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "assertResizeInput",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "assertResizeInput",
+        "toSymbol": "isResizeHandle",
+        "callExpression": "isResizeHandle",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resolveWorldSnapCandidate",
+        "toSymbol": "assertFiniteSnapValue",
+        "callExpression": "assertFiniteSnapValue",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "resolveWorldSnapCandidate",
+        "toSymbol": "assertSnapInput",
+        "callExpression": "assertSnapInput",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "resolveWorldSnapCandidate",
+        "toSymbol": "snapWorldCoordinate",
+        "callExpression": "snapWorldCoordinate",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/resolveWorldSnapCandidate.ts",
+        "toSymbol": "hasHigherCandidateRank",
+        "callExpression": "hasHigherCandidateRank",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "selectWorldRects",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/selectWorldRects.ts",
+        "toSymbol": "getWorldRectBounds",
+        "callExpression": "getWorldRectBounds",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/selectWorldRects.ts",
+        "toSymbol": "containsWorldRect",
+        "callExpression": "containsWorldRect",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromSymbol": "src/features/interactions/selectWorldRects.ts",
+        "toSymbol": "intersectsWorldRect",
+        "callExpression": "intersectsWorldRect",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
       },
       {
         "fromSymbol": "getVisibleGridItems",
@@ -3716,6 +4936,76 @@
         "sourcePath": "src/features/axes/getAxisTicks.ts"
       },
       {
+        "fromSymbol": "hitTestWorldRects",
+        "toType": "GridPoint",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromSymbol": "hitTestWorldRects",
+        "toType": "T",
+        "sourcePath": "src/features/interactions/hitTestWorldRects.ts"
+      },
+      {
+        "fromSymbol": "moveWorldRects",
+        "toType": "GridMoveOptions",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromSymbol": "moveWorldRects",
+        "toType": "GridPoint",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromSymbol": "moveWorldRects",
+        "toType": "T",
+        "sourcePath": "src/features/interactions/moveWorldRects.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toType": "GridPoint",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toType": "GridResizeHandle",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toType": "GridResizeOptions",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resizeWorldRect",
+        "toType": "T",
+        "sourcePath": "src/features/interactions/resizeWorldRect.ts"
+      },
+      {
+        "fromSymbol": "resolveWorldSnapCandidate",
+        "toType": "GridCandidateSnapOptions",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "resolveWorldSnapCandidate",
+        "toType": "GridSnapCandidate",
+        "sourcePath": "src/features/interactions/resolveWorldSnapCandidate.ts"
+      },
+      {
+        "fromSymbol": "selectWorldRects",
+        "toType": "GridMarqueeSelectionOptions",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromSymbol": "selectWorldRects",
+        "toType": "GridRect",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
+        "fromSymbol": "selectWorldRects",
+        "toType": "T",
+        "sourcePath": "src/features/interactions/selectWorldRects.ts"
+      },
+      {
         "fromSymbol": "getVisibleGridItems",
         "toType": "GridViewport",
         "sourcePath": "src/features/items/getVisibleGridItems.ts"
@@ -3929,6 +5219,31 @@
         "fromSymbol": "GridViewportConstraints",
         "toType": "GridViewportAlignment",
         "sourcePath": "src/types/grid.ts"
+      },
+      {
+        "fromSymbol": "GridCandidateSnapOptions",
+        "toType": "GridSnapCandidateKind",
+        "sourcePath": "src/types/interactions.ts"
+      },
+      {
+        "fromSymbol": "GridCandidateSnapOptions",
+        "toType": "GridSnapResolver",
+        "sourcePath": "src/types/interactions.ts"
+      },
+      {
+        "fromSymbol": "GridCandidateSnapOptions",
+        "toType": "GridSnapSpecification",
+        "sourcePath": "src/types/interactions.ts"
+      },
+      {
+        "fromSymbol": "GridMarqueeSelectionOptions",
+        "toType": "GridMarqueeSelectionMode",
+        "sourcePath": "src/types/interactions.ts"
+      },
+      {
+        "fromSymbol": "GridSnapCandidate",
+        "toType": "GridSnapCandidateKind",
+        "sourcePath": "src/types/interactions.ts"
       },
       {
         "fromSymbol": "GridMatrixLayout",

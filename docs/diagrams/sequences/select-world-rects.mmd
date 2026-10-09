@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_getWorldRectBounds as getWorldRectBounds
+  participant participant_selectWorldRects as selectWorldRects
+  participant_selectWorldRects->>participant_getWorldRectBounds: getWorldRectBounds()
+  participant_getWorldRectBounds-->>participant_selectWorldRects: return

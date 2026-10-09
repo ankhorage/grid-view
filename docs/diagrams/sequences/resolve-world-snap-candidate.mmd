@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant participant_assertFiniteSnapValue as assertFiniteSnapValue
+  participant participant_assertSnapInput as assertSnapInput
+  participant participant_resolver as resolver
+  participant participant_resolveWorldSnapCandidate as resolveWorldSnapCandidate
+  participant participant_snapWorldCoordinate as snapWorldCoordinate
+  participant_resolveWorldSnapCandidate->>participant_assertFiniteSnapValue: assertFiniteSnapValue()
+  participant_assertFiniteSnapValue-->>participant_resolveWorldSnapCandidate: return
+  participant_resolveWorldSnapCandidate->>participant_assertSnapInput: assertSnapInput()
+  participant_assertSnapInput-->>participant_resolveWorldSnapCandidate: return
+  participant_resolveWorldSnapCandidate->>participant_snapWorldCoordinate: snapWorldCoordinate()
+  participant_snapWorldCoordinate->>participant_resolver: resolver()
+  participant_resolver-->>participant_snapWorldCoordinate: return
+  participant_snapWorldCoordinate-->>participant_resolveWorldSnapCandidate: return

@@ -2,6 +2,13 @@ graph LR
   module_src_features_axes_getAxisCategoryTicks_ts["src/features/axes/getAxisCategoryTicks.ts"]
   module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
   module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
+  module_src_features_interactions_hitTestWorldRects_ts["src/features/interactions/hitTestWorldRects.ts"]
+  module_src_features_interactions_interactions_test_ts["src/features/interactions/interactions.test.ts"]
+  module_src_features_interactions_moveWorldRects_ts["src/features/interactions/moveWorldRects.ts"]
+  module_src_features_interactions_resizeWorldRect_ts["src/features/interactions/resizeWorldRect.ts"]
+  module_src_features_interactions_resolveWorldSnapCandidate_ts["src/features/interactions/resolveWorldSnapCandidate.ts"]
+  module_src_features_interactions_selectWorldRects_ts["src/features/interactions/selectWorldRects.ts"]
+  module_src_features_interactions_utils_getWorldRectBounds_ts["src/features/interactions/utils/getWorldRectBounds.ts"]
   module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
   module_src_features_layout_createGridAxisMetrics_ts["src/features/layout/createGridAxisMetrics.ts"]
   module_src_features_layout_getLaneIntervalPlacement_ts["src/features/layout/getLaneIntervalPlacement.ts"]
@@ -24,6 +31,7 @@ graph LR
   module_src_index_ts["src/index.ts"]
   module_src_types_axes_ts["src/types/axes.ts"]
   module_src_types_grid_ts["src/types/grid.ts"]
+  module_src_types_interactions_ts["src/types/interactions.ts"]
   module_src_types_items_ts["src/types/items.ts"]
   module_src_types_layout_ts["src/types/layout.ts"]
   module_src_types_snap_ts["src/types/snap.ts"]
@@ -87,12 +95,24 @@ graph LR
   module_src_types_axes_ts --> export_GridAxisName
   export_GridAxisTick["GridAxisTick"]
   module_src_types_axes_ts --> export_GridAxisTick
+  export_GridCandidateSnapOptions["GridCandidateSnapOptions"]
+  module_src_types_interactions_ts --> export_GridCandidateSnapOptions
+  export_GridCandidateSnapOptions -.-> export_GridSnapCandidateKind
+  export_GridCandidateSnapOptions -.-> export_GridSnapResolver
+  export_GridCandidateSnapOptions -.-> export_GridSnapSpecification
+  export_GridInteractionRectItem["GridInteractionRectItem"]
+  module_src_types_interactions_ts --> export_GridInteractionRectItem
   export_GridLane["GridLane"]
   module_src_types_layout_ts --> export_GridLane
   export_GridLaneInterval["GridLaneInterval"]
   module_src_types_layout_ts --> export_GridLaneInterval
   export_GridLaneIntervalPlacement["GridLaneIntervalPlacement"]
   module_src_types_layout_ts --> export_GridLaneIntervalPlacement
+  export_GridMarqueeSelectionMode["GridMarqueeSelectionMode"]
+  module_src_types_interactions_ts --> export_GridMarqueeSelectionMode
+  export_GridMarqueeSelectionOptions["GridMarqueeSelectionOptions"]
+  module_src_types_interactions_ts --> export_GridMarqueeSelectionOptions
+  export_GridMarqueeSelectionOptions -.-> export_GridMarqueeSelectionMode
   export_GridMatrixAxisEntry["GridMatrixAxisEntry"]
   module_src_types_layout_ts --> export_GridMatrixAxisEntry
   export_GridMatrixCell["GridMatrixCell"]
@@ -102,12 +122,23 @@ graph LR
   export_GridMatrixLayout["GridMatrixLayout"]
   module_src_types_layout_ts --> export_GridMatrixLayout
   export_GridMatrixLayout -.-> export_GridMatrixAxisEntry
+  export_GridMoveOptions["GridMoveOptions"]
+  module_src_types_interactions_ts --> export_GridMoveOptions
   export_GridPoint["GridPoint"]
   module_src_types_grid_ts --> export_GridPoint
   export_GridRect["GridRect"]
   module_src_types_grid_ts --> export_GridRect
   export_GridRectItem["GridRectItem"]
   module_src_types_items_ts --> export_GridRectItem
+  export_GridResizeHandle["GridResizeHandle"]
+  module_src_types_interactions_ts --> export_GridResizeHandle
+  export_GridResizeOptions["GridResizeOptions"]
+  module_src_types_interactions_ts --> export_GridResizeOptions
+  export_GridSnapCandidate["GridSnapCandidate"]
+  module_src_types_interactions_ts --> export_GridSnapCandidate
+  export_GridSnapCandidate -.-> export_GridSnapCandidateKind
+  export_GridSnapCandidateKind["GridSnapCandidateKind"]
+  module_src_types_interactions_ts --> export_GridSnapCandidateKind
   export_GridSnapResolver["GridSnapResolver"]
   module_src_types_snap_ts --> export_GridSnapResolver
   export_GridSnapSpecification["GridSnapSpecification"]
@@ -130,16 +161,36 @@ graph LR
   export_GridViewportConstraints -.-> export_GridViewportAlignment
   export_GridZoomLimits["GridZoomLimits"]
   module_src_types_grid_ts --> export_GridZoomLimits
+  export_hitTestWorldRects["hitTestWorldRects"]
+  module_src_features_interactions_hitTestWorldRects_ts --> export_hitTestWorldRects
+  export_hitTestWorldRects -.-> export_GridPoint
+  export_moveWorldRects["moveWorldRects"]
+  module_src_features_interactions_moveWorldRects_ts --> export_moveWorldRects
+  export_moveWorldRects -.-> export_GridMoveOptions
+  export_moveWorldRects -.-> export_GridPoint
   export_panViewport["panViewport"]
   module_src_features_viewport_panViewport_ts --> export_panViewport
   export_panViewport -.-> export_GridPoint
   export_panViewport -.-> export_GridViewport
   export_panViewport -.-> export_GridViewportConstraints
+  export_resizeWorldRect["resizeWorldRect"]
+  module_src_features_interactions_resizeWorldRect_ts --> export_resizeWorldRect
+  export_resizeWorldRect -.-> export_GridPoint
+  export_resizeWorldRect -.-> export_GridResizeHandle
+  export_resizeWorldRect -.-> export_GridResizeOptions
+  export_resolveWorldSnapCandidate["resolveWorldSnapCandidate"]
+  module_src_features_interactions_resolveWorldSnapCandidate_ts --> export_resolveWorldSnapCandidate
+  export_resolveWorldSnapCandidate -.-> export_GridCandidateSnapOptions
+  export_resolveWorldSnapCandidate -.-> export_GridSnapCandidate
   export_revealWorldRect["revealWorldRect"]
   module_src_features_viewport_revealWorldRect_ts --> export_revealWorldRect
   export_revealWorldRect -.-> export_GridRect
   export_revealWorldRect -.-> export_GridViewport
   export_revealWorldRect -.-> export_GridViewportConstraints
+  export_selectWorldRects["selectWorldRects"]
+  module_src_features_interactions_selectWorldRects_ts --> export_selectWorldRects
+  export_selectWorldRects -.-> export_GridMarqueeSelectionOptions
+  export_selectWorldRects -.-> export_GridRect
   export_snapWorldCoordinate["snapWorldCoordinate"]
   module_src_features_snap_snapWorldCoordinate_ts --> export_snapWorldCoordinate
   export_snapWorldCoordinate -.-> export_GridSnapResolver

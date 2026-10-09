@@ -693,6 +693,154 @@
     "structuredRows": []
   },
   {
+    "name": "GridCandidateSnapOptions",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 48,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridSnapCandidateKind",
+      "GridSnapResolver",
+      "GridSnapSpecification"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "enabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "pixelsPerUnit",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "priorities",
+        "kind": "property",
+        "type": "readonly GridSnapCandidateKind[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "scalarResolver",
+        "kind": "property",
+        "type": "GridSnapResolver",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "scalarSpecification",
+        "kind": "property",
+        "type": "GridSnapSpecification",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "tolerancePixels",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridInteractionRectItem",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 5,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "disabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "height",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "locked",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "resizable",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "width",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "x",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "y",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "GridLane",
     "title": null,
     "description": null,
@@ -860,6 +1008,67 @@
         "name": "y",
         "kind": "property",
         "type": "number",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMarqueeSelectionMode",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 12,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "GridMarqueeSelectionOptions",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMarqueeSelectionMode"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "includeDisabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "mode",
+        "kind": "property",
+        "type": "GridMarqueeSelectionMode",
         "required": true,
         "description": null
       }
@@ -1073,6 +1282,43 @@
     "structuredRows": []
   },
   {
+    "name": "GridMoveOptions",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 21,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "includeDisabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "includeLocked",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "GridPoint",
     "title": null,
     "description": null,
@@ -1216,6 +1462,140 @@
         "description": null
       }
     ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridResizeHandle",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 27,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "GridResizeOptions",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 31,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "includeDisabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "includeLocked",
+        "kind": "property",
+        "type": "boolean",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "minimumHeight",
+        "kind": "property",
+        "type": "number",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "minimumWidth",
+        "kind": "property",
+        "type": "number",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridSnapCandidate",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 42,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridSnapCandidateKind"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "coordinate",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "GridSnapCandidateKind",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "GridSnapCandidateKind",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/interactions.ts",
+    "sourceLocation": {
+      "filePath": "src/types/interactions.ts",
+      "line": 39,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
     "structuredRows": []
   },
   {
@@ -1567,6 +1947,107 @@
     "structuredRows": []
   },
   {
+    "name": "hitTestWorldRects",
+    "title": null,
+    "description": "Return the first input-order world rectangle containing a finite point.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/interactions/hitTestWorldRects.ts",
+    "sourceLocation": {
+      "filePath": "src/features/interactions/hitTestWorldRects.ts",
+      "line": 6,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridPoint"
+    ],
+    "signatures": [
+      {
+        "label": "(items: readonly T[], point: GridPoint, includeDisabled?: boolean) => T | undefined",
+        "parameters": [
+          {
+            "name": "includeDisabled",
+            "type": "boolean",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "items",
+            "type": "readonly T[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "point",
+            "type": "GridPoint",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "T | undefined",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "moveWorldRects",
+    "title": null,
+    "description": "Move eligible world rectangles by a finite world delta while retaining input order and IDs.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/interactions/moveWorldRects.ts",
+    "sourceLocation": {
+      "filePath": "src/features/interactions/moveWorldRects.ts",
+      "line": 6,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMoveOptions",
+      "GridPoint"
+    ],
+    "signatures": [
+      {
+        "label": "(items: readonly T[], delta: GridPoint, options?: GridMoveOptions) => readonly T[]",
+        "parameters": [
+          {
+            "name": "delta",
+            "type": "GridPoint",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "items",
+            "type": "readonly T[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "GridMoveOptions",
+            "required": false,
+            "description": null
+          }
+        ],
+        "returnType": "readonly T[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "panViewport",
     "title": null,
     "description": "Pan by pixel displacement; dragging to the right reveals world coordinates to the left.",
@@ -1612,6 +2093,115 @@
           }
         ],
         "returnType": "GridViewport",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "resizeWorldRect",
+    "title": null,
+    "description": "Resize an eligible world rectangle from one handle while preserving finite minimum dimensions.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/interactions/resizeWorldRect.ts",
+    "sourceLocation": {
+      "filePath": "src/features/interactions/resizeWorldRect.ts",
+      "line": 10,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridPoint",
+      "GridResizeHandle",
+      "GridResizeOptions"
+    ],
+    "signatures": [
+      {
+        "label": "(item: T, handle: GridResizeHandle, delta: GridPoint, options?: GridResizeOptions) => T",
+        "parameters": [
+          {
+            "name": "delta",
+            "type": "GridPoint",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "handle",
+            "type": "GridResizeHandle",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "item",
+            "type": "T",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "GridResizeOptions",
+            "required": false,
+            "description": null
+          }
+        ],
+        "returnType": "T",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "resolveWorldSnapCandidate",
+    "title": null,
+    "description": "Resolve one coordinate to the highest-priority in-tolerance candidate, then scalar snapping.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+    "sourceLocation": {
+      "filePath": "src/features/interactions/resolveWorldSnapCandidate.ts",
+      "line": 5,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridCandidateSnapOptions",
+      "GridSnapCandidate"
+    ],
+    "signatures": [
+      {
+        "label": "(value: number, candidates: readonly GridSnapCandidate[], options: GridCandidateSnapOptions) => number",
+        "parameters": [
+          {
+            "name": "candidates",
+            "type": "readonly GridSnapCandidate[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "GridCandidateSnapOptions",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "number",
         "returnDescription": null
       }
     ],
@@ -1670,6 +2260,57 @@
           }
         ],
         "returnType": "GridViewport",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "selectWorldRects",
+    "title": null,
+    "description": "Select input-order item IDs by normalized marquee containment or intersection.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/interactions/selectWorldRects.ts",
+    "sourceLocation": {
+      "filePath": "src/features/interactions/selectWorldRects.ts",
+      "line": 9,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "GridMarqueeSelectionOptions",
+      "GridRect"
+    ],
+    "signatures": [
+      {
+        "label": "(items: readonly T[], marquee: GridRect, options: GridMarqueeSelectionOptions) => readonly string[]",
+        "parameters": [
+          {
+            "name": "items",
+            "type": "readonly T[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "marquee",
+            "type": "GridRect",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "GridMarqueeSelectionOptions",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly string[]",
         "returnDescription": null
       }
     ],

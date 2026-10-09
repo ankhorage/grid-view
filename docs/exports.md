@@ -212,6 +212,42 @@ Source: `src/types/axes.ts:27:1`
 | level | property | `"major" \| "minor"` | yes |  |
 | position | property | `number` | yes |  |
 
+## GridCandidateSnapOptions
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:48:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| enabled | property | `boolean` | no |  |
+| pixelsPerUnit | property | `number` | yes |  |
+| priorities | property | `readonly GridSnapCandidateKind[]` | yes |  |
+| scalarResolver | property | `GridSnapResolver` | no |  |
+| scalarSpecification | property | `GridSnapSpecification` | no |  |
+| tolerancePixels | property | `number` | yes |  |
+
+## GridInteractionRectItem
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:5:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| disabled | property | `boolean` | no |  |
+| height | property | `number` | yes |  |
+| id | property | `string` | yes |  |
+| locked | property | `boolean` | no |  |
+| resizable | property | `boolean` | no |  |
+| width | property | `number` | yes |  |
+| x | property | `number` | yes |  |
+| y | property | `number` | yes |  |
+
 ## GridLane
 
 Kind: `type`
@@ -259,6 +295,25 @@ Source: `src/types/layout.ts:52:1`
 | width | property | `number` | yes |  |
 | x | property | `number` | yes |  |
 | y | property | `number` | yes |  |
+
+## GridMarqueeSelectionMode
+
+Kind: `unknown`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:12:1`
+
+## GridMarqueeSelectionOptions
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:15:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| includeDisabled | property | `boolean` | no |  |
+| mode | property | `GridMarqueeSelectionMode` | yes |  |
 
 ## GridMatrixAxisEntry
 
@@ -320,6 +375,19 @@ Source: `src/types/layout.ts:15:1`
 | columns | property | `readonly GridMatrixAxisEntry[]` | yes |  |
 | rows | property | `readonly GridMatrixAxisEntry[]` | yes |  |
 
+## GridMoveOptions
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:21:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| includeDisabled | property | `boolean` | no |  |
+| includeLocked | property | `boolean` | no |  |
+
 ## GridPoint
 
 Kind: `type`
@@ -363,6 +431,46 @@ Source: `src/types/items.ts:4:1`
 | width | property | `number` | yes |  |
 | x | property | `number` | yes |  |
 | y | property | `number` | yes |  |
+
+## GridResizeHandle
+
+Kind: `unknown`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:27:1`
+
+## GridResizeOptions
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:31:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| includeDisabled | property | `boolean` | no |  |
+| includeLocked | property | `boolean` | no |  |
+| minimumHeight | property | `number` | no |  |
+| minimumWidth | property | `number` | no |  |
+
+## GridSnapCandidate
+
+Kind: `type`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:42:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| coordinate | property | `number` | yes |  |
+| kind | property | `GridSnapCandidateKind` | yes |  |
+
+## GridSnapCandidateKind
+
+Kind: `unknown`
+Module: `src/types/interactions.ts`
+Source: `src/types/interactions.ts:39:1`
 
 ## GridSnapResolver
 
@@ -458,6 +566,38 @@ Source: `src/types/grid.ts:24:1`
 | minX | property | `number` | no |  |
 | minY | property | `number` | no |  |
 
+## hitTestWorldRects
+
+Kind: `function`
+Module: `src/features/interactions/hitTestWorldRects.ts`
+Source: `src/features/interactions/hitTestWorldRects.ts:6:1`
+
+Return the first input-order world rectangle containing a finite point.
+
+### Signatures
+
+- `(items: readonly T[], point: GridPoint, includeDisabled?: boolean) => T | undefined`
+  - includeDisabled: `boolean` (optional)
+  - items: `readonly T[]`
+  - point: `GridPoint`
+  - returns: `T | undefined`
+
+## moveWorldRects
+
+Kind: `function`
+Module: `src/features/interactions/moveWorldRects.ts`
+Source: `src/features/interactions/moveWorldRects.ts:6:1`
+
+Move eligible world rectangles by a finite world delta while retaining input order and IDs.
+
+### Signatures
+
+- `(items: readonly T[], delta: GridPoint, options?: GridMoveOptions) => readonly T[]`
+  - delta: `GridPoint`
+  - items: `readonly T[]`
+  - options: `GridMoveOptions` (optional)
+  - returns: `readonly T[]`
+
 ## panViewport
 
 Kind: `function`
@@ -473,6 +613,39 @@ Pan by pixel displacement; dragging to the right reveals world coordinates to th
   - displacement: `GridPoint`
   - viewport: `GridViewport`
   - returns: `GridViewport`
+
+## resizeWorldRect
+
+Kind: `function`
+Module: `src/features/interactions/resizeWorldRect.ts`
+Source: `src/features/interactions/resizeWorldRect.ts:10:1`
+
+Resize an eligible world rectangle from one handle while preserving finite minimum dimensions.
+
+### Signatures
+
+- `(item: T, handle: GridResizeHandle, delta: GridPoint, options?: GridResizeOptions) => T`
+  - delta: `GridPoint`
+  - handle: `GridResizeHandle`
+  - item: `T`
+  - options: `GridResizeOptions` (optional)
+  - returns: `T`
+
+## resolveWorldSnapCandidate
+
+Kind: `function`
+Module: `src/features/interactions/resolveWorldSnapCandidate.ts`
+Source: `src/features/interactions/resolveWorldSnapCandidate.ts:5:1`
+
+Resolve one coordinate to the highest-priority in-tolerance candidate, then scalar snapping.
+
+### Signatures
+
+- `(value: number, candidates: readonly GridSnapCandidate[], options: GridCandidateSnapOptions) => number`
+  - candidates: `readonly GridSnapCandidate[]`
+  - options: `GridCandidateSnapOptions`
+  - value: `number`
+  - returns: `number`
 
 ## revealWorldRect
 
@@ -491,6 +664,22 @@ Oversized rectangles align their leading edges because neither axis can show the
   - rect: `GridRect`
   - viewport: `GridViewport`
   - returns: `GridViewport`
+
+## selectWorldRects
+
+Kind: `function`
+Module: `src/features/interactions/selectWorldRects.ts`
+Source: `src/features/interactions/selectWorldRects.ts:9:1`
+
+Select input-order item IDs by normalized marquee containment or intersection.
+
+### Signatures
+
+- `(items: readonly T[], marquee: GridRect, options: GridMarqueeSelectionOptions) => readonly string[]`
+  - items: `readonly T[]`
+  - marquee: `GridRect`
+  - options: `GridMarqueeSelectionOptions`
+  - returns: `readonly string[]`
 
 ## snapWorldCoordinate
 

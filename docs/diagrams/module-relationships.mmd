@@ -2,6 +2,13 @@ graph LR
   module_src_features_axes_getAxisCategoryTicks_ts["src/features/axes/getAxisCategoryTicks.ts"]
   module_src_features_axes_getAxisTicks_ts["src/features/axes/getAxisTicks.ts"]
   module_src_features_grid_view_test_ts["src/features/grid-view.test.ts"]
+  module_src_features_interactions_hitTestWorldRects_ts["src/features/interactions/hitTestWorldRects.ts"]
+  module_src_features_interactions_interactions_test_ts["src/features/interactions/interactions.test.ts"]
+  module_src_features_interactions_moveWorldRects_ts["src/features/interactions/moveWorldRects.ts"]
+  module_src_features_interactions_resizeWorldRect_ts["src/features/interactions/resizeWorldRect.ts"]
+  module_src_features_interactions_resolveWorldSnapCandidate_ts["src/features/interactions/resolveWorldSnapCandidate.ts"]
+  module_src_features_interactions_selectWorldRects_ts["src/features/interactions/selectWorldRects.ts"]
+  module_src_features_interactions_utils_getWorldRectBounds_ts["src/features/interactions/utils/getWorldRectBounds.ts"]
   module_src_features_items_getVisibleGridItems_ts["src/features/items/getVisibleGridItems.ts"]
   module_src_features_layout_createGridAxisMetrics_ts["src/features/layout/createGridAxisMetrics.ts"]
   module_src_features_layout_getLaneIntervalPlacement_ts["src/features/layout/getLaneIntervalPlacement.ts"]
@@ -24,6 +31,7 @@ graph LR
   module_src_index_ts["src/index.ts"]
   module_src_types_axes_ts["src/types/axes.ts"]
   module_src_types_grid_ts["src/types/grid.ts"]
+  module_src_types_interactions_ts["src/types/interactions.ts"]
   module_src_types_items_ts["src/types/items.ts"]
   module_src_types_layout_ts["src/types/layout.ts"]
   module_src_types_snap_ts["src/types/snap.ts"]
@@ -35,6 +43,22 @@ graph LR
   module_src_features_axes_getAxisTicks_ts --> module_src_types_grid_ts
   module_src_features_grid_view_test_ts --> module_src_index_ts
   module_src_features_grid_view_test_ts --> module_src_types_grid_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_hitTestWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_interactions_test_ts --> module_src_index_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_moveWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_types_grid_ts
+  module_src_features_interactions_resizeWorldRect_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_resolveWorldSnapCandidate_ts --> module_src_features_snap_snapWorldCoordinate_ts
+  module_src_features_interactions_resolveWorldSnapCandidate_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_features_interactions_utils_getWorldRectBounds_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_types_grid_ts
+  module_src_features_interactions_selectWorldRects_ts --> module_src_types_interactions_ts
+  module_src_features_interactions_utils_getWorldRectBounds_ts --> module_src_types_grid_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_features_viewport_getVisibleWorldBounds_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_types_grid_ts
   module_src_features_items_getVisibleGridItems_ts --> module_src_types_items_ts
@@ -80,4 +104,6 @@ graph LR
   module_src_features_viewport_zoomViewportAt_ts --> module_src_features_viewport_viewportToWorld_ts
   module_src_features_viewport_zoomViewportAt_ts --> module_src_types_grid_ts
   module_src_types_axes_ts --> module_src_types_grid_ts
+  module_src_types_interactions_ts --> module_src_types_items_ts
+  module_src_types_interactions_ts --> module_src_types_snap_ts
   module_src_types_items_ts --> module_src_types_grid_ts

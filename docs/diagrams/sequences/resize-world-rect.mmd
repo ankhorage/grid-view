@@ -1,0 +1,16 @@
+sequenceDiagram
+  participant participant_assertResizeInput as assertResizeInput
+  participant participant_getWorldRectBounds as getWorldRectBounds
+  participant participant_isResizeHandle as isResizeHandle
+  participant participant_resizeAxis as resizeAxis
+  participant participant_resizeWorldRect as resizeWorldRect
+  participant_resizeWorldRect->>participant_assertResizeInput: assertResizeInput()
+  participant_assertResizeInput->>participant_getWorldRectBounds: getWorldRectBounds()
+  participant_getWorldRectBounds-->>participant_assertResizeInput: return
+  participant_assertResizeInput->>participant_isResizeHandle: isResizeHandle()
+  participant_isResizeHandle-->>participant_assertResizeInput: return
+  participant_assertResizeInput-->>participant_resizeWorldRect: return
+  participant_resizeWorldRect->>participant_resizeAxis: resizeAxis()
+  participant_resizeAxis-->>participant_resizeWorldRect: return
+  participant_resizeWorldRect->>participant_getWorldRectBounds: getWorldRectBounds()
+  participant_getWorldRectBounds-->>participant_resizeWorldRect: return
