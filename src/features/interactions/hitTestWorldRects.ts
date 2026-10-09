@@ -1,5 +1,6 @@
 import type { GridPoint } from '../../types/grid.js';
 import type { GridInteractionRectItem } from '../../types/interactions.js';
+import { getWorldRectBounds } from './utils/getWorldRectBounds.js';
 
 /*** Return the first input-order world rectangle containing a finite point. */
 export function hitTestWorldRects<T extends GridInteractionRectItem>(
@@ -8,15 +9,16 @@ export function hitTestWorldRects<T extends GridInteractionRectItem>(
   includeDisabled = false,
 ): T | undefined {
   assertFinitePoint(point, 'Hit-test point');
-  return items.find(
-    (item) =>
-      (includeDisabled || !item.disabled) &&
-      isValidWorldRect(item) &&
-      point.x >= item.x &&
-      point.x <= item.x + item.width &&
-      point.y >= item.y &&
-      point.y <= item.y + item.height,
-  );
+  return items
+    .map((item) => ({ item, bounds: getWorldRectBounds(item, `Item ${item.id}`) }))
+    .find(
+      ({ item, bounds }) =>
+        (includeDisabled || !item.disabled) &&
+        point.x >= bounds.x &&
+        point.x <= bounds.right &&
+        point.y >= bounds.y &&
+        point.y <= bounds.bottom,
+    )?.item;
 }
 
 /*** Reject a point that cannot participate in deterministic world-space geometry. */
@@ -24,13 +26,4 @@ function assertFinitePoint(point: GridPoint, label: string): void {
   if (![point.x, point.y].every(Number.isFinite)) {
     throw new RangeError(`${label} must be finite.`);
   }
-}
-
-/*** Identify finite, nonnegative world rectangles before comparing their inclusive boundaries. */
-function isValidWorldRect(item: GridInteractionRectItem): boolean {
-  return (
-    [item.x, item.y, item.width, item.height].every(Number.isFinite) &&
-    item.width >= 0 &&
-    item.height >= 0
-  );
 }

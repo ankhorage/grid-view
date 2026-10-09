@@ -1,9 +1,10 @@
-import type { GridPoint, GridRect } from '../../types/grid.js';
+import type { GridPoint } from '../../types/grid.js';
 import type {
   GridInteractionRectItem,
   GridResizeHandle,
   GridResizeOptions,
 } from '../../types/interactions.js';
+import { getWorldRectBounds } from './utils/getWorldRectBounds.js';
 
 /*** Resize an eligible world rectangle from one handle while preserving finite minimum dimensions. */
 export function resizeWorldRect<T extends GridInteractionRectItem>(
@@ -38,13 +39,15 @@ export function resizeWorldRect<T extends GridInteractionRectItem>(
     handle.includes('bottom'),
     minimumHeight,
   );
-  return {
+  const resized = {
     ...item,
     x: horizontal.start,
     y: vertical.start,
     width: horizontal.size,
     height: vertical.size,
   };
+  getWorldRectBounds(resized, `Resized item ${item.id}`);
+  return resized;
 }
 
 /*** Resize a single world axis from its leading or trailing handle without permitting inversion. */
@@ -56,29 +59,38 @@ function resizeAxis(
   trailing: boolean,
   minimum: number,
 ): { readonly start: number; readonly size: number } {
+  const end = start + size;
+  if (!Number.isFinite(end)) {
+    throw new RangeError('Resize geometry must have finite endpoints.');
+  }
   if (leading) {
     const nextSize = Math.max(minimum, size - delta);
-    return { start: start + size - nextSize, size: nextSize };
+    const nextStart = end - nextSize;
+    if (![nextSize, nextStart].every(Number.isFinite)) {
+      throw new RangeError('Resize geometry must have finite results.');
+    }
+    return { start: nextStart, size: nextSize };
   }
   if (trailing) {
-    return { start, size: Math.max(minimum, size + delta) };
+    const nextSize = Math.max(minimum, size + delta);
+    if (!Number.isFinite(nextSize)) {
+      throw new RangeError('Resize geometry must have finite results.');
+    }
+    return { start, size: nextSize };
   }
   return { start, size };
 }
 
 /*** Validate protected-item policy and geometry before deriving a resized rectangle. */
 function assertResizeInput(
-  item: GridRect,
+  item: GridInteractionRectItem,
   handle: GridResizeHandle,
   delta: GridPoint,
   options: GridResizeOptions,
 ): void {
-  if (
-    ![item.x, item.y, item.width, item.height, delta.x, delta.y].every(Number.isFinite) ||
-    item.width < 0 ||
-    item.height < 0
-  ) {
-    throw new RangeError('Resize geometry must be finite with nonnegative dimensions.');
+  getWorldRectBounds(item, `Item ${item.id}`);
+  if (![delta.x, delta.y].every(Number.isFinite)) {
+    throw new RangeError('Resize delta must be finite.');
   }
   if (!isResizeHandle(handle)) {
     throw new RangeError('Resize handle is invalid.');

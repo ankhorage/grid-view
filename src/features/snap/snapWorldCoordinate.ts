@@ -23,5 +23,12 @@ export function snapWorldCoordinate(
     throw new RangeError('Snap step must be positive and finite.');
   }
   const origin = specification.origin ?? 0;
-  return origin + Math.round((value - origin) / specification.step) * specification.step;
+  if (!Number.isFinite(origin)) {
+    throw new RangeError('Snap origin must be finite.');
+  }
+  const snapped = origin + Math.round((value - origin) / specification.step) * specification.step;
+  if (!Number.isFinite(snapped)) {
+    throw new RangeError('Snapped world coordinate must be finite.');
+  }
+  return snapped;
 }

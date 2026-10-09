@@ -7,16 +7,24 @@ export function resolveWorldSnapCandidate(
   candidates: readonly GridSnapCandidate[],
   options: GridCandidateSnapOptions,
 ): number {
-  assertSnapInput(value, candidates, options);
+  assertFiniteSnapValue(value, 'Snap coordinate');
+  if (options.enabled === false) {
+    return value;
+  }
+  assertSnapInput(candidates, options);
   const fallback = options.scalarSpecification
     ? snapWorldCoordinate(value, options.scalarSpecification, options.scalarResolver)
     : value;
-  if (options.enabled === false) {
-    return fallback;
-  }
   const tolerance = options.tolerancePixels / options.pixelsPerUnit;
+  if (!Number.isFinite(tolerance)) {
+    throw new RangeError('Snap tolerance must resolve to a finite world coordinate.');
+  }
   const resolved = candidates.reduce<GridSnapCandidate | undefined>((best, candidate) => {
-    if (Math.abs(candidate.coordinate - value) > tolerance) {
+    const distance = Math.abs(candidate.coordinate - value);
+    if (!Number.isFinite(distance)) {
+      throw new RangeError('Snap candidate distance must be finite.');
+    }
+    if (distance > tolerance) {
       return best;
     }
     if (!best || hasHigherCandidateRank(candidate, best, value, options.priorities)) {
@@ -44,12 +52,10 @@ function hasHigherCandidateRank(
 
 /*** Reject ambiguous snap policies or non-finite candidate geometry before resolving. */
 function assertSnapInput(
-  value: number,
   candidates: readonly GridSnapCandidate[],
   options: GridCandidateSnapOptions,
 ): void {
   if (
-    !Number.isFinite(value) ||
     !Number.isFinite(options.pixelsPerUnit) ||
     options.pixelsPerUnit <= 0 ||
     !Number.isFinite(options.tolerancePixels) ||
@@ -72,5 +78,12 @@ function assertSnapInput(
     )
   ) {
     throw new RangeError('Snap candidates must be finite and use a prioritized kind.');
+  }
+}
+
+/*** Reject a coordinate that cannot safely participate in candidate snapping. */
+function assertFiniteSnapValue(value: number, label: string): void {
+  if (!Number.isFinite(value)) {
+    throw new RangeError(`${label} must be finite.`);
   }
 }

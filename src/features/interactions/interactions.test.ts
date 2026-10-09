@@ -29,9 +29,10 @@ describe('world-space selection and transforms', () => {
     expect(selectWorldRects(items, marquee, { mode: 'contain' })).toEqual(['first']);
   });
 
-  test('moves eligible items by world delta and resizes handles to minimum dimensions', () => {
+  test('moves and resizes only eligible items while preserving protected item identities', () => {
     expect(moveWorldRects(items, { x: -5, y: 3 })[0]).toMatchObject({ x: 5, y: 13 });
     expect(moveWorldRects(items, { x: -5, y: 3 })[2]).toBe(items[2]);
+    expect(moveWorldRects(items, { x: -5, y: 3 })[3]).toBe(items[3]);
     const rect = { id: 'resize', x: 10, y: 20, width: 30, height: 40 };
     expect(
       resizeWorldRect(rect, 'top-left', { x: 50, y: 50 }, { minimumWidth: 8, minimumHeight: 9 }),
@@ -39,6 +40,24 @@ describe('world-space selection and transforms', () => {
     expect(resizeWorldRect({ ...rect, resizable: false }, 'right', { x: 4, y: 0 })).toMatchObject(
       rect,
     );
+    const disabled = { ...rect, disabled: true };
+    const locked = { ...rect, locked: true };
+    expect(resizeWorldRect(disabled, 'right', { x: 4, y: 0 })).toBe(disabled);
+    expect(resizeWorldRect(locked, 'right', { x: 4, y: 0 })).toBe(locked);
+  });
+
+  test('rejects finite operands whose world endpoints or transform results overflow', () => {
+    const overflowingRect = { id: 'overflow', x: 1e308, y: 0, width: 1e308, height: 1 };
+    expect(() => hitTestWorldRects([overflowingRect], { x: 0, y: 0 })).toThrow(RangeError);
+    expect(() => moveWorldRects([{ ...overflowingRect, width: 0 }], { x: 1e308, y: 0 })).toThrow(
+      RangeError,
+    );
+    expect(() =>
+      resizeWorldRect({ ...overflowingRect, width: 0 }, 'right', { x: 1e308, y: 0 }),
+    ).toThrow(RangeError);
+    expect(() =>
+      selectWorldRects(items, { x: -1e308, y: 0, width: -1e308, height: 1 }, { mode: 'intersect' }),
+    ).toThrow(RangeError);
   });
 });
 
@@ -67,7 +86,7 @@ describe('world-space candidate snapping', () => {
         ...options,
         enabled: false,
       }),
-    ).toBe(100);
+    ).toBe(102);
     expect(
       resolveWorldSnapCandidate(102, [{ kind: 'guide', coordinate: 103 }], {
         ...options,
@@ -83,6 +102,13 @@ describe('world-space candidate snapping', () => {
     expect(() =>
       resolveWorldSnapCandidate(0, [{ kind: 'guide', coordinate: Number.NaN }], options),
     ).toThrow();
+    expect(() =>
+      resolveWorldSnapCandidate(0, [{ kind: 'guide', coordinate: 1 }], {
+        ...options,
+        pixelsPerUnit: Number.MIN_VALUE,
+        tolerancePixels: Number.MAX_VALUE,
+      }),
+    ).toThrow(RangeError);
   });
 });
 
