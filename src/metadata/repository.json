@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "kind": "library",
+  "title": "Ankhorage Grid View",
+  "summary": "Platform-neutral geometry for grid viewports, axes, snapping, selection, layout, and virtualization.",
+  "purpose": "Provide deterministic grid interaction and visibility calculations that UI layers can reuse across web and native renderers.",
+  "domain": "grid viewport and interaction geometry",
+  "responsibilities": [
+    "Convert between viewport and world coordinates and constrain, pan, reveal, and zoom viewports.",
+    "Calculate axis ticks, snapping candidates, hit tests, selection, movement, and resize results.",
+    "Place lane intervals and matrix cells and select only visible grid items for virtualization."
+  ],
+  "boundaries": [
+    "Does not render user-interface components or own input-event handling.",
+    "Does not store application state or choose a product-specific grid model.",
+    "Does not depend on a specific browser, native UI framework, or canvas implementation."
+  ],
+  "audience": [
+    "UI and visualization packages that need reusable grid geometry.",
+    "Application developers implementing large interactive grids or timelines."
+  ],
+  "useCases": [
+    "Pan or zoom a viewport around a stable world coordinate.",
+    "Snap, select, move, resize, or hit-test rectangular items.",
+    "Virtualize matrix cells and lane intervals inside visible world bounds."
+  ],
+  "architecture": {
+    "role": "Pure reusable library of deterministic geometry functions and portable types.",
+    "invariants": [
+      "Geometry remains platform-neutral and free of renderer state.",
+      "Public operations return calculated values without owning UI lifecycle or persistence."
+    ]
+  }
+}
